@@ -7,9 +7,9 @@ Gem::Specification.new do |gem|
   gem.name          = "echonest"
   gem.version       = Echonest::VERSION
   gem.authors       = ["Tim Case"]
-  gem.email         = ["tim@endpoint.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.email         = ["tim@2drops.net"]
+  gem.description   = %q{A Ruby interface to the Echonest API.}
+  gem.summary       = gem.description
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
