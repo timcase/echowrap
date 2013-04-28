@@ -17,7 +17,8 @@ module Echonest
           :shared_secret,
           :endpoint,
           :connection_options,
-          :identity_map,          
+          :identity_map,
+          :middleware,
         ]
       end
     end

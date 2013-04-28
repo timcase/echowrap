@@ -1,16 +1,16 @@
-# require 'faraday'
-# require 'faraday/request/multipart'
+require 'faraday'
+require 'faraday/request/multipart'
 require 'echonest/configurable'
-# require 'twitter/error/client_error'
-# require 'twitter/error/server_error'
-# require 'twitter/request/multipart_with_file'
-# require 'twitter/response/parse_json'
-# require 'twitter/response/raise_error'
+require 'echonest/error/client_error'
+require 'echonest/error/server_error'
+require 'echonest/request/multipart_with_file'
+require 'echonest/response/parse_json'
+require 'echonest/response/raise_error'
  require 'echonest/version'
 
 module Echonest
   module Default
-    ENDPOINT = 'http://developer.echonest.com/api' unless defined? Echonest::Default::ENDPOINT
+    ENDPOINT = 'http://developer.echonest.com' unless defined? Echonest::Default::ENDPOINT
     CONNECTION_OPTIONS = {
       :headers => {
         :accept => 'application/json',
@@ -25,22 +25,22 @@ module Echonest
       },
     } unless defined? Echnoest::Default::CONNECTION_OPTIONS
     IDENTITY_MAP = false unless defined? Echonest::Default::IDENTITY_MAP
-    # MIDDLEWARE = Faraday::Builder.new do |builder|
-    #   # Convert file uploads to Faraday::UploadIO objects
-    #   builder.use Twitter::Request::MultipartWithFile
-    #   # Checks for files in the payload
-    #   builder.use Faraday::Request::Multipart
-    #   # Convert request params to "www-form-urlencoded"
-    #   builder.use Faraday::Request::UrlEncoded
-    #   # Handle 4xx server responses
-    #   builder.use Twitter::Response::RaiseError, Twitter::Error::ClientError
-    #   # Parse JSON response bodies using MultiJson
-    #   builder.use Twitter::Response::ParseJson
-    #   # Handle 5xx server responses
-    #   builder.use Twitter::Response::RaiseError, Twitter::Error::ServerError
-    #   # Set Faraday's HTTP adapter
-    #   builder.adapter Faraday.default_adapter
-    # end unless defined? Twitter::Default::MIDDLEWARE
+    MIDDLEWARE = Faraday::Builder.new do |builder|
+      # Convert file uploads to Faraday::UploadIO objects
+      builder.use Echonest::Request::MultipartWithFile
+      # Checks for files in the payload
+      builder.use Faraday::Request::Multipart
+      # Convert request params to "www-form-urlencoded"
+      builder.use Faraday::Request::UrlEncoded
+      # Handle 4xx server responses
+      builder.use Echonest::Response::RaiseError, Echonest::Error::ClientError
+      # Parse JSON response bodies using MultiJson
+      builder.use Echonest::Response::ParseJson
+      # Handle 5xx server responses
+      builder.use Echonest::Response::RaiseError, Echonest::Error::ServerError
+      # Set Faraday's HTTP adapter
+      builder.adapter Faraday.default_adapter
+    end unless defined? Echonest::Default::MIDDLEWARE
 
     class << self
 
@@ -82,9 +82,9 @@ module Echonest
       # @see https://github.com/technoweenie/faraday#advanced-middleware-usage
       # @see http://mislav.uniqpath.com/2011/07/faraday-advanced-http/
       # @return [Faraday::Builder]
-      # def middleware
-      #   MIDDLEWARE
-      # end
+      def middleware
+        MIDDLEWARE
+      end
 
     end
   end

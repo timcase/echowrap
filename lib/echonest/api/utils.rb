@@ -2,7 +2,7 @@
 # require 'twitter/cursor'
 # require 'twitter/user'
 
-module Twitter
+module Echonest
   module API
     module Utils
 
@@ -52,14 +52,14 @@ module Twitter
     #     objects_from_array(klass, response)
     #   end
     # 
-    #   # @param klass [Class]
-    #   # @param array [Array]
-    #   # @return [Array]
-    #   def objects_from_array(klass, array)
-    #     array.map do |element|
-    #       klass.fetch_or_new(element)
-    #     end
-    #   end
+      # @param klass [Class]
+      # @param array [Array]
+      # @return [Array]
+      def objects_from_array(klass, array)
+        array.map do |element|
+          klass.fetch_or_new(element)
+        end
+      end
     # 
     #   # @param klass [Class]
     #   # @param request_method [Symbol]
