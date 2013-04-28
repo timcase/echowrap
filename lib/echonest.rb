@@ -3,6 +3,7 @@ require 'echonest/configurable'
 require 'echonest/error'
 require 'echonest/rate_limit'
 require 'echonest/song'
+require 'echonest/track'
 require "echonest/version"
 
 module Echonest

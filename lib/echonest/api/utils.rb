@@ -20,7 +20,7 @@ module Echonest
     #       object_from_response(Twitter::User, request_method, path, merge_user(arguments.options, user))
     #     end
     #   end
-    # 
+    #
     #   # @param request_method [Symbol]
     #   # @param path [String]
     #   # @param args [Array]
@@ -30,7 +30,7 @@ module Echonest
     #     merge_user!(arguments.options, arguments.pop || screen_name) unless arguments.options[:user_id] || arguments.options[:screen_name]
     #     objects_from_response(Twitter::User, request_method, path, arguments.options)
     #   end
-    # 
+    #
     #   # @param klass [Class]
     #   # @param request_method [Symbol]
     #   # @param path [String]
@@ -41,17 +41,17 @@ module Echonest
     #     merge_user!(arguments.options, arguments.pop)
     #     objects_from_response(klass, request_method, path, arguments.options)
     #   end
-    # 
-    #   # @param klass [Class]
-    #   # @param request_method [Symbol]
-    #   # @param path [String]
-    #   # @param options [Hash]
-    #   # @return [Array]
-    #   def objects_from_response(klass, request_method, path, options={})
-    #     response = send(request_method.to_sym, path, options)[:body]
-    #     objects_from_array(klass, response)
-    #   end
-    # 
+    #
+      # @param klass [Class]
+      # @param request_method [Symbol]
+      # @param path [String]
+      # @param options [Hash]
+      # @return [Array]
+      def objects_from_response(klass, request_method, path, options={})
+        response = send(request_method.to_sym, path, options)[:body]
+        objects_from_array(klass, response)
+      end
+
       # @param klass [Class]
       # @param array [Array]
       # @return [Array]
@@ -60,7 +60,7 @@ module Echonest
           klass.fetch_or_new(element)
         end
       end
-    # 
+    #
     #   # @param klass [Class]
     #   # @param request_method [Symbol]
     #   # @param path [String]
@@ -72,17 +72,17 @@ module Echonest
     #       object_from_response(klass, request_method, path, arguments.options.merge(:id => id))
     #     end
     #   end
-    # 
-    #   # @param klass [Class]
-    #   # @param request_method [Symbol]
-    #   # @param path [String]
-    #   # @param options [Hash]
-    #   # @return [Object]
-    #   def object_from_response(klass, request_method, path, options={})
-    #     response = send(request_method.to_sym, path, options)
-    #     klass.from_response(response)
-    #   end
-    # 
+    #
+      # @param klass [Class]
+      # @param request_method [Symbol]
+      # @param path [String]
+      # @param options [Hash]
+      # @return [Object]
+      def object_from_response(klass, request_method, path, options={})
+        response = send(request_method.to_sym, path, options)
+        klass.from_response(response)
+      end
+    #
     #   # @param collection_name [Symbol]
     #   # @param klass [Class]
     #   # @param request_method [Symbol]
@@ -95,7 +95,7 @@ module Echonest
     #     merge_user!(arguments.options, arguments.pop || screen_name) unless arguments.options[:user_id] || arguments.options[:screen_name]
     #     cursor_from_response(collection_name, klass, request_method, path, arguments.options, method_name)
     #   end
-    # 
+    #
     #   # @param collection_name [Symbol]
     #   # @param klass [Class]
     #   # @param request_method [Symbol]
@@ -108,7 +108,7 @@ module Echonest
     #     response = send(request_method.to_sym, path, options)
     #     Twitter::Cursor.from_response(response, collection_name.to_sym, klass, self, method_name, options)
     #   end
-    # 
+    #
     #   def handle_forbidden_error(klass, error)
     #     if error.message == klass::MESSAGE
     #       raise klass.new
@@ -116,15 +116,15 @@ module Echonest
     #       raise error
     #     end
     #   end
-    # 
+    #
     #   def merge_default_cursor!(options)
     #     options[:cursor] = DEFAULT_CURSOR unless options[:cursor]
     #   end
-    # 
+    #
     #   def screen_name
     #     @screen_name ||= verify_credentials.screen_name
     #   end
-    # 
+    #
     #   # Take a user and merge it into the hash with the correct key
     #   #
     #   # @param hash [Hash]
@@ -133,7 +133,7 @@ module Echonest
     #   def merge_user(hash, user, prefix=nil)
     #     merge_user!(hash.dup, user, prefix)
     #   end
-    # 
+    #
     #   # Take a user and merge it into the hash with the correct key
     #   #
     #   # @param hash [Hash]
@@ -150,7 +150,7 @@ module Echonest
     #     end
     #     hash
     #   end
-    # 
+    #
     #   # Take a multiple users and merge them into the hash with the correct keys
     #   #
     #   # @param hash [Hash]
@@ -159,7 +159,7 @@ module Echonest
     #   def merge_users(hash, users)
     #     merge_users!(hash.dup, users)
     #   end
-    # 
+    #
     #   # Take a multiple users and merge them into the hash with the correct keys
     #   #
     #   # @param hash [Hash]
@@ -181,7 +181,7 @@ module Echonest
     #     hash[:screen_name] = screen_names.join(',') unless screen_names.empty?
     #     hash
     #   end
-    # 
+    #
      end
   end
 end

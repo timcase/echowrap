@@ -14,9 +14,18 @@ def a_get(path)
   a_request(:get, Echonest::Default::ENDPOINT + path + api_key)
 end
 
+def a_post(path)
+  a_request(:post, Echonest::Default::ENDPOINT + path)
+end
+
 def stub_get(path)
   stub_request(:get, Echonest::Default::ENDPOINT + path + api_key)
 end
+
+def stub_post(path)
+  stub_request(:post, Echonest::Default::ENDPOINT + path)
+end
+
 
 def api_key
   '?api_key=AK'

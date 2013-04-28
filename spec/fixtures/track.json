@@ -1,0 +1,21 @@
+{
+    "response": {
+        "status": {
+            "version": "4.2",
+            "code": 0,
+            "message": "Success"
+        },
+        "track": {
+            "status": "pending",
+            "artist": "How to Destroy Angels",
+            "title": "Fur Lined",
+            "analyzer_version": "3.01a",
+            "release": "How to Destroy Angels",
+            "audio_md5": "97507e1eeda3e62abeabcc8dd51e6bd6",
+            "bitrate": 320,
+            "id": "TRGOVKX128F7FA5920",
+            "samplerate": 44100,
+            "md5": "cd9276287838f11f2d7f39cd10391195"
+        }
+    }
+}
