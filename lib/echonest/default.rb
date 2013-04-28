@@ -23,8 +23,8 @@ module Echonest
       :ssl => {
         :verify => false
       },
-    } unless defined? Twitter::Default::CONNECTION_OPTIONS
-    # IDENTITY_MAP = false unless defined? Twitter::Default::IDENTITY_MAP
+    } unless defined? Echnoest::Default::CONNECTION_OPTIONS
+    IDENTITY_MAP = false unless defined? Echonest::Default::IDENTITY_MAP
     # MIDDLEWARE = Faraday::Builder.new do |builder|
     #   # Convert file uploads to Faraday::UploadIO objects
     #   builder.use Twitter::Request::MultipartWithFile
@@ -74,9 +74,9 @@ module Echonest
         CONNECTION_OPTIONS
       end
 
-      # def identity_map
-      #   IDENTITY_MAP
-      # end
+      def identity_map
+        IDENTITY_MAP
+      end
 
       # @note Faraday's middleware stack implementation is comparable to that of Rack middleware.  The order of middleware is important: the first middleware on the list wraps all others, while the last middleware is the innermost one.
       # @see https://github.com/technoweenie/faraday#advanced-middleware-usage

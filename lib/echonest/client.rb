@@ -1,6 +1,9 @@
 require 'echonest/configurable'
+require 'echonest/api/song'
+
 module Echonest
   class Client
+    include Echonest::API::Song
     include Echonest::Configurable
     # Initializes a new Client object
     #

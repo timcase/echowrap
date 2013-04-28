@@ -1,4 +1,5 @@
 require 'echonest'
+require 'echonest/identity_map'
 require 'rspec'
 
 RSpec.configure do |config|
