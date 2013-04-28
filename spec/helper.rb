@@ -1,6 +1,7 @@
 require 'echonest'
 require 'echonest/identity_map'
 require 'rspec'
+require 'timecop'
 require 'webmock/rspec'
 
 RSpec.configure do |config|
