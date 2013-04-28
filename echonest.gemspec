@@ -5,7 +5,7 @@ require 'echonest/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "echonest"
-  gem.version       = Echonest::VERSION
+  gem.version       = Echonest::Version
   gem.authors       = ["Tim Case"]
   gem.email         = ["tim@2drops.net"]
   gem.description   = %q{A Ruby interface to the Echonest API.}
