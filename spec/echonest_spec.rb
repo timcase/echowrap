@@ -1,18 +1,18 @@
 require 'helper'
 
 describe Echonest do
-  
+
   after do
     Echonest.reset!
   end
 
   context "when delegating to a client" do
-    
+
       before do
         Echonest.configure do |config|
           config.api_key = 'AK'
         end
-        
+
         stub_get("/api/v4/song/search").
         with(:query => { :artist => 'radiohead'}).
           to_return(:body => fixture("songs.json"),
@@ -29,7 +29,7 @@ describe Echonest do
       it "returns the same results as a client" do
        expect(Echonest.song_search(:artist => 'radiohead')).to eq Echonest::Client.new.song_search(:artist => 'radiohead')
       end
-      
+
       describe ".respond_to?" do
         it "delegates to Echonest::Client" do
           expect(Echonest.respond_to?(:song_search)).to be_true

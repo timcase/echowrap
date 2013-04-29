@@ -1,0 +1,35 @@
+{
+     "response": {
+         "status": {
+             "code": 0,
+             "message": "Success",
+             "version": "4.2"
+         },
+         "track": {
+             "artist": "Weezer",
+             "audio_md5": "e16bde82eaecd13bde9261b2710aa991",
+             "audio_summary": {
+                 "analysis_url": "https://echonest-analysis.s3.amazonaws.com/TR/A1B2C3D4E5F6G7/3/full.json",
+                 "danceability": 0.5164314670162907,
+                 "duration": 243.64363,
+                 "energy": 0.6617689403520844,
+                 "key": 1,
+                 "loudness": -4.613,
+                 "mode": 1,
+                 "speechiness": 0.16405298937493515,
+                 "liveness": 0.05298937493515,
+                 "tempo": 74.694,
+                 "time_signature": 4
+             },
+             "catalog": "7digital-US",
+             "foreign_id": "7digital-US:track:11123262",
+             "foreign_release_id": "7digital-US:release:1011998",
+             "id": "TRTLKZV12E5AC92E11",
+             "preview_url": "http://previews.7digital.com/clips/34/11123262.clip.mp3",
+             "release_image": "http://cdn.7static.com/static/img/sleeveart/00/010/119/0001011998_200.jpg",
+             "song_id": "SOCRHFJ12A67021D74",
+             "status": "complete",
+             "title": "El Scorcho"
+         }
+     }
+ }

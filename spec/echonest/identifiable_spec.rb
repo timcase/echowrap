@@ -12,17 +12,17 @@ describe Echonest::Identity do
     before do
       Echonest.identity_map = Echonest::IdentityMap
     end
-  
+
     after do
       Echonest.identity_map = false
     end
-  
+
     describe ".fetch" do
       it "returns existing objects" do
         Echonest::Identity.store(Echonest::Identity.new(:id => 1))
         expect(Echonest::Identity.fetch(:id => 1)).to be
       end
-  
+
       it "raises an error on objects that don't exist" do
         expect{Echonest::Identity.fetch(:id => 6)}.to raise_error Echonest::Error::IdentityMapKeyError
       end

@@ -1,3 +1,4 @@
+require 'echonest/audio_summary'
 require 'echonest/client'
 require 'echonest/configurable'
 require 'echonest/error'
@@ -17,10 +18,10 @@ module Echonest
       @client = Echonest::Client.new(options) unless defined?(@client) && @client.hash == options.hash
       @client
     end
-    
+
     def respond_to_missing?(method_name, include_private=false); client.respond_to?(method_name, include_private); end if RUBY_VERSION >= "1.9"
     def respond_to?(method_name, include_private=false); client.respond_to?(method_name, include_private) || super; end if RUBY_VERSION < "1.9"
-    
+
     private
 
       def method_missing(method_name, *args, &block)

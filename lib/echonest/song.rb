@@ -2,6 +2,6 @@ require 'echonest/identity'
 
 module Echonest
     class Song < Echonest::Identity
-      attr_reader :attributes, :artist_id, :artist_name, :title
+      attr_reader :artist_id, :artist_name, :attributes, :title
     end
 end
