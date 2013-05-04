@@ -6,25 +6,49 @@ describe Echonest::API::Track do
   end
 
   describe "#track_upload" do
-    before do
-      stub_post("/api/v4/track/upload").
-      with(:body => {:api_key => 'AK', :url => "http://freedownloads.last.fm/download/494669779/Calgary.mp3"}).
-      to_return(:body => fixture("track_upload.json"),
-                 :headers => {:content_type => "application/json; charset=utf-8"})
+
+    context "with track as url option" do
+      before do
+        stub_post("/api/v4/track/upload").
+        with(:body => {:api_key => 'AK', :url => "http://freedownloads.last.fm/download/494669779/Calgary.mp3"}).
+        to_return(:body => fixture("track_upload.json"),
+                   :headers => {:content_type => "application/json; charset=utf-8"})
+      end
+
+      it "requests the correct resource" do
+        @client.track_upload(:url => "http://freedownloads.last.fm/download/494669779/Calgary.mp3")
+        expect(a_post("/api/v4/track/upload").
+        with(:body => {:api_key => 'AK', :url => 'http://freedownloads.last.fm/download/494669779/Calgary.mp3'})).
+        to have_been_made
+      end
+
+      it "returns a track" do
+        track = @client.track_upload(:url => "http://freedownloads.last.fm/download/494669779/Calgary.mp3")
+        expect(track).to be_a Echonest::Track
+        expect(track.id).to eq 'TRGOVKX128F7FA5920'
+      end
     end
 
-    it "requests the correct resource" do
-      @client.track_upload(:url => "http://freedownloads.last.fm/download/494669779/Calgary.mp3")
-      expect(a_post("/api/v4/track/upload").
-      with(:body => {:api_key => 'AK', :url => 'http://freedownloads.last.fm/download/494669779/Calgary.mp3'})).
-      to have_been_made
-    end
+     context "with local audio file and using filetype option" do
 
-    it "returns a track" do
-      track = @client.track_upload(:url => "http://freedownloads.last.fm/download/494669779/Calgary.mp3")
-      expect(track).to be_a Echonest::Track
-      expect(track.id).to eq 'TRGOVKX128F7FA5920'
-    end
+       before do
+         stub_post("/api/v4/track/upload").
+         to_return(:body => fixture("track_upload.json"),
+                    :headers => {:content_type => "application/json; charset=utf-8"})
+       end
+
+       it 'requests the correct resource' do
+         @client.track_upload(:track => fixture('technolol-music.mp3'))
+         expect(a_post("/api/v4/track/upload")).to have_been_made
+       end
+
+       it "returns a track" do
+         track = @client.track_upload(:track => fixture('technolol-music.mp3'))
+         expect(track).to be_a Echonest::Track
+         expect(track.id).to eq 'TRGOVKX128F7FA5920'
+       end
+
+     end
   end
 
   describe "#track_profile" do

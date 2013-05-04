@@ -29,15 +29,17 @@ module Echonest
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
       # @return [Echonest::Track] The track.
       # @param options [Hash] A customizable set of options.
-      # @option options [String] :url A url to an audio file. Cannot be combined with uploadig local audio file.  Example: http://example.com/audio.mp3.
-      # @option options [String] :filetype The type of audio file to be analyzed. Required if uploading a local file. Must be one of ['wav', 'mp3', 'au', 'ogg', 'm4a', 'mp4'].
-      # @option options [String] :track The track data.  Required if using 'multipart/form-data' Content-Type in header.  This is for web forms.
-      # @example Upload via url
+      # @option options [String] :url A url to an audio file. Cannot be combined with uploading local audio file.  Example: http://example.com/audio.mp3.
+      # @option options [File] :track The track data. Cannot be
+      # combined with url option 
+      # @option options [String] :filetype The type of audio file to be analyzed. Optional if uploading a local file, will be determined from file if not explicitly passed. Must be one of ['wav', 'mp3', 'au', 'ogg', 'm4a', 'mp4'].
+      # @example Upload 
       #   Echonest.track_upload(:url => "http://example.com/audio.mp3")
-      def track_upload(options={})
-        track_object_from_response(:post, "/api/v4/track/upload", options)
-      end
-
+      #   Echonest.track_upload(:track => File.new('audio.mp3'))
+       def track_upload(options={})
+         options.merge(filetype: File.extname(options[:track]).gsub('.', '')) if options[:track] && options[:filetype].nil?
+         track_object_from_response(:post, "/api/v4/track/upload", options)
+       end
 
       private
       # @param request_method [Symbol]

@@ -24,6 +24,8 @@ module Echonest
           'image/gif'
         when /\.png$/i
           'image/png'
+        when /\.mp3$/i
+          'audio/mpeg'
         else
           'application/octet-stream'
         end
