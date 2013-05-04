@@ -1,6 +1,9 @@
 # Echonest
 
-TODO: Write a gem description
+![Echonest](http://echonest.com/static/img/logos/250x200_dk.gif)
+
+Ruby API Wrapper to the Echonest API
+http://developer.echonest.com/index.html
 
 ## Installation
 
