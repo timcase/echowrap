@@ -1,9 +1,7 @@
-# Echonest
-
+# The Echonest Ruby Gem
 [![Echonest](http://echonest.com/static/img/logos/250x200_dk.gif)](http://developer.echonest.com/index.html)
 
-Ruby API Wrapper to the Echonest API
-http://developer.echonest.com/index.html
+A Ruby interface to the Echonest API
 
 ## Installation
 
@@ -19,9 +17,25 @@ Or install it yourself as:
 
     $ gem install echonest
 
-## Usage
+## Quick Start Guide
 
-TODO: Write usage instructions here
+First, [get an api key from Echonest][register].
+
+Then copy and paste in your API keys:
+
+```ruby
+Echonest.configure do |config|
+  config.api_key = 'YOUR_API_KEY'
+  #consumer key and shared secret are not implemented yet
+end 
+```
+You are ready to use Echonest:
+
+```ruby
+Echonest.song_search(artist: 'Daft Punk')
+```
+
+[register]: http://developer.echonest.com/account/register
 
 ## Contributing
 
