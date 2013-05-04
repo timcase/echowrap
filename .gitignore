@@ -18,3 +18,4 @@ tmp
 *~
 .rvmrc
 log/*
+.DS_Store
