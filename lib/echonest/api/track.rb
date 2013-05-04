@@ -19,6 +19,7 @@ module Echonest
       # @example Profile via id
       #   Echonest.track_profile(:url => "http://example.com/audio.mp3")
       def track_profile(options={})
+        options.merge(:bucket => 'audio_summary') if options[:bucket].nil?
         track_object_from_response(:get, "/api/v4/track/profile", options)
       end
 
