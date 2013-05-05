@@ -27,7 +27,7 @@ Then copy and paste in your API keys:
 Echonest.configure do |config|
   config.api_key = 'YOUR_API_KEY'
   #consumer key and shared secret are not implemented yet
-end 
+end
 ```
 You are ready to use Echonest:
 
