@@ -62,7 +62,7 @@ module Echonest
         # @param params [Hash]
         # @return [Array]
         def artist_objects_from_response(request_method, path, options={})
-          objects_from_array(Echonest::Artist, send(request_method.to_sym, path, options)[:body][:response][:artists][:artist])
+          objects_from_array(Echonest::Artist, send(request_method.to_sym, path, options)[:body][:response][:artists])
         end
     end
   end
