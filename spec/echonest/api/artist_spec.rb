@@ -51,6 +51,50 @@ describe Echonest::API::Artist do
     end
   end
 
+  describe '#artist_familiarity' do
+    before do
+      stub_get("/api/v4/artist/familiarity").
+      with(:query => {:id => 'ARH6W4X1187B99274F'}).
+      to_return(:body => fixture("artist_familiarity.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_familiarity(:id => 'ARH6W4X1187B99274F')
+      expect(a_get("/api/v4/artist/familiarity").
+      with(:query => {:id => 'ARH6W4X1187B99274F'})).
+      to have_been_made
+    end
+
+    it "returns familiarity" do
+      familiarity = @client.artist_familiarity(:id => 'ARH6W4X1187B99274F')
+      expect(familiarity).to be_an Echonest::Familiarity
+      expect(familiarity.id).to eq 'ARH6W4X1187B99274F'
+    end
+  end
+
+  describe '#artist_hotttnesss' do
+    before do
+      stub_get("/api/v4/artist/hotttnesss").
+      with(:query => {:id => 'ARH6W4X1187B99274F'}).
+      to_return(:body => fixture("artist_hotttnesss.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_hotttnesss(:id => 'ARH6W4X1187B99274F')
+      expect(a_get("/api/v4/artist/hotttnesss").
+      with(:query => {:id => 'ARH6W4X1187B99274F'})).
+      to have_been_made
+    end
+
+    it "returns hotttnesss" do
+      hotttnesss = @client.artist_hotttnesss(:id => 'ARH6W4X1187B99274F')
+      expect(hotttnesss).to be_an Echonest::Hotttnesss
+      expect(hotttnesss.id).to eq 'ARH6W4X1187B99274F'
+    end
+  end
+
   describe "#artist_search" do
 
     before do

@@ -1,5 +1,4 @@
 require 'echonest/api/utils'
-require 'echonest/artist'
 
 module Echonest
   module API
@@ -40,6 +39,36 @@ module Echonest
       #   Echonest.artist_blogs(:id => 'ARH6W4X1187B99274F')
       def artist_blogs(options={})
         blog_objects_from_response(:get, "/api/v4/artist/blogs", options)
+      end
+
+      # Get numerical estimation of how familiar an artist currently is to the world.
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html#familiarity
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Echonest::Familiarity]
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the artist.  Required if name is not provided.  Example: 'ARH6W4X1187B99274F'.
+      # @option options [String] :name The name of the artist. Required if id is not provided.  Example: 'Weezer'.
+      # @example familiarity via id
+      #   Echonest.artist_familiarity(:id => 'ARH6W4X1187B99274F')
+      def artist_familiarity(options={})
+        familiarity_object_from_response(:get, "/api/v4/artist/familiarity", options)
+      end
+
+      # Get numerical description of how hottt an artist currently is.
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html#hotttnesss
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Echonest::Hotttnesss]
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the artist.  Required if name is not provided.  Example: 'ARH6W4X1187B99274F'.
+      # @option options [String] :name The name of the artist. Required if id is not provided.  Example: 'Weezer'.
+      # @example hotttnesss via id
+      #   Echonest.artist_hotttnesss(:id => 'ARH6W4X1187B99274F')
+      def artist_hotttnesss(options={})
+        hotttnesss_object_from_response(:get, "/api/v4/artist/hotttnesss", options)
       end
 
       # Search for artists given different query types
@@ -97,6 +126,25 @@ module Echonest
         def blog_objects_from_response(request_method, path, options={})
           objects_from_array(Echonest::Blog, send(request_method.to_sym, path, options)[:body][:response][:blogs])
         end
+
+        # @param request_method [Symbol]
+        # @param path [String]
+        # @param params [Hash]
+        # @return [Echonest::Familiarity]
+        def familiarity_object_from_response(request_method, path, options={})
+          response = send(request_method.to_sym, path, options)
+          Echonest::Familiarity.fetch_or_new(response[:body][:response][:artist])
+        end
+
+        # @param request_method [Symbol]
+        # @param path [String]
+        # @param params [Hash]
+        # @return [Echonest::Hotttnesss]
+        def hotttnesss_object_from_response(request_method, path, options={})
+          response = send(request_method.to_sym, path, options)
+          Echonest::Hotttnesss.fetch_or_new(response[:body][:response][:artist])
+        end
     end
   end
 end
+      # @option options [String] :license The desired license of the returned images. Not required, can send multiple, must be one of ['echo-source', 'all-rights-reserved', 'cc-by-sa', 'cc-by-nc', 'cc-by-nc-nd', 'cc-by-nc-sa', 'cc-by-nd', 'cc-by', 'public-domain', 'unknown'].
