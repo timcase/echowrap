@@ -1,4 +1,5 @@
 require 'echonest/analysis'
+require 'echonest/artist'
 require 'echonest/audio_summary'
 require 'echonest/client'
 require 'echonest/configurable'

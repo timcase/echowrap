@@ -1,0 +1,17 @@
+{
+  "response": {
+    "status": {
+      "code": "0",
+      "message": "Success",
+      "version": "4.2"
+    },
+    "artists": {
+      "artist": [
+        {
+          "name": "Radiohead",
+          "id": "ARH6W4X1187B99274F"
+        }
+      ]
+    }
+  }
+}

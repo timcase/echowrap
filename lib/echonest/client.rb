@@ -1,10 +1,13 @@
 require 'faraday'
 require 'multi_json'
 require 'echonest/configurable'
+require 'echonest/api/artist'
 require 'echonest/api/song'
 require 'echonest/api/track'
+
 module Echonest
   class Client
+    include Echonest::API::Artist
     include Echonest::API::Song
     include Echonest::API::Track
     include Echonest::Configurable
