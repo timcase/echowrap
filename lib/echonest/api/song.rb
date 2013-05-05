@@ -38,7 +38,7 @@ module Echonest
       # @see http://developer.echonest.com/docs/v4/song.html
       # @authentication Requires api key
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
-      # @return [Echonest::Track] The track.
+      # @return [Echonest::Song] The song.
       # @param options [Hash] A customizable set of options.
       # @option options [String] :id The ID of the song.  Required if track_id is not provided.  Example: 'SOCZMFK12AC468668F'.
       # @option options [String] :track_id The ID of the track. Required if id is not provided.  Example: 'TRTLKZV12E5AC92E11'.
@@ -54,6 +54,7 @@ module Echonest
       # @see http://developer.echonest.com/docs/v4/song.html
       # @authentication Requires api key
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @return [Array] Array of songs.
       # @param options [Hash] A customizable set of options.
       # @option options [String] :title The title of the song.
       # @option options [String] :artist The artist of the song.

@@ -6,28 +6,29 @@ describe Echonest::API::Artist do
     @client = Echonest::Client.new(:api_key => "AK")
   end
 
-  #describe '#artist_biography' do
-    #before do
-      #stub_get("/api/v4/artist/biography").
-      #with(:query => {:id => 'SOCZMFK12AC468668F'}).
-      #to_return(:body => fixture("artist_profile.json"),
-                 #:headers => {:content_type => "application/json; charset=utf-8"})
-    #end
+  describe '#artist_biographies' do
+    before do
+      stub_get("/api/v4/artist/biographies").
+      with(:query => {:id => 'ARH6W4X1187B99274F'}).
+      to_return(:body => fixture("artist_biographies.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
 
-    #it "requests the correct resource" do
-      #@client.artist_profile(:id => 'SOCZMFK12AC468668F')
-      #expect(a_get("/api/v4/artist/profile").
-      #with(:query => {:id => 'SOCZMFK12AC468668F'})).
-      #to have_been_made
-    #end
+    it "requests the correct resource" do
+      @client.artist_biographies(:id => 'ARH6W4X1187B99274F')
+      expect(a_get("/api/v4/artist/biographies").
+      with(:query => {:id => 'ARH6W4X1187B99274F'})).
+      to have_been_made
+    end
 
-    #it "returns a artist" do
-      #artist = @client.song_profile(:id => 'SOCZMFK12AC468668F')
-      #expect(artist).to be_a Echonest::Song
-      #expect(artist.id).to eq 'SOCZMFK12AC468668F'
-    #end
-  #end
-  #
+    it "returns a biography" do
+      biographies = @client.artist_biographies(:id => 'ARH6W4X1187B99274F')
+      expect(biographies).to be_an Array
+      expect(biographies.first.site).to eq 'last.fm'
+      expect(biographies.first.license.attribution).to eq 'Last.fm'
+    end
+  end
+
   describe "#artist_search" do
 
     before do

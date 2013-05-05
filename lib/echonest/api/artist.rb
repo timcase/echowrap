@@ -6,21 +6,23 @@ module Echonest
     module Artist
       include Echonest::API::Utils
 
-      # Get info about artists given a song id or track id.
+      # Get a list of artist biographies.
       #
-      # @see http://developer.echonest.com/docs/v4/artist.html
+      # @see http://developer.echonest.com/docs/v4/artist.html#biographies
       # @authentication Requires api key
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
-      # @return [Echonest::Track] The track.
+      # @return [Array<Echonest::Biography>]
       # @param options [Hash] A customizable set of options.
-      # @option options [String] :id The ID of the artist.  Required if track_id is not provided.  Example: 'SOCZMFK12AC468668F'.
-      # @option options [String] :track_id The ID of the track. Required if id is not provided.  Example: 'TRTLKZV12E5AC92E11'.
-      # @option options [String] :bucket The type of track data that should be returned. Must be one of ['audio_summary', 'artist_familiarity', 'artist_hotttnesss', 'artist_location', 'artist_hotttnesss', 'song_type', 'tracks', 'id:Rosetta-space']. Example: audio_summary.
-      # @example Profile via id
-      #   Echonest.artist_profile(:id => 'SOCZMFK12AC468668F')
-      #def artist_profile(options={})
-        #artist_objects_from_response(:get, "/api/v4/song/profile", options).first
-      #end
+      # @option options [String] :id The ID of the artist.  Required if name is not provided.  Example: 'ARH6W4X1187B99274F'.
+      # @option options [String] :name The name of the artist. Required if id is not provided.  Example: 'Weezer'.
+      # @option options [Integer] :results The desired number of results to return, the valid range is 0 to 100, with 15 as the default
+      # @option options [Integer] :start The desired index of the first result returned, must be on of [0, 15, 30] with 0 as the default
+      # @option options [String] :license The desired license of the returned images. Not required, can send multiple, must be one of ['echo-source', 'all-rights-reserved', 'cc-by-sa', 'cc-by-nc', 'cc-by-nc-nd', 'cc-by-nc-sa', 'cc-by-nd', 'cc-by', 'public-domain', 'unknown'].
+      # @example Biographies via id
+      #   Echonest.artist_biographies(:id => 'ARH6W4X1187B99274F')
+      def artist_biographies(options={})
+        biography_objects_from_response(:get, "/api/v4/artist/biographies", options)
+      end
 
       # Search for artists given different query types
       #
@@ -59,10 +61,16 @@ module Echonest
       private
         # @param request_method [Symbol]
         # @param path [String]
-        # @param params [Hash]
         # @return [Array]
         def artist_objects_from_response(request_method, path, options={})
           objects_from_array(Echonest::Artist, send(request_method.to_sym, path, options)[:body][:response][:artists])
+        end
+
+        # @param request_method [Symbol]
+        # @param path [String]
+        # @return [Array]
+        def biography_objects_from_response(request_method, path, options={})
+          objects_from_array(Echonest::Biography, send(request_method.to_sym, path, options)[:body][:response][:biographies])
         end
     end
   end
