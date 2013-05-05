@@ -15,7 +15,7 @@ describe Echonest do
 
         stub_get("/api/v4/song/search").
         with(:query => { :artist => 'radiohead'}).
-          to_return(:body => fixture("songs.json"),
+          to_return(:body => fixture("search_songs.json"),
                     :headers => {:content_type => "application/json; charset=utf-8"})
       end
 

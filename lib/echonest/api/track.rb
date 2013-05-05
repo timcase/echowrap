@@ -17,7 +17,7 @@ module Echonest
       # @option options [String] :md5 The MD5 of the track. Required if ID is not provided.  Example: '881f4e47e88e8b570e34a3b49c8262ac'.
       # @option options [String] :bucket The type of track data that should be returned. Example: audio_summary.
       # @example Profile via id
-      #   Echonest.track_profile(:url => "http://example.com/audio.mp3")
+      #   Echonest.track_profile(:id => "TRTLKZV12E5AC92E11")
       def track_profile(options={})
         options.merge(:bucket => 'audio_summary') if options[:bucket].nil?
         track_object_from_response(:get, "/api/v4/track/profile", options)

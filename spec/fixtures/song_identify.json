@@ -1,0 +1,19 @@
+{
+  "response": {
+    "status": {
+      "code": 0,
+      "message": "Success",
+      "version": "4.2"
+    },
+    "songs": [
+      {
+        "title": "Billie Jean",
+        "artist_name": "Michael Jackson",
+        "artist_id": "ARXPPEY1187FB51DF4",
+        "score": 49,
+        "message": "OK (match type 5)",
+        "id": "SOKHYNL12A8C142FC7"
+      }
+    ]
+  }
+}

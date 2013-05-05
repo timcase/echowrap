@@ -1,0 +1,17 @@
+{
+  "response": {
+    "status": {
+      "code": 0,
+      "message": "Success",
+      "version": "4.2"
+    },
+    "songs": [
+      {
+        "artist_id": "ARCQMJH1187B9B53CC",
+        "id": "SOCZMFK12AC468668F",
+        "artist_name": "DJ Screw",
+        "title": "Stay Fly"
+      }
+    ]
+  }
+}

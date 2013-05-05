@@ -5,6 +5,50 @@ module Echonest
   module API
     module Song
       include Echonest::API::Utils
+
+      # Identifies a song given an Echoprint or Echo Nest Musical Fingerprint hash codes.
+      #
+      # @see http://developer.echonest.com/docs/v4/song.html
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Echonest::Track] The identified song.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :query The JSON query.  Use only with POST.  Example: See "Here is a sample query:" at http://developer.echonest.com/docs/v4/song.html#identify.
+      # @option options [String] :code The FP hashcodes for the track.  Use only with GET. Example: See "Identifying Songs with GET at http://developer.echonest.com/docs/v4/song.html#identify."
+      # @option options [String] :artist The name of the artist from the ID3 tag.  Use only with GET, not required. Example: 'Michael+Jackson'
+      # @option options [String] :title The title of the track from the ID3 tag. Use only with GET, not required. Example: 'Billie+Jean'
+      # @option options [String] :release The title of the track from the ID3 tag. Use only with GET, not required. Example: 'Thriller'
+      # @option options [String] :duration The length of time of the track, in seconds. Use only with GET, not required. Example: '296.15'
+      # @option options [String] :genre The genre from the ID3 tag. Use only with GET, not required. Example: 'pop'
+      # @option options [String] :version Version of codegen used to generate the code.  Not required.  Example: For ENMFP use 3.15, for Echoprint use 4.12, defaults to 3.15
+      # @option options [String] :bucket The type of track data that should be returned. Must be one of ['audio_summary', 'artist_familiarity', 'artist_hotttnesss', 'artist_location', 'song_hotttnesss', 'song_type', 'tracks', 'id:Rosetta-space']. Example: audio_summary.
+      # @example Identify via json query file
+      #   Echonest.song_identify(:query => File.new('query.json'))
+      def song_identify(options={})
+        if options.key?(:query)
+          song_objects_from_response(:post, "/api/v4/song/identify", options).first
+        else
+          song_objects_from_response(:get, "/api/v4/song/identify", options).first
+        end
+      end
+
+
+      # Get info about songs given a song id or track id.
+      #
+      # @see http://developer.echonest.com/docs/v4/song.html
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Echonest::Track] The track.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the song.  Required if track_id is not provided.  Example: 'SOCZMFK12AC468668F'.
+      # @option options [String] :track_id The ID of the track. Required if id is not provided.  Example: 'TRTLKZV12E5AC92E11'.
+      # @option options [String] :bucket The type of track data that should be returned. Must be one of ['audio_summary', 'artist_familiarity', 'artist_hotttnesss', 'artist_location', 'song_hotttnesss', 'song_type', 'tracks', 'id:Rosetta-space']. Example: audio_summary.
+      # @example Profile via id
+      #   Echonest.song_profile(:id => 'SOCZMFK12AC468668F')
+      def song_profile(options={})
+        song_objects_from_response(:get, "/api/v4/song/profile", options).first
+      end
+
       # Search for songs given different query types
       #
       # @see http://developer.echonest.com/docs/v4/song.html
@@ -63,13 +107,12 @@ module Echonest
       end
 
       private
-
         # @param request_method [Symbol]
         # @param path [String]
         # @param params [Hash]
         # @return [Array]
-        def song_objects_from_response(request_method, path, params={})
-          objects_from_array(Echonest::Song, send(request_method.to_sym, path, params)[:body][:response][:songs])
+        def song_objects_from_response(request_method, path, options={})
+          objects_from_array(Echonest::Song, send(request_method.to_sym, path, options)[:body][:response][:songs])
         end
     end
   end
