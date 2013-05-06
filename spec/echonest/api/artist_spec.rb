@@ -118,6 +118,24 @@ describe Echonest::API::Artist do
     end
   end
 
+  describe '#artist_genres' do
+    before do
+      stub_get("/api/v4/artist/list_genres").
+      to_return(:body => fixture("artist_genres.json"),
+                :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_genres
+      expect(a_get("/api/v4/artist/list_genres")).to have_been_made
+    end
+
+    it "returns genres" do
+      genres = @client.artist_genres
+      expect(genres).to be_an Array
+      expect(genres.first.name).to eq 'a cappella'
+    end
+  end
   describe "#artist_search" do
 
     before do

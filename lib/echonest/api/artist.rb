@@ -75,7 +75,8 @@ module Echonest
       #
       # @see http://developer.echonest.com/docs/v4/artist.html#images
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
       # @return [Array<Echonest::Image>]
       # @param options [Hash] A customizable set of options.
       # @option options [String] :id The ID of the artist.  Required if name is not provided.  Example: 'ARH6W4X1187B99274F'.
@@ -87,6 +88,20 @@ module Echonest
       #   Echonest.artist_images(:id => 'ARH6W4X1187B99274F')
       def artist_images(options={})
         images_objects_from_response(:get, "/api/v4/artist/images", options)
+      end
+
+      # Get a list of the available genres for use with search and playlisting. This method returns a list of genres suitable for use in the artist/search call when searching by description and for the creation of genre-radio playlists. The returned list of genres is inclusive of all supported genres.
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html#genres
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Array<Echonest::Genre>]
+      # @param options [Hash] A customizable set of options.
+      # @example genres
+      #   Echonest.artist_genres
+      def artist_genres
+        genre_objects_from_response(:get, "/api/v4/artist/list_genres")
       end
 
       # Search for artists given different query types
@@ -168,6 +183,13 @@ module Echonest
         # @return [Array]
         def images_objects_from_response(request_method, path, options={})
           objects_from_array(Echonest::Image, send(request_method.to_sym, path, options)[:body][:response][:images])
+        end
+
+        # @param request_method [Symbol]
+        # @param path [String]
+        # @return [Array]
+        def genre_objects_from_response(request_method, path, options={})
+          objects_from_array(Echonest::Genre, send(request_method.to_sym, path, options)[:body][:response][:genres])
         end
     end
   end
