@@ -96,12 +96,29 @@ module Echonest
       # @authentication Requires api key
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @param options [Hash] A customizable set of options.
       # @return [Array<Echonest::Genre>]
       # @param options [Hash] A customizable set of options.
-      # @example genres
-      #   Echonest.artist_genres
-      def artist_genres
-        genre_objects_from_response(:get, "/api/v4/artist/list_genres")
+      # @example artist_list_genres
+      #   Echonest.artist_list_genres
+      def artist_list_genres(options={})
+        genre_objects_from_response(:get, "/api/v4/artist/list_genres", options)
+      end
+
+      # Get a list of the available terms for use with search and playlisting. This method returns a list of genres suitable for use in the artist/search call when searching by description and for the creation of genre-radio playlists. The returned list of genres is inclusive of all supported genres.
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html#terms
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :type The type of term that is of interest. Not required, must be one of ['style', 'mood'].
+      # @return [Array<Echonest::term>]
+      # @param options [Hash] A customizable set of options.
+      # @example artist_list_terms
+      #   Echonest.artist_list_terms
+      def artist_list_terms(options={})
+        term_objects_from_response(:get, "/api/v4/artist/list_terms", options)
       end
 
       # Search for artists given different query types
@@ -190,6 +207,13 @@ module Echonest
         # @return [Array]
         def genre_objects_from_response(request_method, path, options={})
           objects_from_array(Echonest::Genre, send(request_method.to_sym, path, options)[:body][:response][:genres])
+        end
+
+        # @param request_method [Symbol]
+        # @param path [String]
+        # @return [Array]
+        def term_objects_from_response(request_method, path, options={})
+          objects_from_array(Echonest::Term, send(request_method.to_sym, path, options)[:body][:response][:terms])
         end
     end
   end
