@@ -156,6 +156,28 @@ describe Echonest::API::Artist do
     end
   end
 
+  describe '#artist_news' do
+    before do
+      stub_get("/api/v4/artist/news").
+      with(:query => {:id => 'ARH6W4X1187B99274F'}).
+      to_return(:body => fixture("artist_news.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_news(:id => 'ARH6W4X1187B99274F')
+      expect(a_get("/api/v4/artist/news").
+      with(:query => {:id => 'ARH6W4X1187B99274F'})).
+      to have_been_made
+    end
+
+    it "returns news" do
+      news = @client.artist_news(:id => 'ARH6W4X1187B99274F')
+      expect(news).to be_an Array
+      expect(news.first.id).to eq '29c1699c8464426781f3e012d29fc1f6'
+    end
+  end
+
   describe "#artist_search" do
 
     before do
