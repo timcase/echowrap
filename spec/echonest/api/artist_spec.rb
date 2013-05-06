@@ -375,5 +375,26 @@ describe Echonest::API::Artist do
 
   end
 
+  describe '#artist_songs' do
+    before do
+      stub_get("/api/v4/artist/songs").
+      with(:query => {:id => 'ARH6W4X1187B99274F'}).
+      to_return(:body => fixture("artist_songs.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_songs(:id => 'ARH6W4X1187B99274F')
+      expect(a_get("/api/v4/artist/songs").
+      with(:query => {:id => 'ARH6W4X1187B99274F'})).
+      to have_been_made
+    end
+
+    it "returns songs" do
+      songs = @client.artist_songs(:id => 'ARH6W4X1187B99274F')
+      expect(songs).to be_an Array
+      expect(songs.first.title).to eq 'Give Up The Ghost (Brokenchord RMX)'
+    end
+  end
 end
 
