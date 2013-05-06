@@ -178,6 +178,144 @@ describe Echonest::API::Artist do
     end
   end
 
+  describe '#artist_profile' do
+    before do
+      stub_get("/api/v4/artist/profile").
+      with(:query => {:id => 'ARH6W4X1187B99274F',
+                       :bucket => ['biographies',
+                                   'blogs',
+                                   'familiarity',
+                                   'hotttnesss', 
+                                   'images',
+                                   'news',
+                                   'reviews',
+                                   'terms',
+                                   'urls',
+                                   'video',
+                                   'id:musicbrainz']}).
+      to_return(:body => fixture("artist_profile.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                             :bucket => ['biographies',
+                                         'blogs',
+                                         'familiarity',
+                                         'hotttnesss', 
+                                         'images',
+                                         'news',
+                                         'reviews',
+                                         'terms',
+                                         'urls',
+                                         'video',
+                                         'id:musicbrainz'])
+      expect(a_get("/api/v4/artist/profile").
+      with(:query => {:id => 'ARH6W4X1187B99274F',
+                       :bucket => ['biographies',
+                                   'blogs',
+                                   'familiarity',
+                                   'hotttnesss', 
+                                   'images',
+                                   'news',
+                                   'reviews',
+                                   'terms',
+                                   'urls',
+                                   'video',
+                                   'id:musicbrainz']})).
+      to have_been_made
+    end
+
+    it "returns an artist" do
+      artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                             :bucket => ['biographies',
+                                         'blogs',
+                                         'familiarity',
+                                         'hotttnesss', 
+                                         'images',
+                                         'news',
+                                         'reviews',
+                                         'terms',
+                                         'urls',
+                                         'video',
+                                         'id:musicbrainz'])
+      expect(artist).to be_a Echonest::Artist
+      expect(artist.id).to eq 'ARH6W4X1187B99274F'
+    end
+
+     it 'returns an artist with biographies' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['biographies',
+                                          'blogs',
+                                          'familiarity',
+                                          'hotttnesss', 
+                                          'images',
+                                          'news',
+                                          'reviews',
+                                          'terms',
+                                          'urls',
+                                          'video',
+                                          'id:musicbrainz'])
+       expect(artist.biographies).to be_an Array
+       expect(artist.biographies.first.site).to eq 'trouserpress' 
+     end
+
+     it 'returns an artist with blogs' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['biographies',
+                                          'blogs',
+                                          'familiarity',
+                                          'hotttnesss', 
+                                          'images',
+                                          'news',
+                                          'reviews',
+                                          'terms',
+                                          'urls',
+                                          'video',
+                                          'id:musicbrainz'])
+       expect(artist.blogs).to be_an Array
+       expect(artist.blogs.first.id).to eq '30fc8108d77316c6789140bef92ecc09' 
+     end
+
+     it 'returns an artist with images' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['biographies',
+                                          'blogs',
+                                          'familiarity',
+                                          'hotttnesss', 
+                                          'images',
+                                          'news',
+                                          'reviews',
+                                          'terms',
+                                          'urls',
+                                          'video',
+                                          'id:musicbrainz'])
+       expect(artist.images).to be_an Array
+       expect(artist.images.first.url).to eq 'http://userserve-ak.last.fm/serve/_/102639.jpg'
+     end
+  end
+
+  describe '#artist_reviews' do
+    before do
+      stub_get("/api/v4/artist/reviews").
+      with(:query => {:id => 'ARH6W4X1187B99274F'}).
+      to_return(:body => fixture("artist_reviews.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_reviews(:id => 'ARH6W4X1187B99274F')
+      expect(a_get("/api/v4/artist/reviews").
+      with(:query => {:id => 'ARH6W4X1187B99274F'})).
+      to have_been_made
+    end
+
+    it "returns reviews" do
+      reviews = @client.artist_reviews(:id => 'ARH6W4X1187B99274F')
+      expect(reviews).to be_an Array
+      expect(reviews.first.id).to eq '3f9fca724678df56f34845365110c511'
+    end
+  end
   describe "#artist_search" do
 
     before do

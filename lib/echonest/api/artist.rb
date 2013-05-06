@@ -139,6 +139,22 @@ module Echonest
         news_article_objects_from_response(:get, "/api/v4/artist/news", options)
       end
 
+      # Get basic information about an artist.
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Echonest::artist] The artist.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the artist.  Required if name is not provided.  Example: 'SOCZMFK12AC468668F'.
+      # @option options [String] :name The name of the artist. Required if id is not provided.  Example: 'Weezer'.
+      # @option options [String] :bucket The type of track data that should be returned. Not required, can send multiple, may be any of ['biographies', 'blogs', 'doc_counts', 'familiarity', 'hotttnesss', 'images', 'artist_location', 'news', 'reviews', 'songs', 'terms', 'urls', 'video', 'years_active', 'id:rosetta-stone'].
+      # @example Profile via id
+      #   Echonest.artist_profile(:id => 'SOCZMFK12AC468668F')
+      def artist_profile(options={})
+        artist_object_from_response(:get, "/api/v4/artist/profile", options)
+      end
       # Search for artists given different query types
       #
       # @see http://developer.echonest.com/docs/v4/artist.html
@@ -173,7 +189,31 @@ module Echonest
         artist_objects_from_response(:get, "/api/v4/artist/search", options)
       end
 
+      # @see http://developer.echonest.com/docs/v4/artist.html#reviews
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Array<Echonest::Review>]
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the artist.  Required if name is not provided.  Example: 'ARH6W4X1187B99274F'.
+      # @option options [String] :name The name of the artist. Required if id is not provided.  Example: 'Weezer'.
+      # @option options [Integer] :results The desired number of results to return, the valid range is 0 to 100, with 15 as the default
+      # @option options [Integer] :start The desired index of the first result returned, must be on of [0, 15, 30] with 0 as the default
+      # @example reviews via id
+      #   Echonest.artist_reviews(:id => 'ARH6W4X1187B99274F')
+      def artist_reviews(options={})
+        review_objects_from_response(:get, "/api/v4/artist/reviews", options)
+      end
+
       private
+        # @param request_method [Symbol]
+        # @param path [String]
+        # @return [Echonest::Artist]
+        def artist_object_from_response(request_method, path, options={})
+          response = send(request_method.to_sym, path, options)
+          Echonest::Artist.fetch_or_new(response[:body][:response][:artist])
+        end
+
         # @param request_method [Symbol]
         # @param path [String]
         # @return [Array]
@@ -239,6 +279,13 @@ module Echonest
         # @return [Array]
         def news_article_objects_from_response(request_method, path, options={})
           objects_from_array(Echonest::NewsArticle, send(request_method.to_sym, path, options)[:body][:response][:news])
+        end
+
+        # @param request_method [Symbol]
+        # @param path [String]
+        # @return [Array]
+        def review_objects_from_response(request_method, path, options={})
+          objects_from_array(Echonest::Review, send(request_method.to_sym, path, options)[:body][:response][:reviews])
         end
     end
   end

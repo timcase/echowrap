@@ -120,6 +120,16 @@ module Echonest
     def attrs_equal(other)
       self.class == other.class && !other.attrs.empty? && attrs == other.attrs
     end
+    
+    # @param klass [Class]
+    # @param key [Symbol]
+    # @return [Array]
+    def map_collection(klass, key)
+      Array(@attrs[key.to_sym]).map do |entity|
+        klass.fetch_or_new(entity)
+      end
+    end
+
 
   end
 end

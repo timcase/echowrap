@@ -5,11 +5,11 @@ module Echonest
 
 
     def bars
-     @bars ||= map_sequenced_data(Echonest::Bar, :bars)
+     @bars ||= map_collection(Echonest::Bar, :bars)
     end
 
     def beats
-      @beats ||= map_sequenced_data(Echonest::Beat, :beats)
+      @beats ||= map_collection(Echonest::Beat, :beats)
     end
 
     def id
@@ -21,30 +21,19 @@ module Echonest
     end
 
     def sections
-      @sections ||= map_sequenced_data(Echonest::Section, :sections)
+      @sections ||= map_collection(Echonest::Section, :sections)
     end
 
     def segments
-      @segments ||= map_sequenced_data(Echonest::Segment, :segments)
+      @segments ||= map_collection(Echonest::Segment, :segments)
     end
 
     def tatums
-      @tatums ||= map_sequenced_data(Echonest::Tatum, :tatums)
+      @tatums ||= map_collection(Echonest::Tatum, :tatums)
     end
 
     def track
       @track ||= Echonest::Track.new(@attrs[:track])
-    end
-
-
-    private
-
-    # @param klass [Class]
-    # @param key [Symbol]
-    def map_sequenced_data(klass, key)
-      Array(@attrs[key.to_sym]).map do |entity|
-        klass.fetch_or_new(entity)
-      end
     end
 
   end
