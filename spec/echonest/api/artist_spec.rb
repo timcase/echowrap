@@ -95,6 +95,29 @@ describe Echonest::API::Artist do
     end
   end
 
+  describe '#artist_images' do
+    before do
+      stub_get("/api/v4/artist/images").
+      with(:query => {:id => 'ARH6W4X1187B99274F'}).
+      to_return(:body => fixture("artist_images.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_images(:id => 'ARH6W4X1187B99274F')
+      expect(a_get("/api/v4/artist/images").
+      with(:query => {:id => 'ARH6W4X1187B99274F'})).
+      to have_been_made
+    end
+
+    it "returns images" do
+      images = @client.artist_images(:id => 'ARH6W4X1187B99274F')
+      expect(images).to be_an Array
+      expect(images.first.url).to eq 'http://userserve-ak.last.fm/serve/_/102639.jpg'
+      expect(images.first.license.attribution).to eq 'last.fm'
+    end
+  end
+
   describe "#artist_search" do
 
     before do
