@@ -51,6 +51,35 @@ describe Echonest::API::Artist do
     end
   end
 
+  describe "#artist_extract" do
+
+    before do
+      stub_get("/api/v4/artist/extract").
+      with(:query => {
+            :results => 1,
+            :text => 'Siriusmo is my favorite, but I also like hrvatski'}).
+        to_return(:body => fixture("artist_extract.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_extract(:results => 1,
+                          :text => 'Siriusmo is my favorite, but I also like hrvatski')
+      expect(a_get("/api/v4/artist/extract")
+      .with(:query => {:results => 1,
+                       :text => 'Siriusmo is my favorite, but I also like hrvatski'}))
+      .to have_been_made
+    end
+
+    it "returns artists" do
+      artists = @client.artist_extract(:results => 1,
+                          :text => 'Siriusmo is my favorite, but I also like hrvatski')
+      expect(artists).to be_an Array
+      expect(artists.first.name).to eq "Siriusmo"
+    end
+
+  end
+
   describe '#artist_familiarity' do
     before do
       stub_get("/api/v4/artist/familiarity").
@@ -316,34 +345,33 @@ describe Echonest::API::Artist do
       expect(reviews.first.id).to eq '3f9fca724678df56f34845365110c511'
     end
   end
+
   describe "#artist_search" do
 
     before do
       stub_get("/api/v4/artist/search").
       with(:query => {
             :results => 1,
-            :artist => 'radiohead'}).
+            :name => 'radiohead'}).
         to_return(:body => fixture("artist_search.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
-
     it "requests the correct resource" do
       @client.artist_search(:results => 1,
-                          :artist => 'radiohead')
+                          :name => 'radiohead')
       expect(a_get("/api/v4/artist/search")
       .with(:query => {:results => 1,
-                       :artist => 'radiohead'}))
+                       :name => 'radiohead'}))
       .to have_been_made
     end
 
     it "returns artists" do
       artists = @client.artist_search(:results => 1,
-                          :artist => 'radiohead')
+                          :name => 'radiohead')
       expect(artists).to be_an Array
       expect(artists.first.name).to eq "Radiohead"
     end
-
 
   end
 

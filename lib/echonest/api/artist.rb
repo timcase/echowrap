@@ -41,6 +41,27 @@ module Echonest
         blog_objects_from_response(:get, "/api/v4/artist/blogs", options)
       end
 
+      # Extract artist names from text.
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html#extract-beta
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :bucket Indicates what data should be returned with each artist. Not required, may send multiple, must be one of ['biographies', 'blogs', 'doc_counts', 'familiarity', 'hotttnesss', 'images', 'artist_location', 'news', 'reviews', 'songs', 'terms', 'urls', 'video', 'years_active', 'id:Rosetta-space']. Example: 'songs'.
+      # @option options [String] :limit If 'true' limit the results to any of the given idspaces or catalogs. Not required, defaults to 'false'.
+      # @option options [String] :text Text that contains artist names. Not required.  Example: 'Siriusmo is my favorite, but I also like hrvatski'.
+      # @option options [Float] :max_familiarity The maximum familiarity for the artist, the valid range for max_familiairty is 0.0 to 1.0, with 1.0 as default.
+      # @option options [Float] :min_familiarity The minimum famliiarity for the artist, the valid range for min_familiarity is 1.0 to 0.0, with 0.0 as default.
+      # @option options [Float] :max_hotttnesss The maximum hotttnesss of any artist's artist, the valid range for artist_max_hotttnesss is 0.0 to 1.0, with 1.0 as default.
+      # @option options [Float] :min_hotttnesss The minimum hotttnesss of any artist's artist, the valid range for the artist_min_hotttnesss is 0.0 to 1.0, with 0.0 as default.
+      # @option options [String] :sort Indicates how the artists results should be ordered. Must be one of ['familiarity-asc', 'hotttnesss-asc', 'familiarity-desc', 'hotttnesss-desc', 'artist_start_year-asc', 'artist_start_year-desc', 'artist_end_year-asc', 'artist_end_year-desc', 'artist_start_year-asc', 'artist_start_year-desc', 'artist_end_year-asc', 'artist_end_year-desc'].
+      # @option options [Integer] :results The desired number of results to return, the valid range is 0 to 100, with 15 as the default
+      # @return [Array<Echonest::artist>]
+      # @example Return an array of artists with artist 'Daft Punk'
+      #   Echonest.artist_search(:artist => "Daft Punk")
+      def artist_extract(options={})
+        artist_objects_from_response(:get, "/api/v4/artist/extract", options)
+      end
       # Get numerical estimation of how familiar an artist currently is to the world.
       #
       # @see http://developer.echonest.com/docs/v4/artist.html#familiarity
