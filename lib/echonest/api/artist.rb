@@ -286,6 +286,22 @@ module Echonest
         artist_objects_from_response(:get, "/api/v4/artist/suggest", options)
       end
 
+      #Get a list of most descriptive terms for an artist
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html#terms
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the artist.  Required if name is not provided.  Example: 'ARH6W4X1187B99274F'.
+      # @option options [String] :name The name of the artist. Required if id is not provided.  Example: 'Weezer'.
+      # @option options [String] :sort Sort terms based upon weight or frequency. Not required, must be one of ['weight', 'frequency'], with 'frequency' as default.
+      # @return [Array<Echonest::Term>]
+      # @example Return an array of terms with name 'Daft Punk'
+      #   Echonest.artist_terms(:name => "Daft Punk")
+      def artist_terms(options={})
+        term_objects_from_response(:get, "/api/v4/artist/terms", options)
+      end
+
       private
         # @param request_method [Symbol]
         # @param path [String]

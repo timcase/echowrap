@@ -454,5 +454,34 @@ describe Echonest::API::Artist do
     end
 
   end
+
+  describe "#artist_terms" do
+
+    before do
+      stub_get("/api/v4/artist/terms").
+      with(:query => {
+            :results => 1,
+            :name => 'radiohead'}).
+        to_return(:body => fixture("artist_terms.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_terms(:results => 1,
+                          :name => 'radiohead')
+      expect(a_get("/api/v4/artist/terms")
+      .with(:query => {:results => 1,
+                       :name => 'radiohead'}))
+      .to have_been_made
+    end
+
+    it "returns artists" do
+      terms = @client.artist_terms(:results => 1,
+                          :name => 'radiohead')
+      expect(terms).to be_an Array
+      expect(terms.first.name).to eq "rock"
+    end
+
+  end
 end
 
