@@ -425,5 +425,34 @@ describe Echonest::API::Artist do
     end
 
   end
+
+  describe "#artist_suggest" do
+
+    before do
+      stub_get("/api/v4/artist/suggest").
+      with(:query => {
+            :results => 1,
+            :name => 'radioh'}).
+        to_return(:body => fixture("artist_suggest.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_suggest(:results => 1,
+                          :name => 'radioh')
+      expect(a_get("/api/v4/artist/suggest")
+      .with(:query => {:results => 1,
+                       :name => 'radioh'}))
+      .to have_been_made
+    end
+
+    it "returns artists" do
+      artists = @client.artist_suggest(:results => 1,
+                          :name => 'radioh')
+      expect(artists).to be_an Array
+      expect(artists.first.name).to eq "Radiohead"
+    end
+
+  end
 end
 

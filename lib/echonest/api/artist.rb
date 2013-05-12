@@ -270,6 +270,22 @@ module Echonest
         song_objects_from_response(:get, "/api/v4/artist/songs", options)
       end
 
+      #Suggest artists based upon partial names. This method will return a list of potential artist matches based upon a query string. The method returns the most familiar best matching artist for the query.
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html#suggest
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :name A partial artist name.  Not required.  Examples: ["r", "rad", "radioh"].
+      # @option options [String] :q A partial artist name (an alias for 'name', to be jQuery friendly). Not required.  Examples: ["r", "rad", "radioh"].
+      # @option options [Integer] :results The desired number of results to return, the valid range is 0 to 100, with 15 as the default
+      # @return [Array<Echonest::artist>]
+      # @example Return an array of artists with artist 'Daft Pu'
+      #   Echonest.artist_suggest(:name => "Daft Pu")
+      def artist_suggest(options={})
+        artist_objects_from_response(:get, "/api/v4/artist/suggest", options)
+      end
+
       private
         # @param request_method [Symbol]
         # @param path [String]
