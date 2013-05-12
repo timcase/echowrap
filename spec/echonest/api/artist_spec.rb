@@ -214,7 +214,7 @@ describe Echonest::API::Artist do
                        :bucket => ['biographies',
                                    'blogs',
                                    'familiarity',
-                                   'hotttnesss', 
+                                   'hotttnesss',
                                    'images',
                                    'news',
                                    'reviews',
@@ -231,7 +231,7 @@ describe Echonest::API::Artist do
                              :bucket => ['biographies',
                                          'blogs',
                                          'familiarity',
-                                         'hotttnesss', 
+                                         'hotttnesss',
                                          'images',
                                          'news',
                                          'reviews',
@@ -244,7 +244,7 @@ describe Echonest::API::Artist do
                        :bucket => ['biographies',
                                    'blogs',
                                    'familiarity',
-                                   'hotttnesss', 
+                                   'hotttnesss',
                                    'images',
                                    'news',
                                    'reviews',
@@ -260,7 +260,7 @@ describe Echonest::API::Artist do
                              :bucket => ['biographies',
                                          'blogs',
                                          'familiarity',
-                                         'hotttnesss', 
+                                         'hotttnesss',
                                          'images',
                                          'news',
                                          'reviews',
@@ -277,7 +277,7 @@ describe Echonest::API::Artist do
                               :bucket => ['biographies',
                                           'blogs',
                                           'familiarity',
-                                          'hotttnesss', 
+                                          'hotttnesss',
                                           'images',
                                           'news',
                                           'reviews',
@@ -286,7 +286,7 @@ describe Echonest::API::Artist do
                                           'video',
                                           'id:musicbrainz'])
        expect(artist.biographies).to be_an Array
-       expect(artist.biographies.first.site).to eq 'trouserpress' 
+       expect(artist.biographies.first.site).to eq 'trouserpress'
      end
 
      it 'returns an artist with blogs' do
@@ -294,7 +294,7 @@ describe Echonest::API::Artist do
                               :bucket => ['biographies',
                                           'blogs',
                                           'familiarity',
-                                          'hotttnesss', 
+                                          'hotttnesss',
                                           'images',
                                           'news',
                                           'reviews',
@@ -303,7 +303,7 @@ describe Echonest::API::Artist do
                                           'video',
                                           'id:musicbrainz'])
        expect(artist.blogs).to be_an Array
-       expect(artist.blogs.first.id).to eq '30fc8108d77316c6789140bef92ecc09' 
+       expect(artist.blogs.first.id).to eq '30fc8108d77316c6789140bef92ecc09'
      end
 
      it 'returns an artist with images' do
@@ -311,7 +311,7 @@ describe Echonest::API::Artist do
                               :bucket => ['biographies',
                                           'blogs',
                                           'familiarity',
-                                          'hotttnesss', 
+                                          'hotttnesss',
                                           'images',
                                           'news',
                                           'reviews',
@@ -395,6 +395,35 @@ describe Echonest::API::Artist do
       expect(songs).to be_an Array
       expect(songs.first.title).to eq 'Give Up The Ghost (Brokenchord RMX)'
     end
+  end
+
+  describe "#artist_similar" do
+
+    before do
+      stub_get("/api/v4/artist/similar").
+      with(:query => {
+            :results => 1,
+            :name => 'radiohead'}).
+        to_return(:body => fixture("artist_similar.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_similar(:results => 1,
+                          :name => 'radiohead')
+      expect(a_get("/api/v4/artist/similar")
+      .with(:query => {:results => 1,
+                       :name => 'radiohead'}))
+      .to have_been_made
+    end
+
+    it "returns artists" do
+      artists = @client.artist_similar(:results => 1,
+                          :name => 'radiohead')
+      expect(artists).to be_an Array
+      expect(artists.first.name).to eq "Thom Yorke"
+    end
+
   end
 end
 

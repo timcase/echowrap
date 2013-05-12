@@ -96,7 +96,7 @@ module Echonest
       #
       # @see http://developer.echonest.com/docs/v4/artist.html#images
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
       # @return [Array<Echonest::Image>]
       # @param options [Hash] A customizable set of options.
@@ -115,7 +115,7 @@ module Echonest
       #
       # @see http://developer.echonest.com/docs/v4/artist.html#genres
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
       # @param options [Hash] A customizable set of options.
       # @return [Array<Echonest::Genre>]
@@ -130,7 +130,7 @@ module Echonest
       #
       # @see http://developer.echonest.com/docs/v4/artist.html#terms
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
       # @param options [Hash] A customizable set of options.
       # @option options [String] :type The type of term that is of interest. Not required, must be one of ['style', 'mood'].
@@ -224,6 +224,34 @@ module Echonest
       #   Echonest.artist_reviews(:id => 'ARH6W4X1187B99274F')
       def artist_reviews(options={})
         review_objects_from_response(:get, "/api/v4/artist/reviews", options)
+      end
+
+      #Return similar artists given one or more artists for comparison. The Echo Nest provides up-to-the-minute artist similarity and recommendations from their real-time musical and cultural analysis of what people are saying across the Internet and what the music sounds like.
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html#similar
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :name The name of the artist to search for. Not required. Example: 'radiohead'.
+      # @option options [Integer] :results The desired number of results to return, the valid range is 0 to 100, with 15 as the default
+      # @option options [Integer] :min_results Indicates the minimum number of results to be returned regardless of constraints, the valid range is 0 to 100, with 15 as the default
+      # @option options [Integer] :start The desired index of the first result returned, must be on of [0, 15, 30] with 0 as the default
+      # @option options [String] :bucket Indicates what data should be returned with each artist. Not required, may send multiple, must be one of ['biographies', 'blogs', 'doc_counts', 'familiarity', 'hotttnesss', 'images', 'artist_location', 'news', 'reviews', 'songs', 'terms', 'urls', 'video', 'years_active', 'id:Rosetta-space']. Example: 'songs'.
+      # @option options [Float] :max_familiarity The maximum familiarity for the artist, the valid range for max_familiairty is 0.0 to 1.0, with 1.0 as default.
+      # @option options [Float] :min_familiarity The minimum famliiarity for the artist, the valid range for min_familiarity is 1.0 to 0.0, with 0.0 as default.
+      # @option options [Float] :max_hotttnesss The maximum hotttnesss of any artist's artist, the valid range for artist_max_hotttnesss is 0.0 to 1.0, with 1.0 as default.
+      # @option options [Float] :min_hotttnesss The minimum hotttnesss of any artist's artist, the valid range for the artist_min_hotttnesss is 0.0 to 1.0, with 0.0 as default.
+      # @option options [String] :artist_start_year_before Matches artists that have an earliest start year before the given value, some examples are '1970', '2011', 'present'.
+      # @option options [String] :artist_start_year_after Matches artists that have an earliest start year after the given value, some examples are '1970', '2011', 'present'.
+      # @option options [String] :artist_end_year_before Matches artists that have an latest start year before the given value, some examples are '1970', '2011', 'present'.
+      # @option options [String] :artist_end_year_after Matches artists that have an latest start year after the given value, some examples are '1970', '2011', 'present'.
+      # @option options [String] :limit If 'true' limit the results to any of the given idspaces or catalogs. Not required, defaults to 'false'.
+      # @option options [String] :seed_catalog Only give similars to those in a catalog or catalogs, An Echo Nest artist catalog identifier. Muliple are allowed, up to 5, example: 'CAKSMUX1321A708AA4'.
+      # @return [Array<Echonest::artist>]
+      # @example Return an array of artists with artist 'Daft Punk'
+      #   Echonest.artist_similar(:name => "Daft Punk")
+      def artist_similar(options={})
+        artist_objects_from_response(:get, "/api/v4/artist/similar", options)
       end
 
       # @see http://developer.echonest.com/docs/v4/artist.html#songs
