@@ -25,6 +25,7 @@ require 'echonest/term'
 require 'echonest/track'
 require 'echonest/urls'
 require "echonest/version"
+require "echonest/video"
 
 module Echonest
   class << self

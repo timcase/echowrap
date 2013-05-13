@@ -593,5 +593,27 @@ describe Echonest::API::Artist do
     end
 
   end
+
+  describe '#artist_video' do
+    before do
+      stub_get("/api/v4/artist/video").
+      with(:query => {:id => 'ARH6W4X1187B99274F'}).
+      to_return(:body => fixture("artist_video.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_video(:id => 'ARH6W4X1187B99274F')
+      expect(a_get("/api/v4/artist/video").
+      with(:query => {:id => 'ARH6W4X1187B99274F'})).
+      to have_been_made
+    end
+
+    it "returns video" do
+      video= @client.artist_video(:id => 'ARH6W4X1187B99274F')
+      expect(video).to be_an Array
+      expect(video.first.title).to eq 'Radiohead - Inside My Head (with lyrics)'
+    end
+  end
 end
 
