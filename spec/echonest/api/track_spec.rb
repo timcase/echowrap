@@ -11,7 +11,7 @@ describe Echonest::API::Track do
       before do
         stub_post("/api/v4/track/upload").
         with(:body => {:api_key => 'AK', :url => "http://freedownloads.last.fm/download/494669779/Calgary.mp3"}).
-        to_return(:body => fixture("track_upload.json"),
+        to_return(:body => fixture("track/upload.json"),
                    :headers => {:content_type => "application/json; charset=utf-8"})
       end
 
@@ -33,7 +33,7 @@ describe Echonest::API::Track do
 
        before do
          stub_post("/api/v4/track/upload").
-         to_return(:body => fixture("track_upload.json"),
+         to_return(:body => fixture("track/upload.json"),
                     :headers => {:content_type => "application/json; charset=utf-8"})
        end
 
@@ -55,7 +55,7 @@ describe Echonest::API::Track do
     before do
       stub_get("/api/v4/track/profile").
       with(:query => {:id => 'TRTLKZV12E5AC92E11'}).
-      to_return(:body => fixture("track_profile.json"),
+      to_return(:body => fixture("track/profile.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -84,7 +84,7 @@ describe Echonest::API::Track do
 
     before do
       stub_request(:get, "http://echonest-analysis.s3.amazonaws.com/TR/TREYOVK13C9786E66B/3/full.json?AWSAccessKeyId=AKIAJRDFEY23UEVW42BQ&Expires=1367716357&Signature=dkZ4zsyf2%2BOuICu/veozEN5wWMs&api_key=AK").
-      to_return(:body => fixture("track_analysis.json"),
+      to_return(:body => fixture("track/analysis.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 

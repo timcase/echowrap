@@ -10,7 +10,7 @@ describe Echonest::API::Artist do
     before do
       stub_get("/api/v4/artist/biographies").
       with(:query => {:id => 'ARH6W4X1187B99274F'}).
-      to_return(:body => fixture("artist_biographies.json"),
+      to_return(:body => fixture("artist/biographies.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -33,7 +33,7 @@ describe Echonest::API::Artist do
     before do
       stub_get("/api/v4/artist/blogs").
       with(:query => {:id => 'ARH6W4X1187B99274F'}).
-      to_return(:body => fixture("artist_blogs.json"),
+      to_return(:body => fixture("artist/blogs.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -58,7 +58,7 @@ describe Echonest::API::Artist do
       with(:query => {
             :results => 1,
             :text => 'Siriusmo is my favorite, but I also like hrvatski'}).
-        to_return(:body => fixture("artist_extract.json"),
+        to_return(:body => fixture("artist/extract.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -84,7 +84,7 @@ describe Echonest::API::Artist do
     before do
       stub_get("/api/v4/artist/familiarity").
       with(:query => {:id => 'ARH6W4X1187B99274F'}).
-      to_return(:body => fixture("artist_familiarity.json"),
+      to_return(:body => fixture("artist/familiarity.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -106,7 +106,7 @@ describe Echonest::API::Artist do
     before do
       stub_get("/api/v4/artist/hotttnesss").
       with(:query => {:id => 'ARH6W4X1187B99274F'}).
-      to_return(:body => fixture("artist_hotttnesss.json"),
+      to_return(:body => fixture("artist/hotttnesss.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -128,7 +128,7 @@ describe Echonest::API::Artist do
     before do
       stub_get("/api/v4/artist/images").
       with(:query => {:id => 'ARH6W4X1187B99274F'}).
-      to_return(:body => fixture("artist_images.json"),
+      to_return(:body => fixture("artist/images.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -150,7 +150,7 @@ describe Echonest::API::Artist do
   describe '#artist_list_genres' do
     before do
       stub_get("/api/v4/artist/list_genres").
-      to_return(:body => fixture("artist_list_genres.json"),
+      to_return(:body => fixture("artist/list_genres.json"),
                 :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -169,7 +169,7 @@ describe Echonest::API::Artist do
   describe '#artist_list_terms' do
     before do
       stub_get("/api/v4/artist/list_terms").
-      to_return(:body => fixture("artist_list_terms.json"),
+      to_return(:body => fixture("artist/list_terms.json"),
                 :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -189,7 +189,7 @@ describe Echonest::API::Artist do
     before do
       stub_get("/api/v4/artist/news").
       with(:query => {:id => 'ARH6W4X1187B99274F'}).
-      to_return(:body => fixture("artist_news.json"),
+      to_return(:body => fixture("artist/news.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -226,7 +226,7 @@ describe Echonest::API::Artist do
                                    'video',
                                    'years_active',
                                    'id:musicbrainz']}).
-      to_return(:body => fixture("artist_profile.json"),
+      to_return(:body => fixture("artist/profile.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -329,7 +329,7 @@ describe Echonest::API::Artist do
        expect(artist.blogs).to be_an Array
        expect(artist.blogs.first.id).to eq '24bfd596c968ccee4069f2b21817d692'
      end
-     
+
      it 'returns an artist with a doc counts' do
        artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
                               :bucket => ['artist_location',
@@ -413,7 +413,7 @@ describe Echonest::API::Artist do
        expect(artist.images).to be_an Array
        expect(artist.images.first.url).to eq 'http://userserve-ak.last.fm/serve/_/102639.jpg'
      end
-     
+
      it 'returns an artist with a location' do
        artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
                               :bucket => ['artist_location',
@@ -582,7 +582,7 @@ describe Echonest::API::Artist do
        expect(artist.foreign_ids).to be_an Array
        expect(artist.foreign_ids.first.id).to eq 'musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711'
      end
-     
+
      it 'returns an artist with years active' do
        artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
                               :bucket => ['artist_location',
@@ -603,14 +603,14 @@ describe Echonest::API::Artist do
        expect(artist.years_active).to be_an Array
        expect(artist.years_active.first.start).to eq 1985
      end
-     
+
   end
 
   describe '#artist_reviews' do
     before do
       stub_get("/api/v4/artist/reviews").
       with(:query => {:id => 'ARH6W4X1187B99274F'}).
-      to_return(:body => fixture("artist_reviews.json"),
+      to_return(:body => fixture("artist/reviews.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -635,7 +635,7 @@ describe Echonest::API::Artist do
       with(:query => {
             :results => 1,
             :name => 'radiohead'}).
-        to_return(:body => fixture("artist_search.json"),
+        to_return(:body => fixture("artist/search.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -661,7 +661,7 @@ describe Echonest::API::Artist do
     before do
       stub_get("/api/v4/artist/songs").
       with(:query => {:id => 'ARH6W4X1187B99274F'}).
-      to_return(:body => fixture("artist_songs.json"),
+      to_return(:body => fixture("artist/songs.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -686,7 +686,7 @@ describe Echonest::API::Artist do
       with(:query => {
             :results => 1,
             :name => 'radiohead'}).
-        to_return(:body => fixture("artist_similar.json"),
+        to_return(:body => fixture("artist/similar.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -715,7 +715,7 @@ describe Echonest::API::Artist do
       with(:query => {
             :results => 1,
             :name => 'radioh'}).
-        to_return(:body => fixture("artist_suggest.json"),
+        to_return(:body => fixture("artist/suggest.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -744,7 +744,7 @@ describe Echonest::API::Artist do
       with(:query => {
             :results => 1,
             :name => 'radiohead'}).
-        to_return(:body => fixture("artist_terms.json"),
+        to_return(:body => fixture("artist/terms.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -773,7 +773,7 @@ describe Echonest::API::Artist do
       with(:query => {
             :results => 1,
             :genre => 'dance'}).
-        to_return(:body => fixture("artist_top_hottt.json"),
+        to_return(:body => fixture("artist/top_hottt.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -801,7 +801,7 @@ describe Echonest::API::Artist do
       stub_get("/api/v4/artist/top_terms").
       with(:query => {
             :results => 100}).
-        to_return(:body => fixture("artist_top_terms.json"),
+        to_return(:body => fixture("artist/top_terms.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -827,7 +827,7 @@ describe Echonest::API::Artist do
       with(:query => {
             :results => 1,
             :name => 'radiohead'}).
-        to_return(:body => fixture("artist_twitter.json"),
+        to_return(:body => fixture("artist/twitter.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -855,7 +855,7 @@ describe Echonest::API::Artist do
       stub_get("/api/v4/artist/urls").
       with(:query => {
             :name => 'radiohead'}).
-        to_return(:body => fixture("artist_urls.json"),
+        to_return(:body => fixture("artist/urls.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -880,7 +880,7 @@ describe Echonest::API::Artist do
     before do
       stub_get("/api/v4/artist/video").
       with(:query => {:id => 'ARH6W4X1187B99274F'}).
-      to_return(:body => fixture("artist_video.json"),
+      to_return(:body => fixture("artist/video.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 

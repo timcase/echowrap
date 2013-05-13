@@ -14,7 +14,7 @@ describe Echonest::API::Song do
             :results => 1,
             :artist => 'radiohead',
             :title => 'karma police'}).
-        to_return(:body => fixture("search_songs.json"),
+        to_return(:body => fixture("song/search.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -57,7 +57,7 @@ describe Echonest::API::Song do
                                   'song_type',
                                   'tracks',
                                   'id:7digital-US']}).
-      to_return(:body => fixture("song_profile.json"),
+      to_return(:body => fixture("song/profile.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
@@ -106,7 +106,7 @@ describe Echonest::API::Song do
       expect(song).to be_a Echonest::Song
       expect(song.id).to eq 'SODJXOA1313438FB61'
     end
-    
+
     it "returns artist familiarity" do
       song = @client.song_profile(:id => 'SODJXOA1313438FB61',
                               :bucket => ['artist_familiarity',
@@ -140,7 +140,7 @@ describe Echonest::API::Song do
       expect(song.artist_hotttnesss).to be_an Float
       expect(song.artist_hotttnesss).to eq 0.625762
     end
-    
+
     it "returns an artist location" do
       song = @client.song_profile(:id => 'SODJXOA1313438FB61',
                               :bucket => ['artist_familiarity',
@@ -266,7 +266,7 @@ describe Echonest::API::Song do
     context 'with POST' do
       before do
         stub_post("/api/v4/song/identify").
-        to_return(:body => fixture("song_identify.json"),
+        to_return(:body => fixture("song/identify.json"),
                    :headers => {:content_type => "application/json; charset=utf-8"})
       end
 
@@ -280,15 +280,15 @@ describe Echonest::API::Song do
         expect(song).to be_a Echonest::Song
         expect(song.id).to eq 'SOKHYNL12A8C142FC7'
       end
-      
-      
+
+
     end
 
     context 'with GET' do
       before do
         stub_get("/api/v4/song/identify").
         with(:query => {:code => fixture('billie_jean_fingerprint.txt').read}).
-        to_return(:body => fixture("song_identify.json"),
+        to_return(:body => fixture("song/identify.json"),
                    :headers => {:content_type => "application/json; charset=utf-8"})
       end
 
