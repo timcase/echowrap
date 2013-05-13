@@ -306,6 +306,40 @@ describe Echonest::API::Artist do
        expect(artist.blogs.first.id).to eq '30fc8108d77316c6789140bef92ecc09'
      end
 
+     it 'returns an artist with familiarity' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['biographies',
+                                          'blogs',
+                                          'familiarity',
+                                          'hotttnesss',
+                                          'images',
+                                          'news',
+                                          'reviews',
+                                          'terms',
+                                          'urls',
+                                          'video',
+                                          'id:musicbrainz'])
+       expect(artist.familiarity).to be_an Float
+       expect(artist.familiarity).to eq 0.897921
+     end
+
+     it 'returns an artist with hotttnesss' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['biographies',
+                                          'blogs',
+                                          'familiarity',
+                                          'hotttnesss',
+                                          'images',
+                                          'news',
+                                          'reviews',
+                                          'terms',
+                                          'urls',
+                                          'video',
+                                          'id:musicbrainz'])
+       expect(artist.hotttnesss).to be_an Float
+       expect(artist.hotttnesss).to eq 0.666535
+     end
+
      it 'returns an artist with images' do
        artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
                               :bucket => ['biographies',
@@ -321,6 +355,108 @@ describe Echonest::API::Artist do
                                           'id:musicbrainz'])
        expect(artist.images).to be_an Array
        expect(artist.images.first.url).to eq 'http://userserve-ak.last.fm/serve/_/102639.jpg'
+     end
+
+     it 'returns an artist with news' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['biographies',
+                                          'blogs',
+                                          'familiarity',
+                                          'hotttnesss',
+                                          'images',
+                                          'news',
+                                          'reviews',
+                                          'terms',
+                                          'urls',
+                                          'video',
+                                          'id:musicbrainz'])
+       expect(artist.news).to be_an Array
+       expect(artist.news.first.id).to eq '29c1699c8464426781f3e012d29fc1f6'
+     end
+
+     it 'returns an artist with reviews' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['biographies',
+                                          'blogs',
+                                          'familiarity',
+                                          'hotttnesss',
+                                          'images',
+                                          'news',
+                                          'reviews',
+                                          'terms',
+                                          'urls',
+                                          'video',
+                                          'id:musicbrainz'])
+       expect(artist.reviews).to be_an Array
+       expect(artist.reviews.first.id).to eq '3f9fca724678df56f34845365110c511'
+     end
+
+     it 'returns an artist with terms' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['biographies',
+                                          'blogs',
+                                          'familiarity',
+                                          'hotttnesss',
+                                          'images',
+                                          'news',
+                                          'reviews',
+                                          'terms',
+                                          'urls',
+                                          'video',
+                                          'id:musicbrainz'])
+       expect(artist.terms).to be_an Array
+       expect(artist.terms.first.id).to eq 'rock'
+     end
+
+     it 'returns an artist with urls' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['biographies',
+                                          'blogs',
+                                          'familiarity',
+                                          'hotttnesss',
+                                          'images',
+                                          'news',
+                                          'reviews',
+                                          'terms',
+                                          'urls',
+                                          'video',
+                                          'id:musicbrainz'])
+       expect(artist.urls).to be_an Echonest::Urls
+       expect(artist.urls.id).to eq 'http://radiohead.com'
+     end
+
+     it 'returns an artist with video' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['biographies',
+                                          'blogs',
+                                          'familiarity',
+                                          'hotttnesss',
+                                          'images',
+                                          'news',
+                                          'reviews',
+                                          'terms',
+                                          'urls',
+                                          'video',
+                                          'id:musicbrainz'])
+       expect(artist.video).to be_an Array
+       expect(artist.video.first.id).to eq 'df78d34fcc930764ac002d8cf798b62c'
+     end
+
+     it 'returns an artist with foreign_ids' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['biographies',
+                                          'blogs',
+                                          'familiarity',
+                                          'hotttnesss',
+                                          'images',
+                                          'news',
+                                          'reviews',
+                                          'terms',
+                                          'urls',
+                                          'video',
+                                          'id:musicbrainz'])
+       expect(artist.foreign_ids).to be_an Array
+       expect(artist.foreign_ids.first.id).to eq 'musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711'
      end
   end
 
