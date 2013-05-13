@@ -303,7 +303,7 @@ describe Echonest::API::Artist do
                                           'video',
                                           'id:musicbrainz'])
        expect(artist.blogs).to be_an Array
-       expect(artist.blogs.first.id).to eq '30fc8108d77316c6789140bef92ecc09'
+       expect(artist.blogs.first.id).to eq '24bfd596c968ccee4069f2b21817d692'
      end
 
      it 'returns an artist with familiarity' do
@@ -320,7 +320,7 @@ describe Echonest::API::Artist do
                                           'video',
                                           'id:musicbrainz'])
        expect(artist.familiarity).to be_an Float
-       expect(artist.familiarity).to eq 0.897921
+       expect(artist.familiarity).to eq 0.897745
      end
 
      it 'returns an artist with hotttnesss' do
@@ -337,7 +337,7 @@ describe Echonest::API::Artist do
                                           'video',
                                           'id:musicbrainz'])
        expect(artist.hotttnesss).to be_an Float
-       expect(artist.hotttnesss).to eq 0.666535
+       expect(artist.hotttnesss).to eq 0.64754
      end
 
      it 'returns an artist with images' do
@@ -371,7 +371,7 @@ describe Echonest::API::Artist do
                                           'video',
                                           'id:musicbrainz'])
        expect(artist.news).to be_an Array
-       expect(artist.news.first.id).to eq '29c1699c8464426781f3e012d29fc1f6'
+       expect(artist.news.first.id).to eq 'c72241d996fa856b38d88acd4cedec18'
      end
 
      it 'returns an artist with reviews' do
@@ -439,7 +439,7 @@ describe Echonest::API::Artist do
                                           'video',
                                           'id:musicbrainz'])
        expect(artist.video).to be_an Array
-       expect(artist.video.first.id).to eq 'df78d34fcc930764ac002d8cf798b62c'
+       expect(artist.video.first.id).to eq '36f2c2daf09feb738980d4783dc0a3b1'
      end
 
      it 'returns an artist with foreign_ids' do
