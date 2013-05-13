@@ -226,7 +226,7 @@ module Echonest
         review_objects_from_response(:get, "/api/v4/artist/reviews", options)
       end
 
-      #Return similar artists given one or more artists for comparison. The Echo Nest provides up-to-the-minute artist similarity and recommendations from their real-time musical and cultural analysis of what people are saying across the Internet and what the music sounds like.
+      # Return similar artists given one or more artists for comparison. The Echo Nest provides up-to-the-minute artist similarity and recommendations from their real-time musical and cultural analysis of what people are saying across the Internet and what the music sounds like.
       #
       # @see http://developer.echonest.com/docs/v4/artist.html#similar
       # @authentication Requires api key
@@ -270,7 +270,7 @@ module Echonest
         song_objects_from_response(:get, "/api/v4/artist/songs", options)
       end
 
-      #Suggest artists based upon partial names. This method will return a list of potential artist matches based upon a query string. The method returns the most familiar best matching artist for the query.
+      # Suggest artists based upon partial names. This method will return a list of potential artist matches based upon a query string. The method returns the most familiar best matching artist for the query.
       #
       # @see http://developer.echonest.com/docs/v4/artist.html#suggest
       # @authentication Requires api key
@@ -286,7 +286,7 @@ module Echonest
         artist_objects_from_response(:get, "/api/v4/artist/suggest", options)
       end
 
-      #Get a list of most descriptive terms for an artist
+      # Get a list of most descriptive terms for an artist
       #
       # @see http://developer.echonest.com/docs/v4/artist.html#terms
       # @authentication Requires api key
@@ -300,6 +300,27 @@ module Echonest
       #   Echonest.artist_terms(:name => "Daft Punk")
       def artist_terms(options={})
         term_objects_from_response(:get, "/api/v4/artist/terms", options)
+      end
+
+      # Return a list of the top hottt artists.
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html#top_hottt
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @param options [Hash] A customizable set of options.
+      # @option options [Integer] :results The desired number of results to return, the valid range is 0 to 100, with 15 as the default
+      # @option options [Integer] :start The desired index of the first result returned, must be on of [0, 15, 30] with 0 as the default
+      # @option options [String] :genre A musical genre like rock, jazz, or funky. Not required, may send multiple. Examples are: 'jazz', 'metal'.
+      # @option options [String] :bucket Indicates what data should be returned with each artist. Not required, may send multiple, must be one of ['biographies', 'blogs', 'doc_counts', 'familiarity', 'hotttnesss', 'images', 'artist_location', 'news', 'reviews', 'songs', 'terms', 'urls', 'video', 'years_active', 'id:Rosetta-space']. Example: 'songs'.
+      # @option options [String] :limit If 'true' limit the results to any of the given idspaces or catalogs. Not required, defaults to 'false'.
+      # @option options [String] :name A partial artist name.  Not required.  Examples: ["r", "rad", "radioh"].
+      # @option options [String] :q A partial artist name (an alias for 'name', to be jQuery friendly). Not required.  Examples: ["r", "rad", "radioh"].
+      # @option options [Integer] :results The desired number of results to return, the valid range is 0 to 100, with 15 as the default
+      # @return [Array<Echonest::artist>]
+      # @example Return an array of artists with top genre 'dance'
+      #   Echonest.artist_top_hottt(:genre => "dance")
+      def artist_top_hottt(options={})
+        artist_objects_from_response(:get, "/api/v4/artist/top_hottt", options)
       end
 
       private

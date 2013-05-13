@@ -483,5 +483,34 @@ describe Echonest::API::Artist do
     end
 
   end
+
+  describe "#artist_top_hottt" do
+
+    before do
+      stub_get("/api/v4/artist/top_hottt").
+      with(:query => {
+            :results => 1,
+            :genre => 'dance'}).
+        to_return(:body => fixture("artist_top_hottt.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_top_hottt(:results => 1,
+                          :genre => 'dance')
+      expect(a_get("/api/v4/artist/top_hottt")
+      .with(:query => {:results => 1,
+                       :genre => 'dance'}))
+      .to have_been_made
+    end
+
+    it "returns artists" do
+      artists = @client.artist_top_hottt(:results => 1,
+                          :genre => 'dance')
+      expect(artists).to be_an Array
+      expect(artists.first.name).to eq "Justin Timberlake"
+    end
+
+  end
 end
 
