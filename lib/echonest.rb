@@ -23,6 +23,7 @@ require 'echonest/sequenced_data/tatum'
 require 'echonest/song'
 require 'echonest/term'
 require 'echonest/track'
+require 'echonest/urls'
 require "echonest/version"
 
 module Echonest

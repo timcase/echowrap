@@ -350,6 +350,21 @@ module Echonest
         artist_object_from_response(:get, "/api/v4/artist/twitter", options)
       end
 
+      # Get links to the artist's official site, MusicBrainz site, MySpace site, Wikipedia article, Amazon list, and iTunes page.
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html#urls
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the artist.  Required if name is not provided.  Example: 'ARH6W4X1187B99274F'.
+      # @option options [String] :name The name of the artist. Required if id is not provided.  Example: 'Weezer'.
+      # @return [Array<Echonest::Urls>]
+      # @example Return urls for artist with name of 'Daft Punk'
+      #   Echonest.artist_urls(:name => "Daft Punk")
+      def artist_urls(options={})
+        urls_object_from_response(:get, "/api/v4/artist/urls", options)
+      end
+
       private
         # @param request_method [Symbol]
         # @param path [String]
@@ -438,6 +453,14 @@ module Echonest
         # @return [Array]
         def song_objects_from_response(request_method, path, options={})
           objects_from_array(Echonest::Song, send(request_method.to_sym, path, options)[:body][:response][:songs])
+        end
+
+        # @param request_method [Symbol]
+        # @param path [String]
+        # @return [Echonest::Urls]
+        def urls_object_from_response(request_method, path, options={})
+          response = send(request_method.to_sym, path, options)
+          Echonest::Urls.fetch_or_new(response[:body][:response][:urls])
         end
     end
   end

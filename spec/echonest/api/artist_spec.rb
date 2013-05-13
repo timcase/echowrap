@@ -566,5 +566,32 @@ describe Echonest::API::Artist do
     end
 
   end
+
+  describe "#artist_urls" do
+
+    before do
+      stub_get("/api/v4/artist/urls").
+      with(:query => {
+            :name => 'radiohead'}).
+        to_return(:body => fixture("artist_urls.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_urls(:name => 'radiohead')
+      expect(a_get("/api/v4/artist/urls")
+      .with(:query => {
+                       :name => 'radiohead'}))
+      .to have_been_made
+    end
+
+    it "returns urls" do
+      urls = @client.artist_urls(
+                          :name => 'radiohead')
+      expect(urls).to be_an Echonest::Urls
+      expect(urls.lastfm_url).to eq "http://www.last.fm/music/Radiohead"
+    end
+
+  end
 end
 
