@@ -313,14 +313,25 @@ module Echonest
       # @option options [String] :genre A musical genre like rock, jazz, or funky. Not required, may send multiple. Examples are: 'jazz', 'metal'.
       # @option options [String] :bucket Indicates what data should be returned with each artist. Not required, may send multiple, must be one of ['biographies', 'blogs', 'doc_counts', 'familiarity', 'hotttnesss', 'images', 'artist_location', 'news', 'reviews', 'songs', 'terms', 'urls', 'video', 'years_active', 'id:Rosetta-space']. Example: 'songs'.
       # @option options [String] :limit If 'true' limit the results to any of the given idspaces or catalogs. Not required, defaults to 'false'.
-      # @option options [String] :name A partial artist name.  Not required.  Examples: ["r", "rad", "radioh"].
-      # @option options [String] :q A partial artist name (an alias for 'name', to be jQuery friendly). Not required.  Examples: ["r", "rad", "radioh"].
-      # @option options [Integer] :results The desired number of results to return, the valid range is 0 to 100, with 15 as the default
-      # @return [Array<Echonest::artist>]
+      # @return [Array<Echonest::Artist>]
       # @example Return an array of artists with top genre 'dance'
       #   Echonest.artist_top_hottt(:genre => "dance")
       def artist_top_hottt(options={})
         artist_objects_from_response(:get, "/api/v4/artist/top_hottt", options)
+      end
+
+      # Returns a list of the overall top terms.
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html#top_terms
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @param options [Hash] A customizable set of options.
+      # @option options [Integer] :results The desired number of results to return, the valid range is 0 to 100, with 15 as the default
+      # @return [Array<Echonest::Term>]
+      # @example Return an array of terms
+      #   Echonest.artist_top_terms
+      def artist_top_terms(options={})
+        term_objects_from_response(:get, "/api/v4/artist/top_terms", options)
       end
 
       private

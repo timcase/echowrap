@@ -512,5 +512,30 @@ describe Echonest::API::Artist do
     end
 
   end
+
+  describe "#artist_top_terms" do
+
+    before do
+      stub_get("/api/v4/artist/top_terms").
+      with(:query => {
+            :results => 100}).
+        to_return(:body => fixture("artist_top_terms.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_top_terms(:results => 100)
+      expect(a_get("/api/v4/artist/top_terms")
+      .with(:query => {:results => 100}))
+      .to have_been_made
+    end
+
+    it "returns terms" do
+      terms = @client.artist_top_terms(:results => 100)
+      expect(terms).to be_an Array
+      expect(terms.first.name).to eq "rock"
+    end
+
+  end
 end
 
