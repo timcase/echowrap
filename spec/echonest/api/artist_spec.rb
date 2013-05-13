@@ -329,6 +329,27 @@ describe Echonest::API::Artist do
        expect(artist.blogs).to be_an Array
        expect(artist.blogs.first.id).to eq '24bfd596c968ccee4069f2b21817d692'
      end
+     
+     it 'returns an artist with a doc counts' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['artist_location',
+                                           'biographies',
+                                           'blogs',
+                                           'doc_counts',
+                                           'familiarity',
+                                           'hotttnesss',
+                                           'images',
+                                           'news',
+                                           'songs',
+                                           'reviews',
+                                           'terms',
+                                           'urls',
+                                           'video',
+                                           'years_active',
+                                           'id:musicbrainz'])
+       expect(artist.doc_counts).to be_an Echonest::DocCounts
+       expect(artist.doc_counts.songs).to eq 333
+     end
 
      it 'returns an artist with familiarity' do
        artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
@@ -392,6 +413,27 @@ describe Echonest::API::Artist do
        expect(artist.images).to be_an Array
        expect(artist.images.first.url).to eq 'http://userserve-ak.last.fm/serve/_/102639.jpg'
      end
+     
+     it 'returns an artist with a location' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['artist_location',
+                                           'biographies',
+                                           'blogs',
+                                           'doc_counts',
+                                           'familiarity',
+                                           'hotttnesss',
+                                           'images',
+                                           'news',
+                                           'songs',
+                                           'reviews',
+                                           'terms',
+                                           'urls',
+                                           'video',
+                                           'years_active',
+                                           'id:musicbrainz'])
+       expect(artist.location).to be_an Echonest::Location
+       expect(artist.location.id).to eq 'Abingdon, England, GB'
+     end
 
      it 'returns an artist with news' do
        artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
@@ -434,6 +476,28 @@ describe Echonest::API::Artist do
        expect(artist.reviews).to be_an Array
        expect(artist.reviews.first.id).to eq '3f9fca724678df56f34845365110c511'
      end
+
+     it 'returns an artist with songs' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['artist_location',
+                                           'biographies',
+                                           'blogs',
+                                           'doc_counts',
+                                           'familiarity',
+                                           'hotttnesss',
+                                           'images',
+                                           'news',
+                                           'songs',
+                                           'reviews',
+                                           'terms',
+                                           'urls',
+                                           'video',
+                                           'years_active',
+                                           'id:musicbrainz'])
+       expect(artist.songs).to be_an Array
+       expect(artist.songs.first.id).to eq 'SOAROML1316771494B'
+     end
+
 
      it 'returns an artist with terms' do
        artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
@@ -518,6 +582,28 @@ describe Echonest::API::Artist do
        expect(artist.foreign_ids).to be_an Array
        expect(artist.foreign_ids.first.id).to eq 'musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711'
      end
+     
+     it 'returns an artist with years active' do
+       artist = @client.artist_profile(:id => 'ARH6W4X1187B99274F',
+                              :bucket => ['artist_location',
+                                           'biographies',
+                                           'blogs',
+                                           'doc_counts',
+                                           'familiarity',
+                                           'hotttnesss',
+                                           'images',
+                                           'news',
+                                           'songs',
+                                           'reviews',
+                                           'terms',
+                                           'urls',
+                                           'video',
+                                           'years_active',
+                                           'id:musicbrainz'])
+       expect(artist.years_active).to be_an Array
+       expect(artist.years_active.first.start).to eq 1985
+     end
+     
   end
 
   describe '#artist_reviews' do

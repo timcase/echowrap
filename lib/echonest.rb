@@ -5,12 +5,14 @@ require 'echonest/blog'
 require 'echonest/audio_summary'
 require 'echonest/client'
 require 'echonest/configurable'
+require 'echonest/doc_counts'
 require 'echonest/error'
 require 'echonest/familiarity'
 require 'echonest/foreign_id'
 require 'echonest/hotttnesss'
 require 'echonest/genre'
 require 'echonest/image'
+require 'echonest/location'
 require 'echonest/license'
 require 'echonest/news_article'
 require 'echonest/rate_limit'
@@ -25,8 +27,10 @@ require 'echonest/song'
 require 'echonest/term'
 require 'echonest/track'
 require 'echonest/urls'
-require "echonest/version"
-require "echonest/video"
+require 'echonest/version'
+require 'echonest/video'
+require 'echonest/years_active'
+
 
 module Echonest
   class << self
