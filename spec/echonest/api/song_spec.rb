@@ -45,23 +45,221 @@ describe Echonest::API::Song do
   describe '#song_profile' do
     before do
       stub_get("/api/v4/song/profile").
-      with(:query => {:id => 'SOCZMFK12AC468668F'}).
+      with(:query => {:id => 'SODJXOA1313438FB61',
+                      :bucket => ['artist_familiarity',
+                                  'artist_hotttnesss',
+                                  'artist_location',
+                                  'audio_summary',
+                                  'scores',
+                                  'song_currency',
+                                  'song_discovery',
+                                  'song_hotttness',
+                                  'song_type',
+                                  'tracks',
+                                  'id:7digital-US']}).
       to_return(:body => fixture("song_profile.json"),
                  :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
     it "requests the correct resource" do
-      @client.song_profile(:id => 'SOCZMFK12AC468668F')
+      @client.song_profile(:id => 'SODJXOA1313438FB61',
+                            :bucket => ['artist_familiarity',
+                                        'artist_hotttnesss',
+                                        'artist_location',
+                                        'audio_summary',
+                                        'scores',
+                                        'song_currency',
+                                        'song_discovery',
+                                        'song_hotttness',
+                                        'song_type',
+                                        'tracks',
+                                        'id:7digital-US'])
       expect(a_get("/api/v4/song/profile").
-      with(:query => {:id => 'SOCZMFK12AC468668F'})).
+      with(:query => {:id => 'SODJXOA1313438FB61',
+                      :bucket => ['artist_familiarity',
+                                  'artist_hotttnesss',
+                                  'artist_location',
+                                  'audio_summary',
+                                  'scores',
+                                  'song_currency',
+                                  'song_discovery',
+                                  'song_hotttness',
+                                  'song_type',
+                                  'tracks',
+                                  'id:7digital-US']})).
       to have_been_made
     end
 
     it "returns a song" do
-      song = @client.song_profile(:id => 'SOCZMFK12AC468668F')
+      song = @client.song_profile(:id => 'SODJXOA1313438FB61',
+                                  :bucket => ['artist_familiarity',
+                                              'artist_hotttnesss',
+                                              'artist_location',
+                                              'audio_summary',
+                                              'scores',
+                                              'song_currency',
+                                              'song_discovery',
+                                              'song_hotttness',
+                                              'song_type',
+                                              'tracks',
+                                              'id:7digital-US'])
       expect(song).to be_a Echonest::Song
-      expect(song.id).to eq 'SOCZMFK12AC468668F'
+      expect(song.id).to eq 'SODJXOA1313438FB61'
     end
+    
+    it "returns artist familiarity" do
+      song = @client.song_profile(:id => 'SODJXOA1313438FB61',
+                              :bucket => ['artist_familiarity',
+                                          'artist_hotttnesss',
+                                          'artist_location',
+                                          'audio_summary',
+                                          'scores',
+                                          'song_currency',
+                                          'song_discovery',
+                                          'song_hotttness',
+                                          'song_type',
+                                          'tracks',
+                                          'id:7digital-US'])
+      expect(song.artist_familiarity).to be_an Float
+      expect(song.artist_familiarity).to eq 0.892819
+    end
+
+    it "returns artist hotttnesss" do
+      song = @client.song_profile(:id => 'SODJXOA1313438FB61',
+                              :bucket => ['artist_familiarity',
+                                          'artist_hotttnesss',
+                                          'artist_location',
+                                          'audio_summary',
+                                          'scores',
+                                          'song_currency',
+                                          'song_discovery',
+                                          'song_hotttness',
+                                          'song_type',
+                                          'tracks',
+                                          'id:7digital-US'])
+      expect(song.artist_hotttnesss).to be_an Float
+      expect(song.artist_hotttnesss).to eq 0.625762
+    end
+    
+    it "returns an artist location" do
+      song = @client.song_profile(:id => 'SODJXOA1313438FB61',
+                              :bucket => ['artist_familiarity',
+                                          'artist_hotttnesss',
+                                          'artist_location',
+                                          'audio_summary',
+                                          'scores',
+                                          'song_currency',
+                                          'song_discovery',
+                                          'song_hotttness',
+                                          'song_type',
+                                          'tracks',
+                                          'id:7digital-US'])
+      expect(song.artist_location).to be_an Echonest::Location
+      expect(song.artist_location.location).to eq "Gary, IN, US"
+    end
+
+    it "returns an audio summary" do
+      song = @client.song_profile(:id => 'SODJXOA1313438FB61',
+                              :bucket => ['artist_familiarity',
+                                          'artist_hotttnesss',
+                                          'artist_location',
+                                          'audio_summary',
+                                          'scores',
+                                          'song_currency',
+                                          'song_discovery',
+                                          'song_hotttness',
+                                          'song_type',
+                                          'tracks',
+                                          'id:7digital-US'])
+      expect(song.audio_summary).to be_an Echonest::AudioSummary
+      expect(song.audio_summary.audio_md5).to eq "77688ec91b91e8cf5e105049a4227be9"
+    end
+
+    it "returns song currency" do
+      song = @client.song_profile(:id => 'SODJXOA1313438FB61',
+                              :bucket => ['artist_familiarity',
+                                          'artist_hotttnesss',
+                                          'artist_location',
+                                          'audio_summary',
+                                          'scores',
+                                          'song_currency',
+                                          'song_discovery',
+                                          'song_hotttness',
+                                          'song_type',
+                                          'tracks',
+                                          'id:7digital-US'])
+      expect(song.song_currency).to be_an Float
+      expect(song.song_currency).to eq 0.062214422885901594
+    end
+
+    it "returns song discovery" do
+      song = @client.song_profile(:id => 'SODJXOA1313438FB61',
+                              :bucket => ['artist_familiarity',
+                                          'artist_hotttnesss',
+                                          'artist_location',
+                                          'audio_summary',
+                                          'scores',
+                                          'song_currency',
+                                          'song_discovery',
+                                          'song_hotttness',
+                                          'song_type',
+                                          'tracks',
+                                          'id:7digital-US'])
+      expect(song.song_discovery).to be_an Float
+      expect(song.song_discovery).to eq 0.0008134358711419619
+    end
+
+    it "returns song hotness" do
+      song = @client.song_profile(:id => 'SODJXOA1313438FB61',
+                              :bucket => ['artist_familiarity',
+                                          'artist_hotttnesss',
+                                          'artist_location',
+                                          'audio_summary',
+                                          'scores',
+                                          'song_currency',
+                                          'song_discovery',
+                                          'song_hotttness',
+                                          'song_type',
+                                          'tracks',
+                                          'id:7digital-US'])
+      expect(song.song_hotttnesss).to be_an Float
+      expect(song.song_hotttnesss).to eq 0.744413
+    end
+
+    it "returns song type" do
+      song = @client.song_profile(:id => 'SODJXOA1313438FB61',
+                              :bucket => ['artist_familiarity',
+                                          'artist_hotttnesss',
+                                          'artist_location',
+                                          'audio_summary',
+                                          'scores',
+                                          'song_currency',
+                                          'song_discovery',
+                                          'song_hotttness',
+                                          'song_type',
+                                          'tracks',
+                                          'id:7digital-US'])
+      expect(song.song_type).to be_an Array
+      expect(song.song_type.first).to eq 'studio'
+    end
+
+    it "returns tracks" do
+      song = @client.song_profile(:id => 'SODJXOA1313438FB61',
+                              :bucket => ['artist_familiarity',
+                                          'artist_hotttnesss',
+                                          'artist_location',
+                                          'audio_summary',
+                                          'scores',
+                                          'song_currency',
+                                          'song_discovery',
+                                          'song_hotttness',
+                                          'song_type',
+                                          'tracks',
+                                          'id:7digital-US'])
+      expect(song.tracks).to be_an Array
+      expect(song.tracks.first.id).to eq 'TRDZFYM137EBC77532'
+    end
+
   end
 
   describe '#song_identify' do
@@ -82,7 +280,8 @@ describe Echonest::API::Song do
         expect(song).to be_a Echonest::Song
         expect(song.id).to eq 'SOKHYNL12A8C142FC7'
       end
-
+      
+      
     end
 
     context 'with GET' do
