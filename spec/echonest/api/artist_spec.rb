@@ -537,5 +537,34 @@ describe Echonest::API::Artist do
     end
 
   end
+
+  describe "#artist_twitter" do
+
+    before do
+      stub_get("/api/v4/artist/twitter").
+      with(:query => {
+            :results => 1,
+            :name => 'radiohead'}).
+        to_return(:body => fixture("artist_twitter.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.artist_twitter(:results => 1,
+                          :name => 'radiohead')
+      expect(a_get("/api/v4/artist/twitter")
+      .with(:query => {:results => 1,
+                       :name => 'radiohead'}))
+      .to have_been_made
+    end
+
+    it "returns an artist" do
+      artist = @client.artist_twitter(:results => 1,
+                          :name => 'radiohead')
+      expect(artist).to be_an Echonest::Artist
+      expect(artist.twitter).to eq "radiohead"
+    end
+
+  end
 end
 

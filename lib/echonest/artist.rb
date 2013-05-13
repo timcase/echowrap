@@ -2,7 +2,7 @@ require 'echonest/identity'
 
 module Echonest
     class Artist < Echonest::Identity
-      attr_reader :name
+      attr_reader :name, :twitter
 
       def biographies
         @biographies ||= map_collection(Echonest::Biography, :biographies)

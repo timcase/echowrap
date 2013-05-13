@@ -176,6 +176,7 @@ module Echonest
       def artist_profile(options={})
         artist_object_from_response(:get, "/api/v4/artist/profile", options)
       end
+
       # Search for artists given different query types
       #
       # @see http://developer.echonest.com/docs/v4/artist.html
@@ -332,6 +333,21 @@ module Echonest
       #   Echonest.artist_top_terms
       def artist_top_terms(options={})
         term_objects_from_response(:get, "/api/v4/artist/top_terms", options)
+      end
+
+      # Gets the twitter handle for an artist
+      #
+      # @see http://developer.echonest.com/docs/v4/artist.html#twitter
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the artist.  Required if name is not provided.  Example: 'ARH6W4X1187B99274F'.
+      # @option options [String] :name The name of the artist. Required if id is not provided.  Example: 'Weezer'.
+      # @return [Array<Echonest::Term>]
+      # @example Return an artist with name of 'Daft Punk'
+      #   Echonest.artist_twitter(:name => "Daft Punk")
+      def artist_twitter(options={})
+        artist_object_from_response(:get, "/api/v4/artist/twitter", options)
       end
 
       private
