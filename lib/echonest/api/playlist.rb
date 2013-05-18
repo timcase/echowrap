@@ -159,6 +159,33 @@ module Echonest
         response = send(:get, '/api/v4/playlist/dynamic/next', options)
         Echonest::Playlist.fetch_or_new(response[:body][:response])
       end
+
+      # Give feedback on the given items (artists or songs) or the last played song. This method allows you to give user feedback such as rating, favoriting, banning of a song or artist. Feedback is applied to the item specified by the given song_id or track_id. If no song_id or track_id is specified, then the feedback is applied to the most recent song returned by dynamic/next. Multiple feedbacks can be given at any time. Specified songs need not be in the session history. This allows the pre-seeding of a session with played tracks, skipped tracks, favorites, ratings and bans.
+      # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-feedbac
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @return [Echonest::Playlist]
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
+      # @option options [String] :ban_artist The given artist, or the artist associated with the given song or track is banned from the session and will never appear again. Use 'last' to ban the artist of the most recently returned song. Examples: 'ARH6W4X1187B99274F' or 'SOCZMFK12AC468668F' or 'TRTLKZV12E5AC92E11' or 'last'.
+      # @option options [String] :favorite_artist The given artist, or the artist associated with the given song or track is favorited. Use 'last' to favorite the artist of the most recently returned song. Examples: 'ARH6W4X1187B99274F' or 'SOCZMFK12AC468668F' or 'TRTLKZV12E5AC92E11' or 'last'.
+      # @option options [String] :ban_song The given song is banned from the session and will never appear again. Use 'last' to ban the most recently returned song. Examples: 'SOCZMFK12AC468668F' or 'TRTLKZV12E5AC92E11' or 'last'.
+      # @option options [String] :skip_song If the given song is in the session history, it is considered to be skipped. The play timestamp of subsequent songs in the session history are adjusted to reflect the skipped song. The skipped song will never appear again in the session. Use last to skip the most recently returned song. Use 'last' to ban the most recently returned song. Examples: 'SOCZMFK12AC468668F' or 'TRTLKZV12E5AC92E11' or 'last'.
+      # @option options [String] :favorite_song The given song is favorited. Use 'last' to favorite the most recently returned song. Examples: 'SOCZMFK12AC468668F' or 'TRTLKZV12E5AC92E11' or 'last'.
+      # @option options [String] :unplay_song This given song is considered not played. Unlike the skip_song operation, the song may appear again in the session. This operation is typically used when a song is retrieved by the dynamic/next call but for whatever reason is not actually played in the client. Use 'last' to unplay the most recently returned song. Examples: 'SOCZMFK12AC468668F' or 'TRTLKZV12E5AC92E11' or 'last'.
+      # @option options [String] :rate_song The given rating is applied to the song Ratings are of the form: song_id^rating where rating is a value between 0 and 10. Use 'last' to rate the most recently returned song. Examples: 'SOCZMFK12AC468668F^5' or 'TRTLKZV12E5AC92E11^8' or 'last^1'.
+      # @option options [String] :update_catalog This parameter controls whether or not this given feedback is pushed to the seed_catalog. By default, all feedback is pushed to the seed_catalog. If this parameter is false then feedback is not pushed to the catalog. This parameter has no effect if there is no seed_catalog associated with the playlist session. Not required must be one of ['true', 'false'].
+      # @option options [String] :invalidate_song The given song is removed from the play history and will never appear again in the playlist session. This feedback is typically used to discard a song that is unplayable. Examples: 'ARH6W4X1187B99274F' or 'SOCZMFK12AC468668F' or 'TRTLKZV12E5AC92E11' or 'last'.
+      # @option options [String] :invalidate_artist The given artist, or the artist associated with the given song or track is removed from the play history and will never appear again in this playlist session. This feedback is typically used to discard an artist that is unplayable. Examples: 'ARH6W4X1187B99274F' or 'SOCZMFK12AC468668F' or 'TRTLKZV12E5AC92E11' or 'last'.
+      #
+      # @option
+      # @return [Boolean]
+      # @example Return boolean with status of response
+      #   Echonest.playlist_dynamic_feedback(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d', :favorite_song => 'SOCZMFK12AC468668F')
+      def playlist_dynamic_feedback(options={})
+        response = send(:get, '/api/v4/playlist/dynamic/feedback', options)
+        response[:body][:response][:status][:code] == 0
+      end
     end
   end
 end

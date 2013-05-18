@@ -99,22 +99,22 @@ describe Echonest::API::Playlist do
 
     before do
       stub_get("/api/v4/playlist/dynamic/restart").
-      with(:query => {:artist => 'radiohead'}).
+      with(:query => {:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :artist => 'radiohead'}).
         to_return(:body => fixture("playlist/dynamic/restart.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
 
     it "requests the correct resource" do
-      @client.playlist_dynamic_restart(:artist => 'radiohead')
+      @client.playlist_dynamic_restart(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :artist => 'radiohead')
       expect(a_get("/api/v4/playlist/dynamic/restart")
-      .with(:query => {:artist => 'radiohead'},
+      .with(:query => {:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :artist => 'radiohead'},
                       ))
       .to have_been_made
     end
 
     it "returns session id" do
-      playlist = @client.playlist_dynamic_restart(:artist => 'radiohead')
+      playlist = @client.playlist_dynamic_restart(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :artist => 'radiohead')
       expect(playlist).to be_an Echonest::Playlist
       expect(playlist.session_id).to eq "a8cddde7afdf4ac09b510aa1c1c50bf9"
     end
@@ -125,30 +125,54 @@ describe Echonest::API::Playlist do
 
     before do
       stub_get("/api/v4/playlist/dynamic/next").
-      with(:query => {:artist => 'radiohead'}).
+      with(:query => {:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9'}).
         to_return(:body => fixture("playlist/dynamic/next.json"),
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
 
     it "requests the correct resource" do
-      @client.playlist_dynamic_next(:artist => 'radiohead')
+      @client.playlist_dynamic_next(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
       expect(a_get("/api/v4/playlist/dynamic/next")
-      .with(:query => {:artist => 'radiohead'},
+      .with(:query => {:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9'},
                       ))
       .to have_been_made
     end
 
     it "returns songs" do
-      playlist = @client.playlist_dynamic_next(:artist => 'radiohead')
+      playlist = @client.playlist_dynamic_next(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
       expect(playlist).to be_an Echonest::Playlist
       expect(playlist.songs.first.id).to eq "SOXIAKX12AF72AC774"
     end
 
     it "returns lookahead" do
-      playlist = @client.playlist_dynamic_next(:artist => 'radiohead')
+      playlist = @client.playlist_dynamic_next(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
       expect(playlist).to be_an Echonest::Playlist
       expect(playlist.lookahead.first.id).to eq "SOOVSGI12AB017E8ED"
+    end
+  end
+
+  describe "#playlist_dynamic_feedback" do
+
+    before do
+      stub_get("/api/v4/playlist/dynamic/feedback").
+      with(:query => {:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :favorite_song => 'SOCZMFK12AC468668F'}).
+        to_return(:body => fixture("playlist/dynamic/feedback.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+
+    it "requests the correct resource" do
+      @client.playlist_dynamic_feedback(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :favorite_song => 'SOCZMFK12AC468668F')
+      expect(a_get("/api/v4/playlist/dynamic/feedback")
+      .with(:query => {:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :favorite_song => 'SOCZMFK12AC468668F'},
+                      ))
+      .to have_been_made
+    end
+
+    it "returns boolean with response result" do
+      result = @client.playlist_dynamic_feedback(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :favorite_song => 'SOCZMFK12AC468668F')
+      expect(result).to be_true
     end
   end
 end
