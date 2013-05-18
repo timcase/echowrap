@@ -120,4 +120,35 @@ describe Echonest::API::Playlist do
     end
 
   end
+
+  describe "#playlist_dynamic_next" do
+
+    before do
+      stub_get("/api/v4/playlist/dynamic/next").
+      with(:query => {:artist => 'radiohead'}).
+        to_return(:body => fixture("playlist/dynamic/next.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+
+    it "requests the correct resource" do
+      @client.playlist_dynamic_next(:artist => 'radiohead')
+      expect(a_get("/api/v4/playlist/dynamic/next")
+      .with(:query => {:artist => 'radiohead'},
+                      ))
+      .to have_been_made
+    end
+
+    it "returns songs" do
+      playlist = @client.playlist_dynamic_next(:artist => 'radiohead')
+      expect(playlist).to be_an Echonest::Playlist
+      expect(playlist.songs.first.id).to eq "SOXIAKX12AF72AC774"
+    end
+
+    it "returns lookahead" do
+      playlist = @client.playlist_dynamic_next(:artist => 'radiohead')
+      expect(playlist).to be_an Echonest::Playlist
+      expect(playlist.lookahead.first.id).to eq "SOOVSGI12AB017E8ED"
+    end
+  end
 end

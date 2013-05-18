@@ -16,7 +16,7 @@ module Echonest
         @artist_location ||= Echonest::Location.new(@attrs[:artist_location])
       end
 
-      # @return [Echonest::ArtistLocation]
+      # @return [Array]
       def tracks
         @tracks ||= map_collection(Echonest::Track, :tracks)
       end

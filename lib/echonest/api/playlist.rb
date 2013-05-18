@@ -130,13 +130,33 @@ module Echonest
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @return [Echonest::Playlist]
       # @param options [Hash] A customizable set of options.
+      # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
       #
       # @option
       # @return [Echonest::Playlist]
       # @example Return a playlist with a session ID
-      #   Echonest.playlist_dynamic_restart(:artist => "Daft Punk")
+      #   Echonest.playlist_dynamic_restart(:session_id => '7bf982d80ed8421c8c94dbd6de565e9d', :artist => "Daft Punk")
       def playlist_dynamic_restart(options={})
         response = send(:get, '/api/v4/playlist/dynamic/restart', options)
+        Echonest::Playlist.fetch_or_new(response[:body][:response])
+      end
+
+      # Returns the next songs in the playlist. Results includes two lists of songs - one list (called next) contains the next songs to play, the other (called lookahead) contains the lookahead songs (controlled via the lookahead parameter). The next songs returned by this method will be considered to be played starting at the time the call returns. Use the dynamic/feedback method to indicate that the song was skipped or not played.
+      # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-restart
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @return [Echonest::Playlist]
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
+      # @option options [Integer] :results The desired number of next songs returned. Maybe be one of [0, 1, 5]. Requesting zero results, when combined with a non-zero lookahead, allows you to retrieve the next 1-5 songs without any assumptions about songs being played. Requesting zero results returns the lookahead only, no 'results' will be returned. No songs are assumed played nor are any added to the history or any associated session catalogs. The playlist is not advanced. Making consecutive dynamic/next calls with zero results will return the exact same set of lookahead tracks. You must provide feedback (via the dynamic/feedback api), to explicitly play and/or skip songs in the playlist in order to advance the playlist when 'results' is set to zero.
+      # @option options [Integer] :lookahead Number of lookahead songs to return. Lookahead songs are the next songs that will be returned to be played if no user feedback or steering occurs before the next dynamic/next method call. Not required, may be 0 to 5.
+      #
+      # @option
+      # @return [Echonest::Playlist]
+      # @example Return a playlist with songs and lookaheads
+      #   Echonest.playlist_dynamic_next(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d')
+      def playlist_dynamic_next(options={})
+        response = send(:get, '/api/v4/playlist/dynamic/next', options)
         Echonest::Playlist.fetch_or_new(response[:body][:response])
       end
     end
