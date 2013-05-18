@@ -94,4 +94,30 @@ describe Echonest::API::Playlist do
     end
 
   end
+
+  describe "#playlist_dynamic_restart" do
+
+    before do
+      stub_get("/api/v4/playlist/dynamic/restart").
+      with(:query => {:artist => 'radiohead'}).
+        to_return(:body => fixture("playlist/dynamic/restart.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+
+    it "requests the correct resource" do
+      @client.playlist_dynamic_restart(:artist => 'radiohead')
+      expect(a_get("/api/v4/playlist/dynamic/restart")
+      .with(:query => {:artist => 'radiohead'},
+                      ))
+      .to have_been_made
+    end
+
+    it "returns session id" do
+      playlist = @client.playlist_dynamic_restart(:artist => 'radiohead')
+      expect(playlist).to be_an Echonest::Playlist
+      expect(playlist.session_id).to eq "a8cddde7afdf4ac09b510aa1c1c50bf9"
+    end
+
+  end
 end

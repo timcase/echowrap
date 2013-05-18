@@ -117,10 +117,26 @@ module Echonest
       #
       # @option
       # @return [Echonest::Playlist]
-      # @example Return an array of songs with artist 'Daft Punk'
+      # @example Return a playlist with a session ID
       #   Echonest.playlist_dynamic_create(:artist => "Daft Punk")
       def playlist_dynamic_create(options={})
         response = send(:get, '/api/v4/playlist/dynamic/create', options)
+        Echonest::Playlist.fetch_or_new(response[:body][:response])
+      end
+
+      # Restarts a playlist session. Given the session ID and a new set of playlist parameters, this method restarts the playlist session based upon the new parameters. The session history is maintained. Everything else is reset. This method takes all the same parameters as dynamic/create, plus the session ID. Returns the given session ID.
+      # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-restart
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @return [Echonest::Playlist]
+      # @param options [Hash] A customizable set of options.
+      #
+      # @option
+      # @return [Echonest::Playlist]
+      # @example Return a playlist with a session ID
+      #   Echonest.playlist_dynamic_restart(:artist => "Daft Punk")
+      def playlist_dynamic_restart(options={})
+        response = send(:get, '/api/v4/playlist/dynamic/restart', options)
         Echonest::Playlist.fetch_or_new(response[:body][:response])
       end
     end
