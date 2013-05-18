@@ -161,10 +161,10 @@ module Echonest
       end
 
       # Give feedback on the given items (artists or songs) or the last played song. This method allows you to give user feedback such as rating, favoriting, banning of a song or artist. Feedback is applied to the item specified by the given song_id or track_id. If no song_id or track_id is specified, then the feedback is applied to the most recent song returned by dynamic/next. Multiple feedbacks can be given at any time. Specified songs need not be in the session history. This allows the pre-seeding of a session with played tracks, skipped tracks, favorites, ratings and bans.
-      # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-feedbac
+      # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-feedback
       # @authentication Requires api key
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
-      # @return [Echonest::Playlist]
+      # @return [Boolean]
       # @param options [Hash] A customizable set of options.
       # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
       # @option options [String] :ban_artist The given artist, or the artist associated with the given song or track is banned from the session and will never appear again. Use 'last' to ban the artist of the most recently returned song. Examples: 'ARH6W4X1187B99274F' or 'SOCZMFK12AC468668F' or 'TRTLKZV12E5AC92E11' or 'last'.
@@ -184,6 +184,36 @@ module Echonest
       #   Echonest.playlist_dynamic_feedback(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d', :favorite_song => 'SOCZMFK12AC468668F')
       def playlist_dynamic_feedback(options={})
         response = send(:get, '/api/v4/playlist/dynamic/feedback', options)
+        response[:body][:response][:status][:code] == 0
+      end
+
+
+      # Steers the playlist based upon the given constraints. Steerings are additive and can be reset with the reset parameter.
+      # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-steer
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @return [Boolean]
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
+      # @option options [Float] :min_xxx Prefer songs that have a value for xxx that is greater than or equal to the given value where xxx can be tempo, loudness, danceability, energy, liveness, speechiness, song_hotttnesss, artist_hotttnesss, artist_familiarity. Not required, may send multiple.  Examples 'min_song_hotness=0.0', 'min_artist_hotttnesss' => 0.2.
+      # @option options [Float] :max_xxx Prefer songs that have a value for xxx that is less than or equal to the given value where xxx can be tempo, loudness, danceability, energy, liveness, speechiness, song_hotttnesss, artist_hotttnesss, artist_familiarity.
+      # @option options [String] :target_xxx Pefer songs that have a value for xxx that are closer to the given value where xxx can be tempo, loudness, danceability, energy, liveness, speechiness, song_hotttnesss, artist_hotttnesss, artist_familiarity.
+      # @option options [String] :more_like_this Prefer songs that are more similar to the given song ID with the given optional boost. song_id can be last to use the most recently returned song. Boost can be an integer between 0 and 5. The default is 1. Examples: 'SO12341234^2', 'SO123412341234^5'.
+      # @option options [String] :less_like_this Prefer songs that are less similar to the given song ID with the given optional boost. song_id can be last to use the most recently returned song. Boost can be an integer between 0 and 5. The default is 1. Examples: 'SO12341234^2', 'SO123412341234^5'.
+      # @option options [Float] :adventerousness Adjust the adventurousness of the session. A value of 0 means no adventurousness, only known and preferred music will be played. A value of 1 means high adventurousness, mostly unknown music will be played. This parameter only applies to catalog and catalog-radio type playlists. Examples: '0.14', '0.7', '1.0'.
+      # @option options [Float] :variety Adjust the variety of the session. A higher number will allow for more variety in the artists.  Examples: '0.14', '0.7', '1.0'.
+      # @option options [String] :description Prefer songs by artists that match the given general description. Not required, may use multiple.  Example: 'alt-rock,-emo,harp^2'.
+      # @option options [String] :style Prefer songs by artists that match the given style some examples are: 'jazz', 'metal^2'.
+      # @option options [String] :song_type Prefers songs that match the given song type. Supported song_types are: 'christmas', 'live' and 'studio'. A song type can optionally be followed by ':' and a state, where the state can be one of 'true', 'false' or 'any'. If no state is given, the desired state is assumed to be 'true'.
+      # @option options [String] :mood Prefer songs by artists that match the given mood, some examples are: 'happy', 'sad^.5'.
+      # @option options [String] :reset Resets any playlist steering that has been done on this session to the default state.  False is default.
+      #
+      # @option
+      # @return [Boolean]
+      # @example Return boolean with status of response
+      #   Echonest.playlist_dynamic_steer(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d', :min_danceability => 0.4)
+      def playlist_dynamic_steer(options={})
+        response = send(:get, '/api/v4/playlist/dynamic/steer', options)
         response[:body][:response][:status][:code] == 0
       end
     end

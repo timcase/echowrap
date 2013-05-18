@@ -175,4 +175,28 @@ describe Echonest::API::Playlist do
       expect(result).to be_true
     end
   end
+
+  describe "#playlist_dynamic_steer" do
+
+    before do
+      stub_get("/api/v4/playlist/dynamic/steer").
+      with(:query => {:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :min_danceability => 0.5}).
+        to_return(:body => fixture("playlist/dynamic/steer.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+
+    it "requests the correct resource" do
+      @client.playlist_dynamic_steer(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :min_danceability => 0.5)
+      expect(a_get("/api/v4/playlist/dynamic/steer")
+      .with(:query => {:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :min_danceability => 0.5},
+                      ))
+      .to have_been_made
+    end
+
+    it "returns boolean with response result" do
+      result = @client.playlist_dynamic_steer(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :min_danceability => 0.5)
+      expect(result).to be_true
+    end
+  end
 end
