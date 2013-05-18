@@ -233,6 +233,23 @@ module Echonest
         response = send(:get, '/api/v4/playlist/dynamic/info', options)
         Echonest::Playlist.fetch_or_new(response[:body][:response])
       end
+
+      # Deletes a previously created session. A non-commercial API can have, at most 1,000 active playlist sessions.
+      # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-delete
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @return [Boolean]
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
+      #
+      # @option
+      # @return [Boolean]
+      # @example Return boolean with status of response
+      #   Echonest.playlist_dynamic_delete(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d')
+      def playlist_dynamic_delete(options={})
+        response = send(:get, '/api/v4/playlist/dynamic/delete', options)
+        response[:body][:response][:status][:code] == 0
+      end
     end
   end
 end
