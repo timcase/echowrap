@@ -1,5 +1,4 @@
 require 'echonest/api/utils'
-require 'echonest/track'
 
 module Echonest
   module API
