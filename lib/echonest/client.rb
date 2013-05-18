@@ -4,12 +4,14 @@ require 'echonest/configurable'
 require 'echonest/api/artist'
 require 'echonest/api/song'
 require 'echonest/api/track'
+require 'echonest/api/playlist'
 
 module Echonest
   class Client
     include Echonest::API::Artist
     include Echonest::API::Song
     include Echonest::API::Track
+    include Echonest::API::Playlist
     include Echonest::Configurable
     # Initializes a new Client object
     #
