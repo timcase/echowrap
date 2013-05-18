@@ -74,7 +74,7 @@ module Echonest
       # @example familiarity via id
       #   Echonest.artist_familiarity(:id => 'ARH6W4X1187B99274F')
       def artist_familiarity(options={})
-        familiarity_object_from_response(:get, "/api/v4/artist/familiarity", options)
+        object_from_response(Echonest::Familiarity, :get, '/api/v4/artist/familiarity', :artist, options)
       end
 
       # Get numerical description of how hottt an artist currently is.
@@ -89,7 +89,7 @@ module Echonest
       # @example hotttnesss via id
       #   Echonest.artist_hotttnesss(:id => 'ARH6W4X1187B99274F')
       def artist_hotttnesss(options={})
-        hotttnesss_object_from_response(:get, "/api/v4/artist/hotttnesss", options)
+        object_from_response(Echonest::Hotttnesss, :get, '/api/v4/artist/hotttnesss', :artist, options)
       end
 
       # Get a list of artist images.
@@ -174,7 +174,7 @@ module Echonest
       # @example Profile via id
       #   Echonest.artist_profile(:id => 'SOCZMFK12AC468668F')
       def artist_profile(options={})
-        artist_object_from_response(:get, "/api/v4/artist/profile", options)
+        object_from_response(Echonest::Artist, :get, '/api/v4/artist/profile', :artist, options)
       end
 
       # Search for artists given different query types
@@ -347,7 +347,7 @@ module Echonest
       # @example Return an artist with name of 'Daft Punk'
       #   Echonest.artist_twitter(:name => "Daft Punk")
       def artist_twitter(options={})
-        artist_object_from_response(:get, "/api/v4/artist/twitter", options)
+        object_from_response(Echonest::Artist, :get, '/api/v4/artist/twitter', :artist, options)
       end
 
       # Get links to the artist's official site, MusicBrainz site, MySpace site, Wikipedia article, Amazon list, and iTunes page.
@@ -362,7 +362,7 @@ module Echonest
       # @example Return urls for artist with name of 'Daft Punk'
       #   Echonest.artist_urls(:name => "Daft Punk")
       def artist_urls(options={})
-        urls_object_from_response(:get, "/api/v4/artist/urls", options)
+        object_from_response(Echonest::Urls, :get, '/api/v4/artist/urls', :urls, options)
       end
 
       # Get a list of video documents found on the web related to an artist.
@@ -381,41 +381,6 @@ module Echonest
       def artist_video(options={})
         objects_from_response(Echonest::Video, :get, '/api/v4/artist/video', :video, options)
       end
-
-      private
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @return [Echonest::Artist]
-        def artist_object_from_response(request_method, path, options={})
-          response = send(request_method.to_sym, path, options)
-          Echonest::Artist.fetch_or_new(response[:body][:response][:artist])
-        end
-
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @param params [Hash]
-        # @return [Echonest::Familiarity]
-        def familiarity_object_from_response(request_method, path, options={})
-          response = send(request_method.to_sym, path, options)
-          Echonest::Familiarity.fetch_or_new(response[:body][:response][:artist])
-        end
-
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @param params [Hash]
-        # @return [Echonest::Hotttnesss]
-        def hotttnesss_object_from_response(request_method, path, options={})
-          response = send(request_method.to_sym, path, options)
-          Echonest::Hotttnesss.fetch_or_new(response[:body][:response][:artist])
-        end
-
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @return [Echonest::Urls]
-        def urls_object_from_response(request_method, path, options={})
-          response = send(request_method.to_sym, path, options)
-          Echonest::Urls.fetch_or_new(response[:body][:response][:urls])
-        end
 
     end
   end

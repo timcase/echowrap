@@ -78,9 +78,9 @@ module Echonest
       # @param path [String]
       # @param options [Hash]
       # @return [Object]
-      def object_from_response(klass, request_method, path, options={})
-        response = send(request_method.to_sym, path, options)
-        klass.from_response(response)
+      def object_from_response(klass, request_method, path, object_key, options={})
+        response = send(request_method.to_sym, path, options)[:body][:response][object_key]
+        klass.fetch_or_new(response)
       end
     #
     #   # @param collection_name [Symbol]
