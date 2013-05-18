@@ -199,4 +199,53 @@ describe Echonest::API::Playlist do
       expect(result).to be_true
     end
   end
+
+  describe "#playlist_dynamic_info" do
+
+    before do
+      stub_get("/api/v4/playlist/dynamic/info").
+      with(:query => {:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9'}).
+        to_return(:body => fixture("playlist/dynamic/info.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+
+    it "requests the correct resource" do
+      @client.playlist_dynamic_info(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
+      expect(a_get("/api/v4/playlist/dynamic/info")
+      .with(:query => {:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9'},
+                      ))
+      .to have_been_made
+    end
+
+    it "returns category map" do
+      playlist = @client.playlist_dynamic_info(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
+      expect(playlist.category_map).to be_an Echonest::CategoryMap
+      expect(playlist.category_map.childrens).to eq "any"
+    end
+
+    it "returns category seeds" do
+      playlist = @client.playlist_dynamic_info(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
+      expect(playlist.seeds).to be_an Echonest::Seeds
+      expect(playlist.seeds.artist_ids).to eq ['ARF8HTQ1187B9AE693']
+    end
+
+    it "returns rules"  do
+      playlist = @client.playlist_dynamic_info(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
+      expect(playlist.rules).to be_an Array
+      expect(playlist.rules.first.rule).to eq "Don't put two copies of the same song in a playlist."
+    end
+
+    it "returns call list"  do
+      playlist = @client.playlist_dynamic_info(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
+      expect(playlist.call_list).to be_an Array
+      expect(playlist.call_list.first.action).to eq 'create'
+    end
+
+    it "returns call list"  do
+      playlist = @client.playlist_dynamic_info(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
+      expect(playlist.options).to be_an Echonest::Options
+      expect(playlist.options.rank_type).to eq 'relevance'
+    end
+  end
 end

@@ -216,6 +216,23 @@ module Echonest
         response = send(:get, '/api/v4/playlist/dynamic/steer', options)
         response[:body][:response][:status][:code] == 0
       end
+
+      # Returns information about a dynamic playlist session
+      # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-info
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @return [Echonest::Playlist]
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
+      #
+      # @option
+      # @return [Echonest::Playlist]
+      # @example Return boolean with status of response
+      #   Echonest.playlist_dynamic_info(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d')
+      def playlist_dynamic_info(options={})
+        response = send(:get, '/api/v4/playlist/dynamic/info', options)
+        Echonest::Playlist.fetch_or_new(response[:body][:response])
+      end
     end
   end
 end
