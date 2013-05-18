@@ -68,4 +68,30 @@ describe Echonest::API::Playlist do
     end
 
   end
+
+  describe "#playlist_dynamic_create" do
+
+    before do
+      stub_get("/api/v4/playlist/dynamic/create").
+      with(:query => {:artist => 'radiohead'}).
+        to_return(:body => fixture("playlist/dynamic/create.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+
+    it "requests the correct resource" do
+      @client.playlist_dynamic_create(:artist => 'radiohead')
+      expect(a_get("/api/v4/playlist/dynamic/create")
+      .with(:query => {:artist => 'radiohead'},
+                      ))
+      .to have_been_made
+    end
+
+    it "returns session id" do
+      playlist = @client.playlist_dynamic_create(:artist => 'radiohead')
+      expect(playlist).to be_an Echonest::Playlist
+      expect(playlist.session_id).to eq "7c88f9c365294bab8534943d735f587c"
+    end
+
+  end
 end

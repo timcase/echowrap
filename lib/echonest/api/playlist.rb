@@ -92,11 +92,36 @@ module Echonest
       # @option options [String] :sort Indicates how the songs results should be ordered. Must be one of ['tempo-asc', 'duration-asc', 'loudness-asc', 'speechiness-asc', 'liveness-asc', 'artist_familiarity-asc', 'artist_hotttnesss-asc', 'artist_start_year-asc', 'artist_start_year-desc', 'artist_end_year-asc', 'artist_end_year-desc', 'song_hotttness-asc', 'latitude-asc', 'longitude-asc', 'mode-asc', 'key-asc', 'tempo-desc', 'duration-desc', 'loudness-desc', 'liveness-desc', 'speechiness-desc', 'artist_familiarity-desc', 'artist_hotttnesss-desc', 'song_hotttnesss-desc', 'latitude-desc', 'longitude-desc', 'mode-desc', 'key-desc', 'energy-asc', 'energy-desc', 'danceability-asc', 'danceability-desc'].
       # @option options [String] :limit If 'true', limit the results to any of the given rosetta id space. Must be on of ['true', 'false'] with 'false' as the default. If limit is set to anything but false, at least one idspace must also be provided in the bucket parameter.
       # @option options [String] :dmca If true or 'styleb' the playlist delivered will meet the DMCA rules. When the DMCA parameter is set to true, the playlist will conform to the following rules: No more than 2 songs in a row from the same album, no more than 3 songs from an album in a 3 hour period, no more than 3 different songs in a row by the same artist, no more than 4 songs by the same artist in a 3 hour period.  Skipped songs are not considered to have been played for DMCA conformance purposes. If dmca is set to 'styleb', skipped songs are considered to have been played for DMCA purposes.
-      # @return [Array<Echonest::Song>]
+      # @return [Array<Echonest::Song>
       # @example Return an array of songs with artist 'Daft Punk'
       #   Echonest.playlist_static(:artist => "Daft Punk")
       def playlist_static(options={})
         objects_from_response(Echonest::Song, :get, '/api/v4/playlist/static', :songs, options)
+      end
+
+      # Creates a new dynamic playlist session. A dynamic playlist is created with an initial set of parameters that define rules for generating the playlist. A session identifier is returned that can be used with other dynamic methods to get new songs, provide feedback or to steer the playlist. Songs in the playlist can be fetched, one at a time, using the dynamic/next method. The playlist is dynamic in that it is adapted dynamically based on the listener's feedback and steering.
+      # The dynamic playlist will adapt the playlist session based upon a number of factors:
+      #   Played songs
+      #   Skipped songs
+      #   Rated songs/artists
+      #   Favorited songs/artists
+      #   Banned songs/artists
+      #   Playlist steering
+      # The dynamic/create method accepts the same set of parameters as the playlist/static method with the exception of the results parameter.
+      # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-create
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @return [Echonest::Playlist]
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :session_catalog The IDs of catalogs that should be updated with session information (plays, skips, ratings,bans, favorites, etc). Multiple session catalogs can be listed and all will be updated with the same information. The session catalogs must have been previously created using the same API key as used in this call. May use muliple up to 5. Example: 'CAKSMUX1321A708AA4'
+      #
+      # @option
+      # @return [Echonest::Playlist]
+      # @example Return an array of songs with artist 'Daft Punk'
+      #   Echonest.playlist_dynamic_create(:artist => "Daft Punk")
+      def playlist_dynamic_create(options={})
+        response = send(:get, '/api/v4/playlist/dynamic/create', options)
+        Echonest::Playlist.fetch_or_new(response[:body][:response])
       end
     end
   end
