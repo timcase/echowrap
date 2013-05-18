@@ -47,8 +47,8 @@ module Echonest
       # @param path [String]
       # @param options [Hash]
       # @return [Array]
-      def objects_from_response(klass, request_method, path, options={})
-        response = send(request_method.to_sym, path, options)[:body]
+      def objects_from_response(klass, request_method, path, object_key, options={})
+        response = send(request_method.to_sym, path, options)[:body][:response][object_key]
         objects_from_array(klass, response)
       end
 

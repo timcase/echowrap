@@ -20,7 +20,7 @@ module Echonest
       # @example Biographies via id
       #   Echonest.artist_biographies(:id => 'ARH6W4X1187B99274F')
       def artist_biographies(options={})
-        biography_objects_from_response(:get, "/api/v4/artist/biographies", options)
+        objects_from_response(Echonest::Biography, :get, '/api/v4/artist/biographies', :biographies, options)
       end
 
       # Get a list of artist blogs.
@@ -38,7 +38,7 @@ module Echonest
       # @example blogs via id
       #   Echonest.artist_blogs(:id => 'ARH6W4X1187B99274F')
       def artist_blogs(options={})
-        blog_objects_from_response(:get, "/api/v4/artist/blogs", options)
+        objects_from_response(Echonest::Blog, :get, '/api/v4/artist/blogs', :blogs, options)
       end
 
       # Extract artist names from text.
@@ -60,7 +60,7 @@ module Echonest
       # @example Return an array of artists with artist 'Daft Punk'
       #   Echonest.artist_search(:artist => "Daft Punk")
       def artist_extract(options={})
-        artist_objects_from_response(:get, "/api/v4/artist/extract", options)
+        objects_from_response(Echonest::Artist, :get, '/api/v4/artist/extract', :artists, options)
       end
       # Get numerical estimation of how familiar an artist currently is to the world.
       #
@@ -108,7 +108,7 @@ module Echonest
       # @example images via id
       #   Echonest.artist_images(:id => 'ARH6W4X1187B99274F')
       def artist_images(options={})
-        images_objects_from_response(:get, "/api/v4/artist/images", options)
+        objects_from_response(Echonest::Image, :get, '/api/v4/artist/images', :images, options)
       end
 
       # Get a list of the available genres for use with search and playlisting. This method returns a list of genres suitable for use in the artist/search call when searching by description and for the creation of genre-radio playlists. The returned list of genres is inclusive of all supported genres.
@@ -123,7 +123,7 @@ module Echonest
       # @example artist_list_genres
       #   Echonest.artist_list_genres
       def artist_list_genres(options={})
-        genre_objects_from_response(:get, "/api/v4/artist/list_genres", options)
+        objects_from_response(Echonest::Genre, :get, '/api/v4/artist/list_genres', :genres, options)
       end
 
       # Get a list of the available terms for use with search and playlisting. This method returns a list of genres suitable for use in the artist/search call when searching by description and for the creation of genre-radio playlists. The returned list of genres is inclusive of all supported genres.
@@ -139,7 +139,7 @@ module Echonest
       # @example artist_list_terms
       #   Echonest.artist_list_terms
       def artist_list_terms(options={})
-        term_objects_from_response(:get, "/api/v4/artist/list_terms", options)
+        objects_from_response(Echonest::Term, :get, '/api/v4/artist/list_terms', :terms, options)
       end
 
       # Get a list of news articles found on the web related to an artist.
@@ -157,7 +157,7 @@ module Echonest
       # @example news via id
       #   Echonest.artist_news(:id => 'ARH6W4X1187B99274F')
       def artist_news(options={})
-        news_article_objects_from_response(:get, "/api/v4/artist/news", options)
+        objects_from_response(Echonest::NewsArticle, :get, '/api/v4/artist/news', :news, options)
       end
 
       # Get basic information about an artist.
@@ -208,7 +208,7 @@ module Echonest
       # @example Return an array of artists with artist 'Daft Punk'
       #   Echonest.artist_search(:artist => "Daft Punk")
       def artist_search(options={})
-        artist_objects_from_response(:get, "/api/v4/artist/search", options)
+        objects_from_response(Echonest::Artist, :get, '/api/v4/artist/search', :artists, options)
       end
 
       # @see http://developer.echonest.com/docs/v4/artist.html#reviews
@@ -224,7 +224,7 @@ module Echonest
       # @example reviews via id
       #   Echonest.artist_reviews(:id => 'ARH6W4X1187B99274F')
       def artist_reviews(options={})
-        review_objects_from_response(:get, "/api/v4/artist/reviews", options)
+        objects_from_response(Echonest::Review, :get, '/api/v4/artist/reviews', :reviews, options)
       end
 
       # Return similar artists given one or more artists for comparison. The Echo Nest provides up-to-the-minute artist similarity and recommendations from their real-time musical and cultural analysis of what people are saying across the Internet and what the music sounds like.
@@ -252,7 +252,7 @@ module Echonest
       # @example Return an array of artists with artist 'Daft Punk'
       #   Echonest.artist_similar(:name => "Daft Punk")
       def artist_similar(options={})
-        artist_objects_from_response(:get, "/api/v4/artist/similar", options)
+        objects_from_response(Echonest::Artist, :get, '/api/v4/artist/similar', :artists, options)
       end
 
       # @see http://developer.echonest.com/docs/v4/artist.html#songs
@@ -268,7 +268,7 @@ module Echonest
       # @example songs via id
       #   Echonest.artist_songs(:id => 'ARH6W4X1187B99274F')
       def artist_songs(options={})
-        song_objects_from_response(:get, "/api/v4/artist/songs", options)
+        objects_from_response(Echonest::Song, :get, '/api/v4/artist/songs', :songs, options)
       end
 
       # Suggest artists based upon partial names. This method will return a list of potential artist matches based upon a query string. The method returns the most familiar best matching artist for the query.
@@ -284,7 +284,7 @@ module Echonest
       # @example Return an array of artists with artist 'Daft Pu'
       #   Echonest.artist_suggest(:name => "Daft Pu")
       def artist_suggest(options={})
-        artist_objects_from_response(:get, "/api/v4/artist/suggest", options)
+        objects_from_response(Echonest::Artist, :get, '/api/v4/artist/suggest', :artists, options)
       end
 
       # Get a list of most descriptive terms for an artist
@@ -300,7 +300,7 @@ module Echonest
       # @example Return an array of terms with name 'Daft Punk'
       #   Echonest.artist_terms(:name => "Daft Punk")
       def artist_terms(options={})
-        term_objects_from_response(:get, "/api/v4/artist/terms", options)
+        objects_from_response(Echonest::Term, :get, '/api/v4/artist/terms', :terms, options)
       end
 
       # Return a list of the top hottt artists.
@@ -318,7 +318,7 @@ module Echonest
       # @example Return an array of artists with top genre 'dance'
       #   Echonest.artist_top_hottt(:genre => "dance")
       def artist_top_hottt(options={})
-        artist_objects_from_response(:get, "/api/v4/artist/top_hottt", options)
+        objects_from_response(Echonest::Artist, :get, '/api/v4/artist/top_hottt', :artists, options)
       end
 
       # Returns a list of the overall top terms.
@@ -332,7 +332,7 @@ module Echonest
       # @example Return an array of terms
       #   Echonest.artist_top_terms
       def artist_top_terms(options={})
-        term_objects_from_response(:get, "/api/v4/artist/top_terms", options)
+        objects_from_response(Echonest::Term, :get, '/api/v4/artist/top_terms', :terms, options)
       end
 
       # Gets the twitter handle for an artist
@@ -379,7 +379,7 @@ module Echonest
       # @example video via id
       #   Echonest.artist_video(:id => 'ARH6W4X1187B99274F')
       def artist_video(options={})
-        video_objects_from_response(:get, "/api/v4/artist/video", options)
+        objects_from_response(Echonest::Video, :get, '/api/v4/artist/video', :video, options)
       end
 
       private
@@ -389,27 +389,6 @@ module Echonest
         def artist_object_from_response(request_method, path, options={})
           response = send(request_method.to_sym, path, options)
           Echonest::Artist.fetch_or_new(response[:body][:response][:artist])
-        end
-
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @return [Array]
-        def artist_objects_from_response(request_method, path, options={})
-          objects_from_array(Echonest::Artist, send(request_method.to_sym, path, options)[:body][:response][:artists])
-        end
-
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @return [Array]
-        def biography_objects_from_response(request_method, path, options={})
-          objects_from_array(Echonest::Biography, send(request_method.to_sym, path, options)[:body][:response][:biographies])
-        end
-
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @return [Array]
-        def blog_objects_from_response(request_method, path, options={})
-          objects_from_array(Echonest::Blog, send(request_method.to_sym, path, options)[:body][:response][:blogs])
         end
 
         # @param request_method [Symbol]
@@ -432,60 +411,12 @@ module Echonest
 
         # @param request_method [Symbol]
         # @param path [String]
-        # @return [Array]
-        def images_objects_from_response(request_method, path, options={})
-          objects_from_array(Echonest::Image, send(request_method.to_sym, path, options)[:body][:response][:images])
-        end
-
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @return [Array]
-        def genre_objects_from_response(request_method, path, options={})
-          objects_from_array(Echonest::Genre, send(request_method.to_sym, path, options)[:body][:response][:genres])
-        end
-
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @return [Array]
-        def term_objects_from_response(request_method, path, options={})
-          objects_from_array(Echonest::Term, send(request_method.to_sym, path, options)[:body][:response][:terms])
-        end
-
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @return [Array]
-        def news_article_objects_from_response(request_method, path, options={})
-          objects_from_array(Echonest::NewsArticle, send(request_method.to_sym, path, options)[:body][:response][:news])
-        end
-
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @return [Array]
-        def review_objects_from_response(request_method, path, options={})
-          objects_from_array(Echonest::Review, send(request_method.to_sym, path, options)[:body][:response][:reviews])
-        end
-
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @return [Array]
-        def song_objects_from_response(request_method, path, options={})
-          objects_from_array(Echonest::Song, send(request_method.to_sym, path, options)[:body][:response][:songs])
-        end
-
-        # @param request_method [Symbol]
-        # @param path [String]
         # @return [Echonest::Urls]
         def urls_object_from_response(request_method, path, options={})
           response = send(request_method.to_sym, path, options)
           Echonest::Urls.fetch_or_new(response[:body][:response][:urls])
         end
 
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @return [Array]
-        def video_objects_from_response(request_method, path, options={})
-          objects_from_array(Echonest::Video, send(request_method.to_sym, path, options)[:body][:response][:video])
-        end
     end
   end
 end

@@ -25,9 +25,9 @@ module Echonest
       #   Echonest.song_identify(:query => File.new('query.json'))
       def song_identify(options={})
         if options.key?(:query)
-          song_objects_from_response(:post, "/api/v4/song/identify", options).first
+          objects_from_response(Echonest::Song, :post, '/api/v4/song/identify', :songs, options).first
         else
-          song_objects_from_response(:get, "/api/v4/song/identify", options).first
+          objects_from_response(Echonest::Song, :get, '/api/v4/song/identify', :songs, options).first
         end
       end
 
@@ -45,7 +45,7 @@ module Echonest
       # @example Profile via id
       #   Echonest.song_profile(:id => 'SOCZMFK12AC468668F')
       def song_profile(options={})
-        song_objects_from_response(:get, "/api/v4/song/profile", options).first
+        objects_from_response(Echonest::Song, :get, '/api/v4/song/profile', :songs, options).first
       end
 
       # Search for songs given different query types
@@ -103,17 +103,9 @@ module Echonest
       # @example Return an array of songs with artist 'Daft Punk'
       #   Echonest.song_search(:artist => "Daft Punk")
       def song_search(options={})
-        song_objects_from_response(:get, "/api/v4/song/search", options)
+        objects_from_response(Echonest::Song, :get, '/api/v4/song/search', :songs, options)
       end
 
-      private
-        # @param request_method [Symbol]
-        # @param path [String]
-        # @param params [Hash]
-        # @return [Array]
-        def song_objects_from_response(request_method, path, options={})
-          objects_from_array(Echonest::Song, send(request_method.to_sym, path, options)[:body][:response][:songs])
-        end
     end
   end
 end
