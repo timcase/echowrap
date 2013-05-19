@@ -85,11 +85,30 @@ module Echonest
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
       # @return [Array]  Array of taste profiles.
       # @param options [Hash] A customizable set of options.
+      # @option options [Integer] :results The number of results desired.
+      # @option options [Integer] :start The desired index of the first result returned.
       #
       # @example taste_profile_list
       #   Echonest.taste_profile_list
       def taste_profile_list(options={})
         objects_from_response(Echonest::TasteProfile, :get, '/api/v4/catalog/list', :catalogs, options)
+      end
+
+      # Deletes the entire taste profile. Only the API key used to create a taste profile can be used to delete that taste profile.
+      #
+      # @see http://developer.echonest.com/docs/v4/taste_profile.html#delete
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Echonest::TasteProfile]  The taste profiles.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the taste profile. Required. Example: 'CANVFPJ131839D8144'
+      #
+      # @example taste_profile_delete
+      #   Echonest.taste_profile_delete
+      def taste_profile_delete(options={})
+        response = send(:post, '/api/v4/catalog/delete', options)
+        Echonest::TasteProfile.fetch_or_new(response[:body][:response])
       end
     end
   end

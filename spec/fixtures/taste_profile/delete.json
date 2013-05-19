@@ -1,0 +1,11 @@
+{
+  "response": {
+    "status": {
+      "code": 0,
+      "message": "Success",
+      "version": "4.2"
+    },
+    "name": "test_artist_catalog",
+    "id": "CAOFUDS12BB066268E"
+  }
+}

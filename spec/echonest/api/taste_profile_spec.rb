@@ -89,10 +89,35 @@ describe Echonest::API::TasteProfile do
       to have_been_made
     end
 
-    #it "returns a taste profile" do
-      #taste_profile = @client.taste_profile_list(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE')
-      #expect(taste_profile).to be_a Echonest::TasteProfile
-      #expect(taste_profile.list.cat_type).to eq 'persona'
-    #end
+    it "returns taste profiles" do
+      taste_profiles = @client.taste_profile_list(:api_key => 'AK')
+      expect(taste_profiles).to be_a Array
+      expect(taste_profiles.first.id).to eq 'CAZOFXZ13EB0258BD4'
+    end
   end
+
+  describe "#taste_profile_delete" do
+
+    before do
+      stub_post("/api/v4/catalog/delete").
+      with(:body => {:api_key => 'AK', :id => "CAZOFXZ13EB0258BD4"}).
+      to_return(:body => fixture("taste_profile/delete.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.taste_profile_delete(:api_key => 'AK', :id => 'CAZOFXZ13EB0258BD4')
+      expect(a_post("/api/v4/catalog/delete").
+      with(:body => {:api_key => 'AK', :id => 'CAZOFXZ13EB0258BD4'})).
+      to have_been_made
+    end
+
+    it "returns a taste profile" do
+      taste_profile = @client.taste_profile_delete(:api_key => 'AK', :id => 'CAZOFXZ13EB0258BD4')
+      expect(taste_profile).to be_a Echonest::TasteProfile
+      expect(taste_profile.id).to eq 'CAOFUDS12BB066268E'
+    end
+  end
+
+
 end
