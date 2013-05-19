@@ -83,7 +83,7 @@ module Echonest
       # @authentication Requires api key
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
-      # @return [Boolean] The taste profile.
+      # @return [Boolean] Message success
       # @param options [Hash] A customizable set of options.
       # @option options [String] :id The ID of the taste profile. Required. Example: 'CANVFPJ131839D8144'
       # @option options [String] :item The id of the item(s) in the taste profile to be updated. This can be the simple item ID or the Rosetta ID of the item. The items must already be in the taste profile. Examples: 'kfw', 'ARK3D5J1187B9BA0B8', 'CAOFUDS12BB066268E:artist:kfw', '7digital-US:track:293030'
@@ -93,6 +93,25 @@ module Echonest
       #   Echonest.taste_profile_skip(:id => 'CANVFPJ131839D8144', :item => 'kfw')
       def taste_profile_skip(options={})
         response = send(:get, '/api/v4/catalog/skip', options)
+        response[:body][:response][:status][:code] == 0
+      end
+
+      # Indicates that the given items have been favorited or unfavorited.
+      #
+      # @see http://developer.echonest.com/docs/v4/taste_profile.html#favorite
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Boolean] Message success.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the taste profile. Required. Example: 'CANVFPJ131839D8144'
+      # @option options [String] :item The id of the item(s) in the taste profile to be updated. This can be the simple item ID or the Rosetta ID of the item. The items must already be in the taste profile. Examples: 'kfw', 'ARK3D5J1187B9BA0B8', 'CAOFUDS12BB066268E:artist:kfw', '7digital-US:track:293030'
+      # @option options [Integer] :favorite Sets the favorite flag of the specified items(s) to the given value. Not required, must be either ['true, 'false'].
+      #
+      # @example taste_profile_favorite
+      #   Echonest.taste_profile_favorite(:id => 'CANVFPJ131839D8144', :item => 'kfw')
+      def taste_profile_favorite(options={})
+        response = send(:get, '/api/v4/catalog/favorite', options)
         response[:body][:response][:status][:code] == 0
       end
       # Returns a list of all taste profiles created on this key
