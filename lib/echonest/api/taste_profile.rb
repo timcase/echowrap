@@ -128,6 +128,26 @@ module Echonest
         object_from_response(Echonest::TasteProfile, :get, '/api/v4/catalog/profile', :catalog, options)
       end
 
+      # Returns data stored in the taste profile. Also returns Echo Nest IDs for items that have been resolved to Echo Nest IDs along with information requested via bucket. If item_id is not set, all items (subject to the limits of the start and results parameters) are returned, otherwise, only the items explicitly specified by item_id are returned.
+      #
+      # @see http://developer.echonest.com/docs/v4/taste_profile.html#status
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Echonest::TasteProfile]  The taste profile.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the taste profile. Required if name is omitted. Example: 'CAJTFEO131216286ED'.
+      # @option options [String] :item_id The item id for the item in the taste profile. Not required, can send multiple. ID will be whatever ID was assigned for the item.
+      # @option options [String] :bucket Indicates what data should be returned for each item. Not required, can send multiple. Can by any of the following 'item_keyvalues', For song items: 'audio_summary', 'artist_familiarity', 'artist_hotttnesss', 'artist_location', 'song_hotttnesss', 'song_type', 'tracks', 'id:Rosetta-space' For artist items: 'biographies', 'blogs', 'doc_counts', 'familiarity', 'hotttnesss', 'images', 'artist_location', 'news', 'reviews', 'songs', 'terms', 'urls', 'video', 'years_active', 'id:Rosetta-space'
+      # @option options [Integer] :results The number of results desired.
+      # @option options [Integer] :start The desired index of the first result returned.
+      #
+      # @example taste_profile_read
+      #   Echonest.taste_profile_read
+      def taste_profile_read(options={})
+        object_from_response(Echonest::TasteProfile, :get, '/api/v4/catalog/read', :catalog, options)
+      end
+
       # Checks the status of a taste profile update.
       #
       # @see http://developer.echonest.com/docs/v4/taste_profile.html#status

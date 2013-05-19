@@ -171,4 +171,34 @@ describe Echonest::API::TasteProfile do
       expect(taste_profile_status.update_info.first.info).to eq 'lookup failed'
     end
   end
+
+  describe "#taste_profile_read" do
+
+    before do
+      stub_get("/api/v4/catalog/read").
+      with(:query => {:id => 'CAUWCTB13EBA18ADAE'}).
+      to_return(:body => fixture("taste_profile/read.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.taste_profile_read(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE')
+      expect(a_get("/api/v4/catalog/read").
+      with(:query => {:id => 'CAUWCTB13EBA18ADAE'})).
+      to have_been_made
+    end
+
+    it "returns a taste profile" do
+      taste_profile = @client.taste_profile_read(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE')
+      expect(taste_profile).to be_a Echonest::TasteProfile
+      expect(taste_profile.name).to eq 'top hot song catalog by ID'
+    end
+
+    it 'returns items that may be songs' do
+      taste_profile = @client.taste_profile_read(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE')
+      expect(taste_profile.items).to be_a Array
+      expect(taste_profile.items.first.song_name).to eq 'Intro'
+    end
+
+  end
 end

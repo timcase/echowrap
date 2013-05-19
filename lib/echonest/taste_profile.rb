@@ -8,6 +8,11 @@ module Echonest
       def id
         @attrs[:id] || @attrs[:ticket] || 'taste profile'
       end
+      
+      # @return [Array]
+      def items
+        @items ||= map_collection(Echonest::Item, :items)
+      end
 
       # @return [Echonest::Keyvalues]
       def keyvalues

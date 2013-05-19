@@ -17,7 +17,7 @@ module Echonest
       def audio_summary
         @audio_summary ||= Echonest::AudioSummary.new(@attrs[:audio_summary])
       end
-
+      # @return [String]
       def id
         @attrs[:id] || @attrs[:sample_md5]
       end
