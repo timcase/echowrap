@@ -258,7 +258,6 @@ describe Echonest::API::Playlist do
                   :headers => {:content_type => "application/json; charset=utf-8"})
     end
 
-
     it "requests the correct resource" do
       @client.playlist_dynamic_delete(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
       expect(a_get("/api/v4/playlist/dynamic/delete")
