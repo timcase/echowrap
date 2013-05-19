@@ -6,7 +6,7 @@ module Echonest
 
       # @return [String]
       def id
-        @attrs[:id] || 'taste profile'
+        @attrs[:id] || @attrs[:ticket] || 'taste profile'
       end
 
       # @return [Echonest::Keyvalues]
