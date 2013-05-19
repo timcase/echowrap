@@ -110,6 +110,23 @@ module Echonest
         response = send(:post, '/api/v4/catalog/delete', options)
         Echonest::TasteProfile.fetch_or_new(response[:body][:response])
       end
+
+      # Get basic information on a taste profile
+      #
+      # @see http://developer.echonest.com/docs/v4/taste_profile.html#profile
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Echonest::TasteProfile]  The taste profile.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the taste profile. Required if name is omitted. Example: 'CAJTFEO131216286ED'.
+      # @option options [String] :name The name of the taste profile. Required if the ID is omitted. Example: 'My Favorite Artists'.
+      #
+      # @example taste_profile_profile
+      #   Echonest.taste_profile_profile
+      def taste_profile_profile(options={})
+        object_from_response(Echonest::TasteProfile, :get, '/api/v4/catalog/profile', :catalog, options)
+      end
     end
   end
 end

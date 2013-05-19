@@ -120,4 +120,26 @@ describe Echonest::API::TasteProfile do
   end
 
 
+  describe "#taste_profile_profile" do
+
+    before do
+      stub_get("/api/v4/catalog/profile").
+      with(:query => {:id => 'CAUWCTB13EBA18ADAE'}).
+      to_return(:body => fixture("taste_profile/profile.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.taste_profile_profile(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE')
+      expect(a_get("/api/v4/catalog/profile").
+      with(:query => {:id => 'CAUWCTB13EBA18ADAE'})).
+      to have_been_made
+    end
+
+    it "returns a taste profile" do
+      taste_profile = @client.taste_profile_profile(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE')
+      expect(taste_profile).to be_a Echonest::TasteProfile
+      expect(taste_profile.name).to eq 'top hot song catalog by ID'
+    end
+  end
 end
