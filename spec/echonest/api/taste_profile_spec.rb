@@ -224,4 +224,73 @@ describe Echonest::API::TasteProfile do
       expect(result).to be_true
     end
   end
+
+  describe "#taste_profile_skip" do
+
+    before do
+      stub_get("/api/v4/catalog/skip").
+      with(:query => {:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid'}).
+        to_return(:body => fixture("taste_profile/skip.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.taste_profile_skip(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid')
+      expect(a_get("/api/v4/catalog/skip")
+      .with(:query => {:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid'},
+                      ))
+      .to have_been_made
+    end
+
+    it "returns boolean with response result" do
+      result = @client.taste_profile_skip(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid')
+      expect(result).to be_true
+    end
+  end
+
+  describe "#taste_profile_favorite" do
+
+    before do
+      stub_get("/api/v4/catalog/favorite").
+      with(:query => {:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid'}).
+        to_return(:body => fixture("taste_profile/favorite.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.taste_profile_favorite(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid')
+      expect(a_get("/api/v4/catalog/favorite")
+      .with(:query => {:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid'},
+                      ))
+      .to have_been_made
+    end
+
+    it "returns boolean with response result" do
+      result = @client.taste_profile_favorite(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid')
+      expect(result).to be_true
+    end
+  end
+
+  describe "#taste_profile_rate" do
+
+    before do
+      stub_get("/api/v4/catalog/rate").
+      with(:query => {:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid', :rating => 5}).
+        to_return(:body => fixture("taste_profile/rate.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.taste_profile_rate(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid', :rating => 5)
+      expect(a_get("/api/v4/catalog/rate")
+      .with(:query => {:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid', :rating => 5},
+                      ))
+      .to have_been_made
+    end
+
+    it "returns boolean with response result" do
+      result = @client.taste_profile_rate(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid', :rating => 5)
+      expect(result).to be_true
+    end
+  end
 end
