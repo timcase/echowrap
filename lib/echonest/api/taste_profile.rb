@@ -76,6 +76,21 @@ module Echonest
         response = send(:get, '/api/v4/catalog/play', options)
         response[:body][:response][:status][:code] == 0
       end
+
+      # Returns a list of all taste profiles created on this key
+      #
+      # @see http://developer.echonest.com/docs/v4/taste_profile.html#list
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Array]  Array of taste profiles.
+      # @param options [Hash] A customizable set of options.
+      #
+      # @example taste_profile_list
+      #   Echonest.taste_profile_list
+      def taste_profile_list(options={})
+        objects_from_response(Echonest::TasteProfile, :get, '/api/v4/catalog/list', :catalogs, options)
+      end
     end
   end
 end

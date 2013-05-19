@@ -2,7 +2,7 @@ require 'echonest/identity'
 
 module Echonest
     class TasteProfile < Echonest::Identity
-      attr_reader :name, :ticket, :type
+      attr_reader :name, :ticket, :total, :type
 
       # @return [String]
       def id

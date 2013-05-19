@@ -74,4 +74,25 @@ describe Echonest::API::TasteProfile do
       expect(taste_profile.keyvalues.cat_type).to eq 'persona'
     end
   end
+
+  describe "#taste_profile_list" do
+
+    before do
+      stub_get("/api/v4/catalog/list").
+      to_return(:body => fixture("taste_profile/list.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.taste_profile_list(:api_key => 'AK')
+      expect(a_get("/api/v4/catalog/list")).
+      to have_been_made
+    end
+
+    #it "returns a taste profile" do
+      #taste_profile = @client.taste_profile_list(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE')
+      #expect(taste_profile).to be_a Echonest::TasteProfile
+      #expect(taste_profile.list.cat_type).to eq 'persona'
+    #end
+  end
 end

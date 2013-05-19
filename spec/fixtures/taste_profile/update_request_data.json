@@ -1,27 +1,4 @@
-[
-    {
-        "item":
-            {
-                "item_id": "0CF07A178DBF78F7",
-                "song_name" : "Harmonice Mundi II",
-                "artist_name" : "Six Organs Of Admittance",
-                "play_count" : 4
-            }
-    },
-    {
-        "item":
-            {
-                "item_id": "DBC4B9395930FB4A",
-                "song_name" : "Spine",
-                "artist_name" : "Gem Club",
-                "favorite" : true
-            }
-    },
-    {
-        "item":
-            {
-                "item_id": "2EC046EA14A873F8",
-                "play_count" : 10
-            }
-    },
-]
+[{"item": {
+    "item_id": "NewCat-SODJXOA1313438FB61",
+    "song_id": "SODJXOA1313438FB61"
+}}]
