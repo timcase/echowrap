@@ -142,4 +142,33 @@ describe Echonest::API::TasteProfile do
       expect(taste_profile.name).to eq 'top hot song catalog by ID'
     end
   end
+
+  describe "#taste_profile_status" do
+
+    before do
+      stub_get("/api/v4/catalog/status").
+      with(:query => {:ticket => 'e0ba094bbf98cd006283aa7de6780a83'}).
+      to_return(:body => fixture("taste_profile/status.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.taste_profile_status(:api_key => 'AK', :ticket => 'e0ba094bbf98cd006283aa7de6780a83')
+      expect(a_get("/api/v4/catalog/status").
+      with(:query => {:ticket => 'e0ba094bbf98cd006283aa7de6780a83'})).
+      to have_been_made
+    end
+
+    it "returns a taste status" do
+      taste_profile_status = @client.taste_profile_status(:api_key => 'AK', :ticket => 'e0ba094bbf98cd006283aa7de6780a83')
+      expect(taste_profile_status).to be_a Echonest::Status
+      expect(taste_profile_status.ticket_status).to eq 'complete'
+    end
+
+    it "returns a taste status update info" do
+      taste_profile_status = @client.taste_profile_status(:api_key => 'AK', :ticket => 'e0ba094bbf98cd006283aa7de6780a83')
+      expect(taste_profile_status.update_info).to be_a Array
+      expect(taste_profile_status.update_info.first.info).to eq 'lookup failed'
+    end
+  end
 end

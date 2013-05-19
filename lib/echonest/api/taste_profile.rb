@@ -127,6 +127,23 @@ module Echonest
       def taste_profile_profile(options={})
         object_from_response(Echonest::TasteProfile, :get, '/api/v4/catalog/profile', :catalog, options)
       end
+
+      # Checks the status of a taste profile update.
+      #
+      # @see http://developer.echonest.com/docs/v4/taste_profile.html#status
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Echonest::Status]  The taste profile status.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :ticket The ticket to check (returned by upload or update). Required. Example: 'e0ba094bbf98cd006283aa7de6780a83'.
+      #
+      # @example taste_profile_status
+      #   Echonest.taste_profile_status(:ticket => 'e0ba094bbf98cd006283aa7de6780a83')
+      def taste_profile_status(options={})
+        response = send(:get, '/api/v4/catalog/status', options)
+        Echonest::Status.fetch_or_new(response[:body][:response])
+      end
     end
   end
 end

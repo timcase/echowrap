@@ -1,0 +1,2 @@
+{"response": {"status": {"version": "4.2", "code": 0, "message": "Success"}, "total_items": 5, "items_updated": 5, "percent_complete": 100.0, "ticket_status": "complete", "update_info": [{"item_id": "1", "info": "lookup failed"}, {"item_id": "3", "info": "bad value"},{"item_id": "8", "info": "couldn't resolve item"}]}}
+
