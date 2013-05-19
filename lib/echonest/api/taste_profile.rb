@@ -58,17 +58,17 @@ module Echonest
         Echonest::TasteProfile.fetch_or_new(response[:body][:response])
       end
 
-      # Retrieve the catalog-level key/values that are stored in the Taste Profile
+      # Increment the playcount for the given items by the given count.
       #
-      # @see http://developer.echonest.com/docs/v4/taste_profile.html#keyvalues
+      # @see http://developer.echonest.com/docs/v4/taste_profile.html#play
       # @authentication Requires api key
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
-      # @return [Echonest::TasteProfile] The taste profile.
+      # @return [Boolean] Message success.
       # @param options [Hash] A customizable set of options.
       # @option options [String] :id The ID of the taste profile. Required. Example: 'CANVFPJ131839D8144'
       # @option options [String] :item The id of the item(s) in the taste profile to be updated. This can be the simple item ID or the Rosetta ID of the item. The items must already be in the taste profile. Examples: 'kfw', 'ARK3D5J1187B9BA0B8', 'CAOFUDS12BB066268E:artist:kfw', '7digital-US:track:293030'
-      # @option options [Integer] :play Increments the play count for the specified item(s) by the given value. Not required, defaults to 1, must be between 1 and 100.
+      # @option options [Integer] :plays Increments the play count for the specified item(s) by the given value. Not required, defaults to 1, must be between 1 and 100.
       #
       # @example taste_profile_play
       #   Echonest.taste_profile_play(:id => 'CANVFPJ131839D8144', :item => 'kfw')
@@ -77,6 +77,24 @@ module Echonest
         response[:body][:response][:status][:code] == 0
       end
 
+      # Increment the skip count for the given items by the given count
+      #
+      # @see http://developer.echonest.com/docs/v4/taste_profile.html#skip
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Boolean] The taste profile.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the taste profile. Required. Example: 'CANVFPJ131839D8144'
+      # @option options [String] :item The id of the item(s) in the taste profile to be updated. This can be the simple item ID or the Rosetta ID of the item. The items must already be in the taste profile. Examples: 'kfw', 'ARK3D5J1187B9BA0B8', 'CAOFUDS12BB066268E:artist:kfw', '7digital-US:track:293030'
+      # @option options [Integer] :skips Increments the skip count for the specified item(s) by the given value. Not required, defaults to 1, must be between 1 and 100.
+      #
+      # @example taste_profile_skip
+      #   Echonest.taste_profile_skip(:id => 'CANVFPJ131839D8144', :item => 'kfw')
+      def taste_profile_skip(options={})
+        response = send(:get, '/api/v4/catalog/skip', options)
+        response[:body][:response][:status][:code] == 0
+      end
       # Returns a list of all taste profiles created on this key
       #
       # @see http://developer.echonest.com/docs/v4/taste_profile.html#list
