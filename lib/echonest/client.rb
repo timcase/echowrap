@@ -3,6 +3,7 @@ require 'multi_json'
 require 'echonest/configurable'
 require 'echonest/api/artist'
 require 'echonest/api/playlist'
+require 'echonest/api/sandbox'
 require 'echonest/api/song'
 require 'echonest/api/taste_profile'
 require 'echonest/api/track'
@@ -12,6 +13,7 @@ module Echonest
   class Client
     include Echonest::API::Artist
     include Echonest::API::Playlist
+    include Echonest::API::Sandbox
     include Echonest::API::Song
     include Echonest::API::TasteProfile
     include Echonest::API::Track
