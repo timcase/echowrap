@@ -261,6 +261,23 @@ module Echonest
       def taste_profile_similar(options={})
         objects_from_response(Echonest::TasteProfile, :get, '/api/v4/catalog/similar', :catalogs, options)
       end
+
+      # Access the taste profile attributes.
+      #
+      # @see http://developer.echonest.com/docs/v4/taste_profile.html#predict
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Echonest::TasteProfile]  The taste profile.
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the taste profile. Required. Example: 'CAJTFEO131216286ED'.
+      # @option options [String] :category The attributes to be returned for the taste profile. Required, may send multiple, must be any of ['adventurousness', 'diversity', 'freshness', 'mainstreamness', 'top_years', 'top_styles', 'audio_features'] (audio features is only available for song-based profiles).
+      #
+      # @example taste_profile_predict
+      #   Echonest.taste_profile_predict
+      def taste_profile_predict(options={})
+        object_from_response(Echonest::TasteProfile, :get, '/api/v4/catalog/predict', :catalog, options)
+      end
     end
   end
 end

@@ -18,5 +18,11 @@ module Echonest
       def keyvalues
         @keyvalues ||= Echonest::Keyvalues.new(@attrs[:keyvalues])
       end
+      
+      # @return [Array]
+      def predictions
+        @predictions ||= map_collection(Echonest::Prediction, :predictions)
+      end
+      
     end
 end

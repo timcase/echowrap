@@ -348,4 +348,33 @@ describe Echonest::API::TasteProfile do
     end
 
   end
+
+  describe "#taste_profile_predict" do
+
+    before do
+      stub_get("/api/v4/catalog/predict").
+      with(:query => {:id => 'CAUWCTB13EBA18ADAE', :category => 'adventurousness'}).
+      to_return(:body => fixture("taste_profile/predict.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.taste_profile_predict(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE', :category => 'adventurousness')
+      expect(a_get("/api/v4/catalog/predict").
+      with(:query => {:id => 'CAUWCTB13EBA18ADAE', :category => 'adventurousness'})).
+      to have_been_made
+    end
+
+    it "returns a taste profile" do
+      taste_profile = @client.taste_profile_predict(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE', :category => 'adventurousness')
+      expect(taste_profile).to be_a Echonest::TasteProfile
+      expect(taste_profile.name).to eq "Tim's Test Profile"
+    end
+
+    it "returns taste profile predictions" do
+      taste_profile = @client.taste_profile_predict(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE', :category => 'adventurousness')
+      expect(taste_profile.predictions).to be_an Array
+      expect(taste_profile.predictions.first.category).to eq "mainstreamness"
+    end
+  end
 end
