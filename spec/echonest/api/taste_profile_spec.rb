@@ -248,6 +248,29 @@ describe Echonest::API::TasteProfile do
     end
   end
 
+  describe "#taste_profile_ban" do
+
+    before do
+      stub_get("/api/v4/catalog/ban").
+      with(:query => {:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid'}).
+        to_return(:body => fixture("taste_profile/ban.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.taste_profile_ban(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid')
+      expect(a_get("/api/v4/catalog/ban")
+      .with(:query => {:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid'},
+                      ))
+      .to have_been_made
+    end
+
+    it "returns boolean with response result" do
+      result = @client.taste_profile_ban(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid')
+      expect(result).to be_true
+    end
+  end
+
   describe "#taste_profile_favorite" do
 
     before do
