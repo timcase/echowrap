@@ -323,4 +323,29 @@ describe Echonest::API::TasteProfile do
       expect(feeds.first.references.first.id).to eq 'AR6HLNH1187B990435'
     end
   end
+
+  describe "#taste_profile_similar" do
+
+    before do
+      stub_get("/api/v4/catalog/similar").
+      with(:query => {:id => 'CAUWCTB13EBA18ADAE'}).
+      to_return(:body => fixture("taste_profile/similar.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.taste_profile_similar(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE')
+      expect(a_get("/api/v4/catalog/similar")
+      .with(:query => {:id => 'CAUWCTB13EBA18ADAE'},
+                      )).
+      to have_been_made
+    end
+
+    it "returns similars" do
+      similars = @client.taste_profile_similar(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE')
+      expect(similars).to be_a Array
+      expect(similars.first.id).to eq 'CAOFUDS12BB066268E'
+    end
+
+  end
 end

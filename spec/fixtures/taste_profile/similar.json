@@ -1,0 +1,14 @@
+{"response": {"status": {"version": "4.2", "code": 0, "message": "Success"}, "catalogs": [{
+                "id": "CAOFUDS12BB066268E",
+                "name": "test_artist_catalog",
+                "type": "artist",
+                "total": 4,
+                "score": 0.821
+            }    ,
+                            {
+                                "id": "CAGPXKK12BB06F9DE9",
+                                "name": "test_song_catalog",
+                                "type": "song",
+                                "total": 3,
+                                "score": 0.721
+                            }]}}

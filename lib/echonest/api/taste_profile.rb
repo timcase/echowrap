@@ -242,6 +242,25 @@ module Echonest
       def taste_profile_feed(options={})
         objects_from_response(Echonest::Feed, :get, '/api/v4/catalog/feed', :feed, options)
       end
+
+      # Returns a list of all taste profiles that are similar to the given set of taste profiles. This method returns similar taste profiles of the given use type. Similarity search is restricted to taste profiles that were created with the caller's API key.
+      #
+      # @see http://developer.echonest.com/docs/v4/taste_profile.html#similar
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Array]  Array of taste profiles
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the taste profile. Required, can send multiple up to 10. Example: 'CAJTFEO131216286ED'.
+      # @option options [Integer] :results The number of results desired. Not required, defaults to 25.
+      # @option options [Integer] :start The desired index of the first result returned. Not required, defaults to 0.
+      # @option options [String] :keyvalue Restrict results to taste profiles that have the given key/value pair. If no value is given, restrict results to all taste profiles that have the given key. Not required, may send multiple, Examples: ['yob', 'gender:female', 'zipcode:03103']
+      #
+      # @example taste_profile_similar
+      #   Echonest.taste_profile_similar
+      def taste_profile_similar(options={})
+        objects_from_response(Echonest::TasteProfile, :get, '/api/v4/catalog/similar', :catalogs, options)
+      end
     end
   end
 end
