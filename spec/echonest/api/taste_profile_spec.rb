@@ -293,4 +293,34 @@ describe Echonest::API::TasteProfile do
       expect(result).to be_true
     end
   end
+
+  describe "#taste_profile_feed" do
+
+    before do
+      stub_get("/api/v4/catalog/feed").
+      with(:query => {:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9'}).
+      to_return(:body => fixture("taste_profile/feed.json"),
+                 :headers => {:content_type => "application/json; charset=utf-8"})
+    end
+
+    it "requests the correct resource" do
+      @client.taste_profile_feed(:api_key => 'AK', :id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
+      expect(a_get("/api/v4/catalog/feed")
+      .with(:query => {:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9'},
+                      )).
+      to have_been_made
+    end
+
+    it "returns feeds" do
+      feeds = @client.taste_profile_feed(:api_key => 'AK', :id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
+      expect(feeds).to be_a Array
+      expect(feeds.first.id).to eq 'e124dae0b5da8c37bc287abd0dd41a86'
+    end
+
+    it "returns feed references" do
+      feeds = @client.taste_profile_feed(:api_key => 'AK', :id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
+      expect(feeds.first.references).to be_a Array
+      expect(feeds.first.references.first.id).to eq 'AR6HLNH1187B990435'
+    end
+  end
 end

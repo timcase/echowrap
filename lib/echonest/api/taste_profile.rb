@@ -221,6 +221,27 @@ module Echonest
         response = send(:get, '/api/v4/catalog/status', options)
         Echonest::Status.fetch_or_new(response[:body][:response])
       end
+
+      # Returns feeds based on the artists in a taste profile. Unlike catalog/read method, the catalog/feed method interleaves items and sorts them by date.
+      #
+      # @see http://developer.echonest.com/docs/v4/taste_profile.html#list
+      # @authentication Requires api key
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Array]  Array of feeds
+      # @param options [Hash] A customizable set of options.
+      # @option options [String] :id The ID of the taste profile. Required if name is omitted. Example: 'CAJTFEO131216286ED'.
+      # @option options [String] :bucket Indicates what type of feed items should be returned for each artist in the taste profile. Not required, may send multiple. can be any combination of news, blogs, reviews, audio and video blogs. If omitted defaults to news.
+      # @option options [Integer] :results The number of results desired. Not required, defaults to 25.
+      # @option options [Integer] :start The desired index of the first result returned. Not required, defaults to 0.
+      # @option options [String] :since Limit the items to those that have occurred since the given date. Not required, if supplied must be in date format YYYY-mm-dd. Example: '2013-05-19'.
+      # @option options [String] :high_relevance if true only items that are highly relevant for this artist will be returned. Currently only news items are filtered for high relevance. Not required, defaults to 'false', must be one of ['true', 'false'].
+      #
+      # @example taste_profile_feed
+      #   Echonest.taste_profile_feed
+      def taste_profile_feed(options={})
+        objects_from_response(Echonest::Feed, :get, '/api/v4/catalog/feed', :feed, options)
+      end
     end
   end
 end
