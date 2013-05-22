@@ -1,8 +1,11 @@
+require 'coveralls'
 require 'echonest'
 require 'echonest/identity_map'
 require 'rspec'
 require 'timecop'
 require 'webmock/rspec'
+
+Coveralls.wear!
 
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
