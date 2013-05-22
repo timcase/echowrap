@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/timcase/echonest.png)](https://travis-ci.org/timcase/echonest)
 [![Code Climate](https://codeclimate.com/github/timcase/echonest.png)](https://codeclimate.com/github/timcase/echonest)
+[![Coverage Status](https://coveralls.io/repos/timcase/echonest/badge.png?branch=master)](https://coveralls.io/r/timcase/echonest?branch=master)
+
 
 # The Echonest Ruby Gem
 [![Echonest](http://echonest.com/static/img/logos/250x200_dk.gif)](http://developer.echonest.com/index.html)
