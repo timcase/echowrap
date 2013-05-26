@@ -5,6 +5,7 @@ require 'echonest/api/artist'
 require 'echonest/api/playlist'
 require 'echonest/api/sandbox'
 require 'echonest/api/song'
+require 'echonest/api/oauth'
 require 'echonest/api/taste_profile'
 require 'echonest/api/track'
 require 'simple_oauth'
@@ -16,9 +17,11 @@ module Echonest
     include Echonest::API::Playlist
     include Echonest::API::Sandbox
     include Echonest::API::Song
+    include Echonest::API::Oauth
     include Echonest::API::TasteProfile
     include Echonest::API::Track
     include Echonest::Configurable
+
     # Initializes a new Client object
     #
     # @param options [Hash]

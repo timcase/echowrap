@@ -1,6 +1,3 @@
-# require 'twitter/api/arguments'
-# require 'twitter/cursor'
-# require 'twitter/user'
 
 module Echonest
   module API

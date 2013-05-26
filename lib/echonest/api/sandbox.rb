@@ -27,7 +27,7 @@ module Echonest
       # Gets access to the listed assets. This method returns a secure token or URL that can be used by the application to access the asset. This method requires an API key that has been approved for the sandbox.
       # NOTE: This method uses Oauth, the oauth parameters are generated and inserted by this gem automatically and do not need to be manually added.
       #
-      # @see http://developer.echonest.com/docs/v4/sandbox.html#list
+      # @see http://developer.echonest.com/docs/v4/sandbox.html#access
       # @authentication Requires api key
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
