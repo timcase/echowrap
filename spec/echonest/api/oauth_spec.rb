@@ -22,7 +22,7 @@ describe Echonest::API::Oauth do
     it "returns timestamp" do
       timestamp = @client.oauth_timestamp
       expect(timestamp).to be_an Integer
-      expect(timestamp).to eq "1369548063"
+      expect(timestamp).to eq 1369548063
     end
     
   end
