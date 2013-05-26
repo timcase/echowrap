@@ -7,6 +7,7 @@ require 'echonest/api/sandbox'
 require 'echonest/api/song'
 require 'echonest/api/taste_profile'
 require 'echonest/api/track'
+require 'simple_oauth'
 
 
 module Echonest
@@ -30,20 +31,25 @@ module Echonest
 
     # Perform an HTTP GET request
     def get(path, params={})
-      params = params.merge(:api_key => @api_key)
       request(:get, path, params)
     end
 
     # Perform an HTTP POST request
     def post(path, params={})
-      params = params.merge(:api_key => @api_key)
       signature_params = params.values.any?{|value| value.respond_to?(:to_io)} ? {} : params
       request(:post, path, params, signature_params)
     end
 
     private
 
+      def setup_authentication_parameters(method, path, params)
+        params = params.merge(:api_key => @api_key)
+        params = params.merge(oauth_parameters(method, path, params)) if params.delete(:oauth_request)
+        params
+      end
+
       def request(method, path, params={}, signature_params=params)
+        params = setup_authentication_parameters(method, path, params)
         connection.send(method.to_sym, path, params).env
       rescue Faraday::Error::ClientError
         raise Echonest::Error::ClientError
@@ -62,6 +68,10 @@ module Echonest
         end
       end
 
+      def oauth_parameters(method, path, params={})
+        uri = URI(@endpoint + path)
+        SimpleOAuth::Header.new(method, uri, params, credentials).signed_attributes
+      end
 
   end
 end

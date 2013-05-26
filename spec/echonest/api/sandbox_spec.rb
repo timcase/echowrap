@@ -40,4 +40,28 @@ describe Echonest::API::Sandbox do
    end
   end
 
+  describe "#sandbox_access" do
+
+   before do
+     @client = Echonest::Client.new(:api_key => "AK", :consumer_key => "CK", :shared_secret => "SS")
+     stub_get("/api/v4/sandbox/access", false).
+     with(:query => hash_including({:sandbox => 'emi_evanescence', :id => '2d2b8d352d6f2bc8297266117116421d'})).
+     to_return(:body => fixture("sandbox/access.json"),
+                :headers => {:content_type => "application/json; charset=utf-8"})
+   end
+
+   it "requests the correct resource" do
+     @client.sandbox_access(:sandbox => "emi_evanescence", :id => '2d2b8d352d6f2bc8297266117116421d')
+     expect(a_get("/api/v4/sandbox/access", false).
+     with(:query => hash_including({:sandbox => 'emi_evanescence', :id => '2d2b8d352d6f2bc8297266117116421d'}))).
+     to have_been_made
+   end
+
+   it "returns assets with the sandbox" do
+     assets = @client.sandbox_access(:sandbox => "emi_evanescence", :id => '2d2b8d352d6f2bc8297266117116421d')
+     expect(assets).to be_an Array
+     expect(assets.first.id).to eq 'c1b89c9b9e0ee9e53650f1d4e393d716'
+   end
+
+  end
 end

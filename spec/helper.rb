@@ -13,16 +13,16 @@ RSpec.configure do |config|
   end
 end
 
-def a_get(path)
-  a_request(:get, Echonest::Default::ENDPOINT + path + api_key)
+def a_get(path, add_api_key = true)
+  a_request(:get, Echonest::Default::ENDPOINT + path + api_key(add_api_key))
 end
 
 def a_post(path)
   a_request(:post, Echonest::Default::ENDPOINT + path)
 end
 
-def stub_get(path)
-  stub_request(:get, Echonest::Default::ENDPOINT + path + api_key)
+def stub_get(path, add_api_key = true)
+  stub_http_request(:get, Echonest::Default::ENDPOINT + path + api_key(add_api_key))
 end
 
 def stub_post(path)
@@ -30,8 +30,8 @@ def stub_post(path)
 end
 
 
-def api_key
-  '?api_key=AK'
+def api_key(add_api_key = true)
+  add_api_key ? '?api_key=AK' : ''
 end
 
 def fixture_path

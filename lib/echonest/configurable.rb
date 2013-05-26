@@ -57,7 +57,7 @@ module Echonest
       {
         :api_key => @api_key,
         :consumer_key => @consumer_key,
-        :shared_secret => @shared_secret,
+        :consumer_secret => @shared_secret,
       }
     end
 

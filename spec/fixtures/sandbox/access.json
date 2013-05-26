@@ -1,0 +1,19 @@
+{
+    "response": {
+        "status": {
+            "version": "4.2",
+            "code": 0,
+            "message": "Success"
+        },
+            "assets": [
+                {
+                  "url": "http://assets-cdn.echonest.com/emi_evanescence/TRVXTFV123E858A357.mp3?Expires=1319130782&Signature=Py4Eul8uB2-eEjphGLjEAKIN-Ecpu-OWrox7I4jnvvjFJH6AX0Yz80QUUvhCQxZr-gDns5LZqiIyk5YQMGvhJIMAIQFnVToDEcUVoiS6z3RTr9~vbOYscxw2b2~niS7ELxHBlHUXrc5GVzoWujb1sQBp0B0TxVl4Y-Fo4swf8-M_&Key-Pair-Id=APKAI7GSQ2RBQERQWBOA",
+                  "id": "c1b89c9b9e0ee9e53650f1d4e393d716"
+                },
+                {
+                  "url": "http://assets-cdn.echonest.com/emi_evanescence/TRRSUVX123E858D3A6.mp3?Expires=1319130782&Signature=I4VvE3D4XTD6UpZPZJCHTXoFtj2-mn5Nvn~OseucT01iv3vhAsqtOca1NsYU6cJH9sRTJElGF0W3tX3PuAeP0hyY-6B~d8g0l~Jp4~pMhyZebAJYX3mPL0hhRY9OziFQNYlLc0-991T0sM9uLFsBZl3Mdbtqfpfh6QaWuQjN-GU_&Key-Pair-Id=APKAI7GSQ2RBQERQWBOA",
+                  "id": "67d0bf343b70b19e7a6de496dc2ab126"
+                }
+              ]
+    }
+}
