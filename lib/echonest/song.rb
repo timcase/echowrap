@@ -1,7 +1,7 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Song < Echonest::Identity
+    class Song < Echonest::Base
       attr_reader :artist_id, :artist_familiarity, :artist_hotttnesss, :artist_name, 
                   :attributes, :message, :score, :song_currency, :song_discovery, 
                   :song_hotttnesss, :song_type, :title

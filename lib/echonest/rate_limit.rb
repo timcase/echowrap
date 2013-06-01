@@ -1,3 +1,5 @@
+require 'echonest/base'
+
 module Echonest
   class RateLimit
     attr_reader :attrs

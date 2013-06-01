@@ -1,8 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class EchonestId < Echonest::Identity
-      attr_reader :foreign_id
-      
-    end
+  class EchonestId < Echonest::Base
+    attr_reader :foreign_id
+    
+  end
 end

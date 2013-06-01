@@ -1,7 +1,7 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class SequencedData < Echonest::Identity
+    class SequencedData < Echonest::Base
       attr_reader :start, :duration, :confidence
 
       def id

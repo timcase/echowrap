@@ -1,8 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Hotttnesss < Echonest::Identity
-      attr_reader :hotttnesss, :name
-    end
+  class Hotttnesss < Echonest::Base
+    attr_reader :hotttnesss, :name
+  end
 end
 

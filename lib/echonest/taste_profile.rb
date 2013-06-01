@@ -1,12 +1,12 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class TasteProfile < Echonest::Identity
+    class TasteProfile < Echonest::Base
       attr_reader :name, :pending_tickets, :resolved, :score, :ticket, :total, :type 
 
       # @return [String]
       def id
-        @attrs[:id] || @attrs[:ticket] || 'taste profile'
+        @attrs[:id] || @attrs[:ticket]
       end
       
       # @return [Array]

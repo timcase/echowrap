@@ -1,8 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Review < Echonest::Identity
-      attr_reader :date_found, :date_posted, :image_url, :name, :release, :summary, :url
-    end
+  class Review < Echonest::Base
+    attr_reader :date_found, :date_posted, :image_url, :name, :release, :summary, :url
+  end
 end
 

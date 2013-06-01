@@ -1,13 +1,10 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class License < Echonest::Identity
-      attr_reader :attribution, :type, :url
+  class License < Echonest::Base
+    attr_reader :attribution, :type, :url
 
-      def id
-        self.attribution
-      end
-    end
+  end
 end
 
 

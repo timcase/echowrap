@@ -1,12 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Reference < Echonest::Identity
+    class Reference < Echonest::Base
       attr_reader :artist_id, :artist_name
-      
-      def id
-        self.artist_id
-      end
     end
 end
 

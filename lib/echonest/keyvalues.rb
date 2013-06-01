@@ -1,11 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Keyvalues < Echonest::Identity
-      attr_reader :cat_type, :is_active, :timestamp, :version
-      
-      def id
-        'keyvalues'
-      end
-    end
+  class Keyvalues < Echonest::Base
+    attr_reader :cat_type, :is_active, :timestamp, :version
+    
+  end
 end

@@ -1,11 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-  class UpdateInfo < Echonest::Identity
+  class UpdateInfo < Echonest::Base
     attr_reader :info, :item_id
-    
-    def id
-      "item-#{self.item_id}"
-    end
+
   end
 end

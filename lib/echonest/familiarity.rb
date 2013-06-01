@@ -1,8 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Familiarity < Echonest::Identity
-      attr_reader :familiarity, :name
-    end
+  class Familiarity < Echonest::Base
+    attr_reader :familiarity, :name
+  end
 end
 

@@ -1,8 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Blog < Echonest::Identity
-      attr_reader :date_found, :date_posted, :name, :summary, :url
-    end
+  class Blog < Echonest::Base
+    attr_reader :date_found, :date_posted, :name, :summary, :url
+  end
 end
 

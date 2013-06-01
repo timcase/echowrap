@@ -1,13 +1,10 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class ForeignId < Echonest::Identity
-      attr_reader :catalog, :foreign_id
+  class ForeignId < Echonest::Base
+    attr_reader :catalog, :foreign_id
 
-      def id
-        self.foreign_id
-      end
-    end
+  end
 end
 
 

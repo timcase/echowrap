@@ -1,7 +1,7 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-  class Playlist < Echonest::Identity
+  class Playlist < Echonest::Base
     attr_reader :actual_history_length, :api_key, :banned_artist_ids, :banned_song_ids, 
                 :contraints, :favorited_artist_ids, :favorited_song_ids, :favorites_map, 
                 :history, :invalid_artist_ids, :invalid_songs, :playlist_score, :ratings_map, 
@@ -18,12 +18,7 @@ module Echonest
     def category_map
       @category_map ||= Echonest::CategoryMap.new(@attrs[:category_map])
     end
-    
-    # @return [String]
-    def id
-      @attrs[:id] || self.session_id || 'playlist'
-    end
-    
+
     # @return [Array]
     def lookahead
       @lookahead ||= map_collection(Echonest::Song, :lookahead)

@@ -1,7 +1,7 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-  class Feed < Echonest::Identity
+  class Feed < Echonest::Base
     attr_reader :name, :url, :date_posted, :date_found, :summary, :type
     
     # @return [Array]

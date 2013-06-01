@@ -1,12 +1,9 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-  class Urls < Echonest::Identity
+  class Urls < Echonest::Base
     attr_reader :amazon_url, :itunes_url, :lastfm_url, :mb_url, :myspace_url, 
                 :official_url, :wikipedia_url
     
-    def id
-      self.official_url
-    end
   end
 end

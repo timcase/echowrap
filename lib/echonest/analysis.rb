@@ -1,8 +1,7 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Analysis < Echonest::Identity
-
+  class Analysis < Echonest::Base
 
     def bars
      @bars ||= map_collection(Echonest::Bar, :bars)

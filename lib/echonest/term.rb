@@ -1,11 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Term < Echonest::Identity
+    class Term < Echonest::Base
       attr_reader :name, :frequency, :weight
-      
-      def id
-        self.name
-      end
+
     end
 end

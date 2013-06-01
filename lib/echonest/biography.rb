@@ -1,18 +1,13 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Biography < Echonest::Identity
-      attr_reader :site, :text, :url
+  class Biography < Echonest::Base
+    attr_reader :site, :text, :url
 
-      # @return [Echonest::License]
-      def license
-        @license ||= Echonest::License.new(@attrs[:license])
-      end
-
-      # @return [String]
-      def id
-        self.url
-      end
+    # @return [Echonest::License]
+    def license
+      @license ||= Echonest::License.new(@attrs[:license])
     end
+  end
 end
 

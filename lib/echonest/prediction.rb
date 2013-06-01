@@ -1,11 +1,7 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Prediction < Echonest::Identity
-      attr_reader :category, :results
-      
-      def id
-        self.category
-      end
-    end
+  class Prediction < Echonest::Base
+    attr_reader :category, :results
+  end
 end

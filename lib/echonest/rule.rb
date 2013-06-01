@@ -1,11 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Rule < Echonest::Identity
+    class Rule < Echonest::Base
       attr_reader :rule
-      
-      def id
-        self.rule
-      end
+
     end
 end

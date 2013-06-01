@@ -1,11 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class YearsActive < Echonest::Identity
+    class YearsActive < Echonest::Base
       attr_reader :start
       
-      def id
-        self.start
-      end
     end
 end

@@ -432,7 +432,7 @@ describe Echonest::API::Artist do
                                            'years_active',
                                            'id:musicbrainz'])
        expect(artist.location).to be_an Echonest::Location
-       expect(artist.location.id).to eq 'Abingdon, England, GB'
+       expect(artist.location.location).to eq 'Abingdon, England, GB'
      end
 
      it 'returns an artist with news' do
@@ -517,7 +517,7 @@ describe Echonest::API::Artist do
                                            'years_active',
                                            'id:musicbrainz'])
        expect(artist.terms).to be_an Array
-       expect(artist.terms.first.id).to eq 'rock'
+       expect(artist.terms.first.name).to eq 'rock'
      end
 
      it 'returns an artist with urls' do
@@ -538,7 +538,7 @@ describe Echonest::API::Artist do
                                            'years_active',
                                            'id:musicbrainz'])
        expect(artist.urls).to be_an Echonest::Urls
-       expect(artist.urls.id).to eq 'http://radiohead.com'
+       expect(artist.urls.official_url).to eq 'http://radiohead.com'
      end
 
      it 'returns an artist with video' do
@@ -580,7 +580,7 @@ describe Echonest::API::Artist do
                                            'years_active',
                                            'id:musicbrainz'])
        expect(artist.foreign_ids).to be_an Array
-       expect(artist.foreign_ids.first.id).to eq 'musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711'
+       expect(artist.foreign_ids.first.foreign_id).to eq 'musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711'
      end
 
      it 'returns an artist with years active' do

@@ -343,7 +343,7 @@ describe Echonest::API::TasteProfile do
     it "returns feed references" do
       feeds = @client.taste_profile_feed(:api_key => 'AK', :id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
       expect(feeds.first.references).to be_a Array
-      expect(feeds.first.references.first.id).to eq 'AR6HLNH1187B990435'
+      expect(feeds.first.references.first.artist_id).to eq 'AR6HLNH1187B990435'
     end
   end
 

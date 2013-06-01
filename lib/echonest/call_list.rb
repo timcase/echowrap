@@ -1,11 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class CallList < Echonest::Identity
-      attr_reader :action, :time
-      
-      def id
-        self.time
-      end
-    end
+  class CallList < Echonest::Base
+    attr_reader :action, :time
+
+  end
 end

@@ -1,11 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class DocCounts < Echonest::Identity
-      attr_reader :audio, :biographies, :blogs, :images, :news, :reviews, :songs, :video
-      
-      def id
-        self.songs
-      end
-    end
+  class DocCounts < Echonest::Base
+    attr_reader :audio, :biographies, :blogs, :images, :news, :reviews, :songs, :video
+
+  end
 end

@@ -1,11 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Location < Echonest::Identity
-      attr_reader :city, :country, :location, :region
-      
-      def id
-        self.location
-      end
-    end
+  class Location < Echonest::Base
+    attr_reader :city, :country, :location, :region
+
+  end
 end

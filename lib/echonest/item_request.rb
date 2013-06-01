@@ -1,11 +1,8 @@
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class ItemRequest < Echonest::Identity
-      attr_reader :artist_name, :item_id, :song_name
-      
-      def id
-        self.item_id
-      end
-    end
+  class ItemRequest < Echonest::Base
+    attr_reader :artist_name, :item_id, :song_name
+    
+  end
 end

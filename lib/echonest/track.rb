@@ -1,8 +1,7 @@
-require 'uri'
-require 'echonest/identity'
+require 'echonest/base'
 
 module Echonest
-    class Track < Echonest::Identity
+    class Track < Echonest::Base
       attr_reader :analysis_channels, :analysis_sample_rate, :analyzer_version, :artist,
                   :attributes, :audio_md5, :bitrate, :catalog, :code_version, :codestring,
                   :decoder, :duration, :echoprint_version, :echoprintstring, :end_of_fade_in,
@@ -16,10 +15,6 @@ module Echonest
       # @return [Echonest::AudioSummary]
       def audio_summary
         @audio_summary ||= Echonest::AudioSummary.new(@attrs[:audio_summary])
-      end
-      # @return [String]
-      def id
-        @attrs[:id] || @attrs[:sample_md5]
       end
 
     end
