@@ -20,8 +20,7 @@ module Echonest
       # @example sandbox_list
       #   Echonest.sandbox_list(:sandbox => 'emi_evanescence')
       def sandbox_list(options={})
-        response = send(:get, '/api/v4/sandbox/list', options)
-        Echonest::Sandbox.fetch_or_new(response[:body][:response])
+        object_from_response(Echonest::Sandbox, :get, '/api/v4/sandbox/list', nil, options)
       end
 
       # Gets access to the listed assets. This method returns a secure token or URL that can be used by the application to access the asset. This method requires an API key that has been approved for the sandbox.

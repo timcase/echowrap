@@ -120,8 +120,7 @@ module Echonest
       # @example Return a playlist with a session ID
       #   Echonest.playlist_dynamic_create(:artist => "Daft Punk")
       def playlist_dynamic_create(options={})
-        response = send(:get, '/api/v4/playlist/dynamic/create', options)
-        Echonest::Playlist.fetch_or_new(response[:body][:response])
+        object_from_response(Echonest::Playlist, :get, '/api/v4/playlist/dynamic/create', nil, options)
       end
 
       # Restarts a playlist session. Given the session ID and a new set of playlist parameters, this method restarts the playlist session based upon the new parameters. The session history is maintained. Everything else is reset. This method takes all the same parameters as dynamic/create, plus the session ID. Returns the given session ID.
@@ -137,8 +136,7 @@ module Echonest
       # @example Return a playlist with a session ID
       #   Echonest.playlist_dynamic_restart(:session_id => '7bf982d80ed8421c8c94dbd6de565e9d', :artist => "Daft Punk")
       def playlist_dynamic_restart(options={})
-        response = send(:get, '/api/v4/playlist/dynamic/restart', options)
-        Echonest::Playlist.fetch_or_new(response[:body][:response])
+        object_from_response(Echonest::Playlist, :get, '/api/v4/playlist/dynamic/restart', nil, options)
       end
 
       # Returns the next songs in the playlist. Results includes two lists of songs - one list (called next) contains the next songs to play, the other (called lookahead) contains the lookahead songs (controlled via the lookahead parameter). The next songs returned by this method will be considered to be played starting at the time the call returns. Use the dynamic/feedback method to indicate that the song was skipped or not played.
@@ -156,8 +154,7 @@ module Echonest
       # @example Return a playlist with songs and lookaheads
       #   Echonest.playlist_dynamic_next(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d')
       def playlist_dynamic_next(options={})
-        response = send(:get, '/api/v4/playlist/dynamic/next', options)
-        Echonest::Playlist.fetch_or_new(response[:body][:response])
+        object_from_response(Echonest::Playlist, :get, '/api/v4/playlist/dynamic/next', nil, options)
       end
 
       # Give feedback on the given items (artists or songs) or the last played song. This method allows you to give user feedback such as rating, favoriting, banning of a song or artist. Feedback is applied to the item specified by the given song_id or track_id. If no song_id or track_id is specified, then the feedback is applied to the most recent song returned by dynamic/next. Multiple feedbacks can be given at any time. Specified songs need not be in the session history. This allows the pre-seeding of a session with played tracks, skipped tracks, favorites, ratings and bans.
@@ -183,8 +180,7 @@ module Echonest
       # @example Return boolean with status of response
       #   Echonest.playlist_dynamic_feedback(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d', :favorite_song => 'SOCZMFK12AC468668F')
       def playlist_dynamic_feedback(options={})
-        response = send(:get, '/api/v4/playlist/dynamic/feedback', options)
-        response[:body][:response][:status][:code] == 0
+        boolean_from_response(:get, '/api/v4/playlist/dynamic/feedback', options)
       end
 
 
@@ -213,8 +209,7 @@ module Echonest
       # @example Return boolean with status of response
       #   Echonest.playlist_dynamic_steer(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d', :min_danceability => 0.4)
       def playlist_dynamic_steer(options={})
-        response = send(:get, '/api/v4/playlist/dynamic/steer', options)
-        response[:body][:response][:status][:code] == 0
+        boolean_from_response(:get, '/api/v4/playlist/dynamic/steer', options)
       end
 
       # Returns information about a dynamic playlist session
@@ -230,8 +225,7 @@ module Echonest
       # @example Return boolean with status of response
       #   Echonest.playlist_dynamic_info(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d')
       def playlist_dynamic_info(options={})
-        response = send(:get, '/api/v4/playlist/dynamic/info', options)
-        Echonest::Playlist.fetch_or_new(response[:body][:response])
+        object_from_response(Echonest::Playlist, :get, '/api/v4/playlist/dynamic/info', nil, options)
       end
 
       # Deletes a previously created session. A non-commercial API can have, at most 1,000 active playlist sessions.
@@ -247,8 +241,7 @@ module Echonest
       # @example Return boolean with status of response
       #   Echonest.playlist_dynamic_delete(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d')
       def playlist_dynamic_delete(options={})
-        response = send(:get, '/api/v4/playlist/dynamic/delete', options)
-        response[:body][:response][:status][:code] == 0
+        boolean_from_response(:get, '/api/v4/playlist/dynamic/delete', options)
       end
     end
   end

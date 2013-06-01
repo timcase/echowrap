@@ -19,8 +19,7 @@ module Echonest
       # @example taste_profile_create
       #   Echonest.taste_profile_create(:name => "Favorite artists of Paul", :type => 'artist')
       def taste_profile_create(options={})
-        response = send(:post, '/api/v4/catalog/create', options)
-        Echonest::TasteProfile.fetch_or_new(response[:body][:response])
+        object_from_response(Echonest::TasteProfile, :post, '/api/v4/catalog/create', nil, options)
       end
 
       # Updates (adds or deletes) items from a taste profile. The body of the post should include an item block that describes modifications to the taste profile.
@@ -37,8 +36,11 @@ module Echonest
       # @example taste_profile_update
       #   Echonest.taste_profile_update(:name => "Favorite artists of Paul", :type => 'artist')
       def taste_profile_update(options={})
-        response = send(:post, '/api/v4/catalog/update', options.merge({:data_type => 'json'}))
-        Echonest::TasteProfile.fetch_or_new(response[:body][:response])
+        object_from_response(Echonest::TasteProfile,
+                             :post,
+                             '/api/v4/catalog/update',
+                             nil,
+                             options.merge({:data_type => 'json'}))
       end
 
       # Retrieve the catalog-level key/values that are stored in the Taste Profile
@@ -54,8 +56,7 @@ module Echonest
       # @example taste_profile_keyvalues
       #   Echonest.taste_profile_keyvalues(:id => 'CANVFPJ131839D8144')
       def taste_profile_keyvalues(options={})
-        response = send(:get, '/api/v4/catalog/keyvalues', options)
-        Echonest::TasteProfile.fetch_or_new(response[:body][:response])
+        object_from_response(Echonest::TasteProfile, :get, '/api/v4/catalog/keyvalues', nil, options)
       end
 
       # Increment the playcount for the given items by the given count.
@@ -73,8 +74,7 @@ module Echonest
       # @example taste_profile_play
       #   Echonest.taste_profile_play(:id => 'CANVFPJ131839D8144', :item => 'kfw')
       def taste_profile_play(options={})
-        response = send(:get, '/api/v4/catalog/play', options)
-        response[:body][:response][:status][:code] == 0
+        boolean_from_response(:get, '/api/v4/catalog/play', options)
       end
 
       # Increment the skip count for the given items by the given count
@@ -92,8 +92,7 @@ module Echonest
       # @example taste_profile_skip
       #   Echonest.taste_profile_skip(:id => 'CANVFPJ131839D8144', :item => 'kfw')
       def taste_profile_skip(options={})
-        response = send(:get, '/api/v4/catalog/skip', options)
-        response[:body][:response][:status][:code] == 0
+        boolean_from_response(:get, '/api/v4/catalog/skip', options)
       end
 
       # Indicates that the given items have been banned or unbanned.
@@ -111,8 +110,7 @@ module Echonest
       # @example taste_profile_ban
       #   Echonest.taste_profile_ban(:id => 'CANVFPJ131839D8144', :item => 'kfw')
       def taste_profile_ban(options={})
-        response = send(:get, '/api/v4/catalog/ban', options)
-        response[:body][:response][:status][:code] == 0
+        boolean_from_response(:get, '/api/v4/catalog/ban', options)
       end
 
       # Indicates that the given items have been favorited or unfavorited.
@@ -130,8 +128,7 @@ module Echonest
       # @example taste_profile_favorite
       #   Echonest.taste_profile_favorite(:id => 'CANVFPJ131839D8144', :item => 'kfw')
       def taste_profile_favorite(options={})
-        response = send(:get, '/api/v4/catalog/favorite', options)
-        response[:body][:response][:status][:code] == 0
+        boolean_from_response(:get, '/api/v4/catalog/favorite', options)
       end
 
       # Apply the given rating to the given items
@@ -149,8 +146,7 @@ module Echonest
       # @example taste_profile_rate
       #   Echonest.taste_profile_rate(:id => 'CANVFPJ131839D8144', :item => 'kfw')
       def taste_profile_rate(options={})
-        response = send(:get, '/api/v4/catalog/rate', options)
-        response[:body][:response][:status][:code] == 0
+        boolean_from_response(:get, '/api/v4/catalog/rate', options)
       end
 
       # Returns a list of all taste profiles created on this key
@@ -183,8 +179,7 @@ module Echonest
       # @example taste_profile_delete
       #   Echonest.taste_profile_delete
       def taste_profile_delete(options={})
-        response = send(:post, '/api/v4/catalog/delete', options)
-        Echonest::TasteProfile.fetch_or_new(response[:body][:response])
+        object_from_response(Echonest::TasteProfile, :post, '/api/v4/catalog/delete', nil, options)
       end
 
       # Get basic information on a taste profile
@@ -237,8 +232,7 @@ module Echonest
       # @example taste_profile_status
       #   Echonest.taste_profile_status(:ticket => 'e0ba094bbf98cd006283aa7de6780a83')
       def taste_profile_status(options={})
-        response = send(:get, '/api/v4/catalog/status', options)
-        Echonest::Status.fetch_or_new(response[:body][:response])
+        object_from_response(Echonest::Status, :get, '/api/v4/catalog/status', nil, options)
       end
 
       # Returns feeds based on the artists in a taste profile. Unlike catalog/read method, the catalog/feed method interleaves items and sorts them by date.
