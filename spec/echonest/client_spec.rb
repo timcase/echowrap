@@ -37,8 +37,7 @@ describe Echonest::Client do
           :consumer_key => 'CK',
           :shared_secret => 'SS',
           :endpoint => 'http://tumblr.com/',
-          :middleware => Proc.new{},
-          :identity_map => ::Hash
+          :middleware => Proc.new{}
         }
       end
 

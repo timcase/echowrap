@@ -6,7 +6,7 @@ module Echonest
   module Configurable
     extend Forwardable
     attr_writer :api_key, :consumer_key, :shared_secret
-    attr_accessor :endpoint, :connection_options, :identity_map, :middleware
+    attr_accessor :endpoint, :connection_options, :middleware
     def_delegator :options, :hash
 
     class << self
@@ -17,7 +17,6 @@ module Echonest
           :shared_secret,
           :endpoint,
           :connection_options,
-          :identity_map,
           :middleware,
         ]
       end
