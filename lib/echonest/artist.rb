@@ -2,7 +2,7 @@ require 'echonest/base'
 
 module Echonest
   class Artist < Echonest::Base
-    attr_reader :name, :twitter, :familiarity, :hotttnesss
+    attr_reader :name, :twitter, :id, :familiarity, :hotttnesss
 
     # @return [Array]
     def biographies

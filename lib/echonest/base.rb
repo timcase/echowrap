@@ -34,9 +34,9 @@ module Echonest
     end
 
     # @return [Integer]
-    def id
-      @attrs[:id]
-    end
+    # def id
+    #   @attrs[:id]
+    # end
 
     # Retrieves an object from the identity map.
     #
