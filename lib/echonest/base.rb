@@ -73,15 +73,15 @@ module Echonest
     #
     # @param attrs [Hash]
     # @return [Echonest::Base]
-    def self.fetch_or_new(attrs={})
-      return unless attrs
-      return new(attrs) #unless identity_map
-
-      #fetch(attrs) do
-        #object = new(attrs)
-        #store(object)
-      #end
-    end
+    # def self.fetch_or_new(attrs={})
+    #   return unless attrs
+    #   return new(attrs) #unless identity_map
+    # 
+    #   #fetch(attrs) do
+    #     #object = new(attrs)
+    #     #store(object)
+    #   #end
+    # end
 
     # Initializes a new object
     #
@@ -137,7 +137,7 @@ module Echonest
     # @return [Array]
     def map_collection(klass, key)
       Array(@attrs[key.to_sym]).map do |entity|
-        klass.fetch_or_new(entity)
+        klass.new(entity)
       end
     end
 

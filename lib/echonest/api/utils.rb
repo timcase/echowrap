@@ -27,7 +27,7 @@ module Echonest
       # @return [Array]
       def objects_from_array(klass, array)
         array.map do |element|
-          klass.fetch_or_new(element)
+          klass.new(element)
         end
       end
 
@@ -40,7 +40,7 @@ module Echonest
       def object_from_response(klass, request_method, path, object_key, options={})
         response = send(request_method.to_sym, path, options)[:body][:response]
         response = response[object_key] if object_key
-        klass.fetch_or_new(response)
+        klass.new(response)
       end
 
       # @param klass [Class]

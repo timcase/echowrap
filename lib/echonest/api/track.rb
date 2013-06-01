@@ -56,7 +56,7 @@ module Echonest
       def track_analysis(options={})
         url = options.delete(:url)
         response = send(:get, url, options)
-        Echonest::Analysis.fetch_or_new(response[:body])
+        Echonest::Analysis.new(response[:body])
       end
 
     end
