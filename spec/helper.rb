@@ -1,6 +1,5 @@
 require 'coveralls'
 require 'echonest'
-require 'echonest/identity_map'
 require 'rspec'
 require 'timecop'
 require 'webmock/rspec'
