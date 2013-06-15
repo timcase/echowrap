@@ -39,6 +39,20 @@ describe Echonest::API::Song do
       expect(songs.first.title).to eq "Karma Police"
     end
 
+    it 'still returns an audio summary if bucket is not specified' do
+      songs = @client.song_search(:results => 1,
+                          :artist => 'radiohead',
+                          :title => 'karma police')
+      expect(songs.first.audio_summary).to be_an Echonest::AudioSummary
+    end
+
+    it 'returns nil for any field of audio summary' do
+      songs = @client.song_search(:results => 1,
+                          :artist => 'radiohead',
+                          :title => 'karma police')
+      expect(songs.first.audio_summary.key).to be_nil
+    end
+
 
   end
 

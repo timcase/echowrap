@@ -7,7 +7,7 @@ module Echonest
       mod = Module.new do
         attrs.each do |attribute|
           define_method attribute do
-            @attrs[attribute.to_sym]
+            @attrs[attribute.to_sym] if @attrs
           end
           define_method "#{attribute}?" do
             !!@attrs[attribute.to_sym]
@@ -23,7 +23,7 @@ module Echonest
     def ==(other)
       super || attr_equal(:id, other) || attrs_equal(other)
     end
-    
+
     # Initializes a new object
     #
     # @param attrs [Hash]
@@ -50,7 +50,7 @@ module Echonest
     end
 
   protected
-    
+
     # @param attr [Symbol]
     # @param other [Echonest::Base]
     # @return [Boolean]
