@@ -13,7 +13,7 @@ module Echonest
     def blogs
       @blogs ||= map_collection(Echonest::Blog, :blogs)
     end
-    
+
     # @return [Echonest::DocCounts]
     def doc_counts
       @doc_counts ||= Echonest::DocCounts.new(@attrs[:doc_counts])
@@ -63,11 +63,11 @@ module Echonest
     def video
       @video ||= map_collection(Echonest::Video, :video)
     end
-    
+
     # @return [Array]
     def years_active
       @years_active ||= map_collection(Echonest::YearsActive, :years_active)
     end
-    
+
   end
 end

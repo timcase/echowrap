@@ -2,8 +2,8 @@ require 'echonest/base'
 
 module Echonest
     class Song < Echonest::Base
-      attr_reader :artist_id, :artist_familiarity, :artist_hotttnesss, :artist_name, 
-                  :attributes, :id, :message, :score, :song_currency, :song_discovery, 
+      attr_reader :artist_id, :artist_familiarity, :artist_hotttnesss, :artist_name,
+                  :attributes, :id, :message, :score, :song_currency, :song_discovery,
                   :song_hotttnesss, :song_type, :title
 
       # @return [Echonest::AudioSummary]
