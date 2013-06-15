@@ -19,6 +19,7 @@ module Echonest
       :request => {
         :open_timeout => 5,
         :timeout => 10,
+        :params_encoder => Faraday::FlatParamsEncoder
       },
       :ssl => {
         :verify => false
