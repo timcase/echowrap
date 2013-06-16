@@ -12,6 +12,14 @@ RSpec.configure do |config|
   end
 end
 
+def new_test_client
+  client = Echonest::Client.new(:api_key => "AK")
+  #Param encoder is being set here because webmock expects params encodeded a certain way
+  #Normally, you won't set this option, it's already configured for Echonest in lib/echonest/default.rb
+  client.connection_options[:request][:params_encoder] = Faraday::NestedParamsEncoder
+  client
+end
+
 def a_get(path, add_api_key = true)
   a_request(:get, Echonest::Default::ENDPOINT + path + api_key(add_api_key))
 end

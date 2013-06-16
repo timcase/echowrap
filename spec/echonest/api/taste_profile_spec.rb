@@ -3,7 +3,7 @@ require 'helper'
 describe Echonest::API::TasteProfile do
 
   before do
-    @client = Echonest::Client.new(:api_key => "AK")
+    @client = new_test_client
   end
 
   describe "#taste_profile_create" do

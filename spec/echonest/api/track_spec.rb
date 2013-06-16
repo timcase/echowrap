@@ -2,7 +2,7 @@ require 'helper'
 
 describe Echonest::API::Track do
   before do
-    @client = Echonest::Client.new(:api_key => "AK")
+    @client = new_test_client
   end
 
   describe "#track_upload" do
