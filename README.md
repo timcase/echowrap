@@ -69,7 +69,7 @@ Echonest.song_search(artist: 'Daft Punk')
 [register]: http://developer.echonest.com/account/register
 
 ## Usage
-See Usage page for a complete listing of the api methods
+See [Usage page](https://github.com/timcase/echonest/wiki) for a complete listing of the api methods
 
 ## Tests
 An Rspec test suite is available to ensure API functionality:
