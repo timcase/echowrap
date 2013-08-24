@@ -11,7 +11,7 @@ require 'echonest/error/too_many_requests'
 require 'echonest/error/unauthorized'
 require 'echonest/error/unprocessable_entity'
 
-module Echonest
+module Echowrap
   module Response
     class RaiseError < Faraday::Response::Middleware
 

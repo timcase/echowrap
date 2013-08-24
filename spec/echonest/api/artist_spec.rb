@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Echonest::API::Artist do
+describe Echowrap::API::Artist do
 
   before do
     @client = new_test_client
@@ -97,7 +97,7 @@ describe Echonest::API::Artist do
 
     it "returns familiarity" do
       familiarity = @client.artist_familiarity(:id => 'ARH6W4X1187B99274F')
-      expect(familiarity).to be_an Echonest::Familiarity
+      expect(familiarity).to be_an Echowrap::Familiarity
       expect(familiarity.id).to eq 'ARH6W4X1187B99274F'
     end
   end
@@ -119,7 +119,7 @@ describe Echonest::API::Artist do
 
     it "returns hotttnesss" do
       hotttnesss = @client.artist_hotttnesss(:id => 'ARH6W4X1187B99274F')
-      expect(hotttnesss).to be_an Echonest::Hotttnesss
+      expect(hotttnesss).to be_an Echowrap::Hotttnesss
       expect(hotttnesss.id).to eq 'ARH6W4X1187B99274F'
     end
   end
@@ -284,7 +284,7 @@ describe Echonest::API::Artist do
                                           'video',
                                           'years_active',
                                           'id:musicbrainz'])
-      expect(artist).to be_a Echonest::Artist
+      expect(artist).to be_a Echowrap::Artist
       expect(artist.id).to eq 'ARH6W4X1187B99274F'
     end
 
@@ -347,7 +347,7 @@ describe Echonest::API::Artist do
                                            'video',
                                            'years_active',
                                            'id:musicbrainz'])
-       expect(artist.doc_counts).to be_an Echonest::DocCounts
+       expect(artist.doc_counts).to be_an Echowrap::DocCounts
        expect(artist.doc_counts.songs).to eq 333
      end
 
@@ -431,7 +431,7 @@ describe Echonest::API::Artist do
                                            'video',
                                            'years_active',
                                            'id:musicbrainz'])
-       expect(artist.location).to be_an Echonest::Location
+       expect(artist.location).to be_an Echowrap::Location
        expect(artist.location.location).to eq 'Abingdon, England, GB'
      end
 
@@ -537,7 +537,7 @@ describe Echonest::API::Artist do
                                            'video',
                                            'years_active',
                                            'id:musicbrainz'])
-       expect(artist.urls).to be_an Echonest::Urls
+       expect(artist.urls).to be_an Echowrap::Urls
        expect(artist.urls.official_url).to eq 'http://radiohead.com'
      end
 
@@ -843,7 +843,7 @@ describe Echonest::API::Artist do
     it "returns an artist" do
       artist = @client.artist_twitter(:results => 1,
                           :name => 'radiohead')
-      expect(artist).to be_an Echonest::Artist
+      expect(artist).to be_an Echowrap::Artist
       expect(artist.twitter).to eq "radiohead"
     end
 
@@ -870,7 +870,7 @@ describe Echonest::API::Artist do
     it "returns urls" do
       urls = @client.artist_urls(
                           :name => 'radiohead')
-      expect(urls).to be_an Echonest::Urls
+      expect(urls).to be_an Echowrap::Urls
       expect(urls.lastfm_url).to eq "http://www.last.fm/music/Radiohead"
     end
 

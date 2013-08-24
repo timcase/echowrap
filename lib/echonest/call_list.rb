@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-  class CallList < Echonest::Base
+module Echowrap
+  class CallList < Echowrap::Base
     attr_reader :action, :time
 
   end

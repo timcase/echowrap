@@ -1,48 +1,48 @@
 require 'helper'
 
-describe Echonest::Base do
+describe Echowrap::Base do
 
   #context "identity map enabled" do
     #before do
-      #Echonest.identity_map = Echonest::IdentityMap
-      #object = Echonest::Base.new(:id => 1)
-      #@base = Echonest::Base.store(object)
+      #Echowrap.identity_map = Echowrap::IdentityMap
+      #object = Echowrap::Base.new(:id => 1)
+      #@base = Echowrap::Base.store(object)
     #end
 
     #after do
-      #Echonest.identity_map = false
+      #Echowrap.identity_map = false
     #end
 
     #describe ".identity_map" do
       #it "returns an instance of the identity map" do
-        #expect(Echonest::Base.identity_map).to be_a Echonest::IdentityMap
+        #expect(Echowrap::Base.identity_map).to be_a Echowrap::IdentityMap
       #end
     #end
 
     #describe ".fetch" do
       #it "returns existing objects" do
-        #expect(Echonest::Base.fetch(:id => 1)).to be
+        #expect(Echowrap::Base.fetch(:id => 1)).to be
       #end
 
       #it "raises an error on objects that don't exist" do
-        #expect{Echonest::Base.fetch(:id => 6)}.to raise_error Echonest::Error::IdentityMapKeyError
+        #expect{Echowrap::Base.fetch(:id => 6)}.to raise_error Echowrap::Error::IdentityMapKeyError
       #end
     #end
 
     #describe ".store" do
-      #it "stores Echonest::Base objects" do
-        #object = Echonest::Base.new(:id => 4)
-        #expect(Echonest::Base.store(object)).to be_a Echonest::Base
+      #it "stores Echowrap::Base objects" do
+        #object = Echowrap::Base.new(:id => 4)
+        #expect(Echowrap::Base.store(object)).to be_a Echowrap::Base
       #end
     #end
 
     #describe ".fetch_or_new" do
       #it "returns existing objects" do
-        #expect(Echonest::Base.fetch_or_new(:id => 1)).to be
+        #expect(Echowrap::Base.fetch_or_new(:id => 1)).to be
       #end
       #it "creates new objects and stores them" do
-        #expect(Echonest::Base.fetch_or_new(:id => 2)).to be
-        #expect(Echonest::Base.fetch(:id => 2)).to be
+        #expect(Echowrap::Base.fetch_or_new(:id => 2)).to be
+        #expect(Echowrap::Base.fetch(:id => 2)).to be
       #end
     #end
 
@@ -68,7 +68,7 @@ describe Echonest::Base do
 
     #describe "identical objects" do
       #it "have the same object_id" do
-        #expect(@base.object_id).to eq Echonest::Base.fetch(:id => 1).object_id
+        #expect(@base.object_id).to eq Echowrap::Base.fetch(:id => 1).object_id
       #end
     #end
 
@@ -77,42 +77,42 @@ describe Echonest::Base do
   #context "identity map disabled" do
 
     #before(:all) do
-      #Echonest.identity_map = false
+      #Echowrap.identity_map = false
     #end
 
     #after(:all) do
-      #Echonest.identity_map = Echonest::IdentityMap
+      #Echowrap.identity_map = Echowrap::IdentityMap
     #end
 
     #describe ".identity_map" do
       #it "returns nil" do
-        #expect(Echonest::Base.identity_map).to be_nil
+        #expect(Echowrap::Base.identity_map).to be_nil
       #end
     #end
 
     #describe ".fetch" do
       #it "returns nil" do
-        #expect(Echonest::Base.fetch(:id => 1)).to be_nil
+        #expect(Echowrap::Base.fetch(:id => 1)).to be_nil
       #end
     #end
 
     #describe ".store" do
       #it "returns an instance of the object" do
-        #expect(Echonest::Base.store(Echonest::Base.new(:id => 1))).to be_a Echonest::Base
+        #expect(Echowrap::Base.store(Echowrap::Base.new(:id => 1))).to be_a Echowrap::Base
       #end
     #end
 
     #describe ".fetch_or_new" do
       #it "creates new objects" do
-        #expect(Echonest::Base.fetch_or_new(:id => 2)).to be
-        #expect(Echonest.identity_map).to be_false
+        #expect(Echowrap::Base.fetch_or_new(:id => 2)).to be
+        #expect(Echowrap.identity_map).to be_false
       #end
     #end
   #end
 
   #describe '#attrs' do
     #it 'returns a hash of attributes' do
-      #expect(Echonest::Base.new(:id => 1).attrs).to eq({:id => 1})
+      #expect(Echowrap::Base.new(:id => 1).attrs).to eq({:id => 1})
     #end
   #end
 

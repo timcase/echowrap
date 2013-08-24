@@ -1,9 +1,9 @@
 require 'echonest/error/client_error'
 
-module Echonest
+module Echowrap
   class Error
-    # Raised when Echonest returns the HTTP status code 406
-    class NotAcceptable < Echonest::Error::ClientError
+    # Raised when Echowrap returns the HTTP status code 406
+    class NotAcceptable < Echowrap::Error::ClientError
       HTTP_STATUS_CODE = 406
     end
   end

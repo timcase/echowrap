@@ -1,9 +1,9 @@
 require 'echonest/error/client_error'
 
-module Echonest
+module Echowrap
   class Error
-    # Raised when Echonest returns the HTTP status code 403
-    class Forbidden < Echonest::Error::ClientError
+    # Raised when Echowrap returns the HTTP status code 403
+    class Forbidden < Echowrap::Error::ClientError
       HTTP_STATUS_CODE = 403
     end
   end

@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-  class License < Echonest::Base
+module Echowrap
+  class License < Echowrap::Base
     attr_reader :attribution, :type, :url
 
   end

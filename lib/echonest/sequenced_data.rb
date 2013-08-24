@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-    class SequencedData < Echonest::Base
+module Echowrap
+    class SequencedData < Echowrap::Base
       attr_reader :start, :duration, :confidence
 
       def id

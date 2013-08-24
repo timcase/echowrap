@@ -1,6 +1,6 @@
 require 'echonest/error'
 
-module Echonest
+module Echowrap
   class Error
     class ConfigurationError < ::ArgumentError
     end

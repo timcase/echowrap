@@ -1,11 +1,11 @@
 require 'echonest/error/server_error'
 
-module Echonest
+module Echowrap
   class Error
-    # Raised when Echonest returns the HTTP status code 504
-    class GatewayTimeout < Echonest::Error::ServerError
+    # Raised when Echowrap returns the HTTP status code 504
+    class GatewayTimeout < Echowrap::Error::ServerError
       HTTP_STATUS_CODE = 504
-      MESSAGE = "The Echonest servers are up, but the request couldn't be serviced due to some failure within our stack. Try again later."
+      MESSAGE = "The Echowrap servers are up, but the request couldn't be serviced due to some failure within our stack. Try again later."
     end
   end
 end

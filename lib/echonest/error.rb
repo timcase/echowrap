@@ -1,5 +1,5 @@
-module Echonest
-  # Custom error class for rescuing from all Echonest errors
+module Echowrap
+  # Custom error class for rescuing from all Echowrap errors
   class Error < StandardError
     attr_reader :rate_limit, :wrapped_exception
 
@@ -17,9 +17,9 @@ module Echonest
     #
     # @param exception [Exception, String]
     # @param response_headers [Hash]
-    # @return [Echonest::Error]
+    # @return [Echowrap::Error]
     def initialize(exception=$!, response_headers={})
-      @rate_limit = Echonest::RateLimit.new(response_headers)
+      @rate_limit = Echowrap::RateLimit.new(response_headers)
       @wrapped_exception = exception
       exception.respond_to?(:backtrace) ? super(exception.message) : super(exception.to_s)
     end

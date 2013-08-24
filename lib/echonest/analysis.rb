@@ -1,14 +1,14 @@
 require 'echonest/base'
 
-module Echonest
-  class Analysis < Echonest::Base
+module Echowrap
+  class Analysis < Echowrap::Base
 
     def bars
-     @bars ||= map_collection(Echonest::Bar, :bars)
+     @bars ||= map_collection(Echowrap::Bar, :bars)
     end
 
     def beats
-      @beats ||= map_collection(Echonest::Beat, :beats)
+      @beats ||= map_collection(Echowrap::Beat, :beats)
     end
 
     def id
@@ -16,23 +16,23 @@ module Echonest
     end
 
     def meta
-      @meta ||= Echonest::Meta.new(@attrs[:meta])
+      @meta ||= Echowrap::Meta.new(@attrs[:meta])
     end
 
     def sections
-      @sections ||= map_collection(Echonest::Section, :sections)
+      @sections ||= map_collection(Echowrap::Section, :sections)
     end
 
     def segments
-      @segments ||= map_collection(Echonest::Segment, :segments)
+      @segments ||= map_collection(Echowrap::Segment, :segments)
     end
 
     def tatums
-      @tatums ||= map_collection(Echonest::Tatum, :tatums)
+      @tatums ||= map_collection(Echowrap::Tatum, :tatums)
     end
 
     def track
-      @track ||= Echonest::Track.new(@attrs[:track])
+      @track ||= Echowrap::Track.new(@attrs[:track])
     end
 
   end

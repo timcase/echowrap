@@ -1,4 +1,4 @@
-module Echonest
-    class Beat < Echonest::SequencedData
+module Echowrap
+    class Beat < Echowrap::SequencedData
     end
 end

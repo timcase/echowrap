@@ -1,12 +1,12 @@
 require 'echonest/base'
 
-module Echonest
-  class Image < Echonest::Base
+module Echowrap
+  class Image < Echowrap::Base
     attr_reader :url
 
-    # @return [Echonest::License]
+    # @return [Echowrap::License]
     def license
-      @license ||= Echonest::License.new(@attrs[:license])
+      @license ||= Echowrap::License.new(@attrs[:license])
     end
 
   end

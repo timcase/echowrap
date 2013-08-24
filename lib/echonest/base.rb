@@ -1,4 +1,4 @@
-module Echonest
+module Echowrap
   class Base
     # Define methods that retrieve the value from an initialized instance variable Hash, using the attribute as a key
     #
@@ -21,7 +21,7 @@ module Echonest
       include mod
     end
 
-    # @param other [Echonest::Base]
+    # @param other [Echowrap::Base]
     # @return [Boolean]
     def ==(other)
       super || attr_equal(:id, other) || attrs_equal(other)
@@ -30,7 +30,7 @@ module Echonest
     # Initializes a new object
     #
     # @param attrs [Hash]
-    # @return [Echonest::Base]
+    # @return [Echowrap::Base]
     def initialize(attrs={})
       @attrs = attrs
     end
@@ -46,7 +46,7 @@ module Echonest
     # Update the attributes of an object
     #
     # @param attrs [Hash]
-    # @return [Echonest::Base]
+    # @return [Echowrap::Base]
     def update(attrs)
       @attrs.update(attrs)
       self
@@ -63,13 +63,13 @@ module Echonest
   protected
 
     # @param attr [Symbol]
-    # @param other [Echonest::Base]
+    # @param other [Echowrap::Base]
     # @return [Boolean]
     def attr_equal(attr, other)
       self.class == other.class && !other.send(attr).nil? && send(attr) == other.send(attr)
     end
 
-    # @param other [Echonest::Base]
+    # @param other [Echowrap::Base]
     # @return [Boolean]
     def attrs_equal(other)
       self.class == other.class && !other.attrs.empty? && attrs == other.attrs

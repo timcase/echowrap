@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-    class Track < Echonest::Base
+module Echowrap
+    class Track < Echowrap::Base
       attr_reader :analysis_channels, :analysis_sample_rate, :analyzer_version, :artist,
                   :attributes, :audio_md5, :bitrate, :catalog, :code_version, :codestring,
                   :decoder, :duration, :echoprint_version, :echoprintstring, :end_of_fade_in,
@@ -12,9 +12,9 @@ module Echonest
                   :tempo_confidence, :time_signature, :time_signature_confidence, :title,
                   :window_seconds
 
-      # @return [Echonest::AudioSummary]
+      # @return [Echowrap::AudioSummary]
       def audio_summary
-        @audio_summary ||= Echonest::AudioSummary.new(@attrs[:audio_summary])
+        @audio_summary ||= Echowrap::AudioSummary.new(@attrs[:audio_summary])
       end
 
     end

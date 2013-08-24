@@ -1,72 +1,72 @@
 require 'echonest/base'
 
-module Echonest
-  class Artist < Echonest::Base
+module Echowrap
+  class Artist < Echowrap::Base
     attr_reader :name, :twitter, :id, :familiarity, :hotttnesss
 
     # @return [Array]
     def biographies
-      @biographies ||= map_collection(Echonest::Biography, :biographies)
+      @biographies ||= map_collection(Echowrap::Biography, :biographies)
     end
 
     # @return [Array]
     def blogs
-      @blogs ||= map_collection(Echonest::Blog, :blogs)
+      @blogs ||= map_collection(Echowrap::Blog, :blogs)
     end
 
-    # @return [Echonest::DocCounts]
+    # @return [Echowrap::DocCounts]
     def doc_counts
-      @doc_counts ||= Echonest::DocCounts.new(@attrs[:doc_counts])
+      @doc_counts ||= Echowrap::DocCounts.new(@attrs[:doc_counts])
     end
 
     # @return [Array]
     def images
-      @images ||= map_collection(Echonest::Image, :images)
+      @images ||= map_collection(Echowrap::Image, :images)
     end
 
     # @return [Array]
     def foreign_ids
-      @foreign_ids ||= map_collection(Echonest::ForeignId, :foreign_ids)
+      @foreign_ids ||= map_collection(Echowrap::ForeignId, :foreign_ids)
     end
 
-    # @return [Echonest::Location]
+    # @return [Echowrap::Location]
     def location
-      @location ||= Echonest::Location.new(@attrs[:artist_location])
+      @location ||= Echowrap::Location.new(@attrs[:artist_location])
     end
 
     # @return [Array]
     def news
-      @news ||= map_collection(Echonest::NewsArticle, :news)
+      @news ||= map_collection(Echowrap::NewsArticle, :news)
     end
 
     # @return [Array]
     def reviews
-      @reviews ||= map_collection(Echonest::Review, :reviews)
+      @reviews ||= map_collection(Echowrap::Review, :reviews)
     end
 
     # @return [Array]
     def songs
-      @songs ||= map_collection(Echonest::Song, :songs)
+      @songs ||= map_collection(Echowrap::Song, :songs)
     end
 
     # @return [Array]
     def terms
-      @terms ||= map_collection(Echonest::Term, :terms)
+      @terms ||= map_collection(Echowrap::Term, :terms)
     end
 
-    # @return [Echonest::Urls]
+    # @return [Echowrap::Urls]
     def urls
-      @urls ||= Echonest::Urls.new(@attrs[:urls])
+      @urls ||= Echowrap::Urls.new(@attrs[:urls])
     end
 
     # @return [Array]
     def video
-      @video ||= map_collection(Echonest::Video, :video)
+      @video ||= map_collection(Echowrap::Video, :video)
     end
 
     # @return [Array]
     def years_active
-      @years_active ||= map_collection(Echonest::YearsActive, :years_active)
+      @years_active ||= map_collection(Echowrap::YearsActive, :years_active)
     end
 
   end

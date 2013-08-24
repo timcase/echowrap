@@ -1,11 +1,11 @@
 require 'echonest/error/server_error'
 
-module Echonest
+module Echowrap
   class Error
-    # Raised when Echonest returns the HTTP status code 503
-    class ServiceUnavailable < Echonest::Error::ServerError
+    # Raised when Echowrap returns the HTTP status code 503
+    class ServiceUnavailable < Echowrap::Error::ServerError
       HTTP_STATUS_CODE = 503
-      MESSAGE = "(__-){ Echonest is over capacity."
+      MESSAGE = "(__-){ Echowrap is over capacity."
     end
   end
 end

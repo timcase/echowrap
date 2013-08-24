@@ -1,4 +1,4 @@
-module Echonest
-    class Tatum < Echonest::SequencedData
+module Echowrap
+    class Tatum < Echowrap::SequencedData
     end
 end

@@ -2,7 +2,7 @@ require 'echonest/default'
 require 'echonest/error/configuration_error'
 require 'forwardable'
 
-module Echonest
+module Echowrap
   module Configurable
     extend Forwardable
     attr_writer :api_key, :consumer_key, :shared_secret
@@ -24,7 +24,7 @@ module Echonest
 
     # Convenience method to allow configuration options to be set in a block
     #
-    # @raise [Echonest::Error::ConfigurationError] Error is raised when supplied
+    # @raise [Echowrap::Error::ConfigurationError] Error is raised when supplied
     #   echonest credentials are not a String or Symbol.
     def configure
       yield self
@@ -38,8 +38,8 @@ module Echonest
     end
 
     def reset!
-      Echonest::Configurable.keys.each do |key|
-        instance_variable_set(:"@#{key}", Echonest::Default.options[key])
+      Echowrap::Configurable.keys.each do |key|
+        instance_variable_set(:"@#{key}", Echowrap::Default.options[key])
       end
       self
     end
@@ -62,13 +62,13 @@ module Echonest
 
     # @return [Hash]
     def options
-      Hash[Echonest::Configurable.keys.map{|key| [key, instance_variable_get(:"@#{key}")]}]
+      Hash[Echowrap::Configurable.keys.map{|key| [key, instance_variable_get(:"@#{key}")]}]
     end
 
     # Ensures that all credentials set during configuration are of a
     # valid type. Valid types are String and Symbol.
     #
-    # @raise [Echonest::Error::ConfigurationError] Error is raised when
+    # @raise [Echowrap::Error::ConfigurationError] Error is raised when
     #   supplied echonest credentials are not a String or Symbol.
     def validate_credential_type!
       credentials.each do |credential, value|

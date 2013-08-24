@@ -1,9 +1,9 @@
 require 'echonest/api/utils'
 
-module Echonest
+module Echowrap
   module API
     module Playlist
-      include Echonest::API::Utils
+      include Echowrap::API::Utils
 
       # Returns a basic playlist. A basic playlist is generated once from an initial set of parameters, and returned as an ordered list of songs. Basic playlist functionality is supported, see the static and dynamic playlist APIs for advanced contextual and personalized playlisting.
       # Some properties of a basic playlist:
@@ -12,7 +12,7 @@ module Echonest
       # A number of different algorithms can be used to select songs for the playlist. These are specified with the type parameter.
       # @see http://developer.echonest.com/docs/v4/playlist.html#basic
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @return [Array] Array of songs.
       # @param options [Hash] A customizable set of options.
       # @option options [String] :type The type of the playlist to be generated. Not required, must be one of ['artist-radio', 'song-radio', 'genre-radio']
@@ -25,11 +25,11 @@ module Echonest
       # @option options [String] :bucket Specifies which extra information should be returned in the playlist. Not require, may use multiple, must be one of ['id:catalog-name', 'tracks'].  When specifying idspace buckets (those starting with "id:") the results will be returned in a "foreign_ids" key/element. See Project Rosetta Stone for more information on ID spaces. Example: "tracks".
       # @option options [String] :limit If 'true', limit the results to any of the given rosetta id space. Must be on of ['true', 'false'] with 'false' as the default. If limit is set to anything but false, at least one idspace must also be provided in the bucket parameter.
       # @option options [String] :dmca If true or 'styleb' the playlist delivered will meet the DMCA rules. When the DMCA parameter is set to true, the playlist will conform to the following rules: No more than 2 songs in a row from the same album, no more than 3 songs from an album in a 3 hour period, no more than 3 different songs in a row by the same artist, no more than 4 songs by the same artist in a 3 hour period.  Skipped songs are not considered to have been played for DMCA conformance purposes. If dmca is set to 'styleb', skipped songs are considered to have been played for DMCA purposes.
-      # @return [Array<Echonest::Song>]
+      # @return [Array<Echowrap::Song>]
       # @example Return an array of songs with artist 'Daft Punk'
-      #   Echonest.playlist_basic(:artist => "Daft Punk")
+      #   Echowrap.playlist_basic(:artist => "Daft Punk")
       def playlist_basic(options={})
-        objects_from_response(Echonest::Song, :get, '/api/v4/playlist/basic', :songs, options)
+        objects_from_response(Echowrap::Song, :get, '/api/v4/playlist/basic', :songs, options)
       end
 
       # Returns a static playlist. A static playlist is generated once from an initial set of parameters, and returned as an ordered list of songs.
@@ -39,7 +39,7 @@ module Echonest
       # A number of different algorithms can be used to select songs for the playlist. These are specified with the type parameter.
       # @see http://developer.echonest.com/docs/v4/playlist.html#static
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @return [Array] Array of songs.
       # @param options [Hash] A customizable set of options.
       # @option options [String] :type The type of the playlist to be generated. Not required, must be one of ['artist', 'artist-radio', 'artist-description', 'song-radio', 'catalog', 'catalog-radio', 'genre-radio'], 'artist' is default.
@@ -92,11 +92,11 @@ module Echonest
       # @option options [String] :sort Indicates how the songs results should be ordered. Must be one of ['tempo-asc', 'duration-asc', 'loudness-asc', 'speechiness-asc', 'liveness-asc', 'artist_familiarity-asc', 'artist_hotttnesss-asc', 'artist_start_year-asc', 'artist_start_year-desc', 'artist_end_year-asc', 'artist_end_year-desc', 'song_hotttness-asc', 'latitude-asc', 'longitude-asc', 'mode-asc', 'key-asc', 'tempo-desc', 'duration-desc', 'loudness-desc', 'liveness-desc', 'speechiness-desc', 'artist_familiarity-desc', 'artist_hotttnesss-desc', 'song_hotttnesss-desc', 'latitude-desc', 'longitude-desc', 'mode-desc', 'key-desc', 'energy-asc', 'energy-desc', 'danceability-asc', 'danceability-desc'].
       # @option options [String] :limit If 'true', limit the results to any of the given rosetta id space. Must be on of ['true', 'false'] with 'false' as the default. If limit is set to anything but false, at least one idspace must also be provided in the bucket parameter.
       # @option options [String] :dmca If true or 'styleb' the playlist delivered will meet the DMCA rules. When the DMCA parameter is set to true, the playlist will conform to the following rules: No more than 2 songs in a row from the same album, no more than 3 songs from an album in a 3 hour period, no more than 3 different songs in a row by the same artist, no more than 4 songs by the same artist in a 3 hour period.  Skipped songs are not considered to have been played for DMCA conformance purposes. If dmca is set to 'styleb', skipped songs are considered to have been played for DMCA purposes.
-      # @return [Array<Echonest::Song>
+      # @return [Array<Echowrap::Song>
       # @example Return an array of songs with artist 'Daft Punk'
-      #   Echonest.playlist_static(:artist => "Daft Punk")
+      #   Echowrap.playlist_static(:artist => "Daft Punk")
       def playlist_static(options={})
-        objects_from_response(Echonest::Song, :get, '/api/v4/playlist/static', :songs, options)
+        objects_from_response(Echowrap::Song, :get, '/api/v4/playlist/static', :songs, options)
       end
 
       # Creates a new dynamic playlist session. A dynamic playlist is created with an initial set of parameters that define rules for generating the playlist. A session identifier is returned that can be used with other dynamic methods to get new songs, provide feedback or to steer the playlist. Songs in the playlist can be fetched, one at a time, using the dynamic/next method. The playlist is dynamic in that it is adapted dynamically based on the listener's feedback and steering.
@@ -110,57 +110,57 @@ module Echonest
       # The dynamic/create method accepts the same set of parameters as the playlist/static method with the exception of the results parameter.
       # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-create
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
-      # @return [Echonest::Playlist]
+      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @return [Echowrap::Playlist]
       # @param options [Hash] A customizable set of options.
       # @option options [String] :session_catalog The IDs of catalogs that should be updated with session information (plays, skips, ratings,bans, favorites, etc). Multiple session catalogs can be listed and all will be updated with the same information. The session catalogs must have been previously created using the same API key as used in this call. May use muliple up to 5. Example: 'CAKSMUX1321A708AA4'
       #
       # @option
-      # @return [Echonest::Playlist]
+      # @return [Echowrap::Playlist]
       # @example Return a playlist with a session ID
-      #   Echonest.playlist_dynamic_create(:artist => "Daft Punk")
+      #   Echowrap.playlist_dynamic_create(:artist => "Daft Punk")
       def playlist_dynamic_create(options={})
-        object_from_response(Echonest::Playlist, :get, '/api/v4/playlist/dynamic/create', nil, options)
+        object_from_response(Echowrap::Playlist, :get, '/api/v4/playlist/dynamic/create', nil, options)
       end
 
       # Restarts a playlist session. Given the session ID and a new set of playlist parameters, this method restarts the playlist session based upon the new parameters. The session history is maintained. Everything else is reset. This method takes all the same parameters as dynamic/create, plus the session ID. Returns the given session ID.
       # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-restart
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
-      # @return [Echonest::Playlist]
+      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @return [Echowrap::Playlist]
       # @param options [Hash] A customizable set of options.
       # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
       #
       # @option
-      # @return [Echonest::Playlist]
+      # @return [Echowrap::Playlist]
       # @example Return a playlist with a session ID
-      #   Echonest.playlist_dynamic_restart(:session_id => '7bf982d80ed8421c8c94dbd6de565e9d', :artist => "Daft Punk")
+      #   Echowrap.playlist_dynamic_restart(:session_id => '7bf982d80ed8421c8c94dbd6de565e9d', :artist => "Daft Punk")
       def playlist_dynamic_restart(options={})
-        object_from_response(Echonest::Playlist, :get, '/api/v4/playlist/dynamic/restart', nil, options)
+        object_from_response(Echowrap::Playlist, :get, '/api/v4/playlist/dynamic/restart', nil, options)
       end
 
       # Returns the next songs in the playlist. Results includes two lists of songs - one list (called next) contains the next songs to play, the other (called lookahead) contains the lookahead songs (controlled via the lookahead parameter). The next songs returned by this method will be considered to be played starting at the time the call returns. Use the dynamic/feedback method to indicate that the song was skipped or not played.
       # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-restart
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
-      # @return [Echonest::Playlist]
+      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @return [Echowrap::Playlist]
       # @param options [Hash] A customizable set of options.
       # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
       # @option options [Integer] :results The desired number of next songs returned. Maybe be one of [0, 1, 5]. Requesting zero results, when combined with a non-zero lookahead, allows you to retrieve the next 1-5 songs without any assumptions about songs being played. Requesting zero results returns the lookahead only, no 'results' will be returned. No songs are assumed played nor are any added to the history or any associated session catalogs. The playlist is not advanced. Making consecutive dynamic/next calls with zero results will return the exact same set of lookahead tracks. You must provide feedback (via the dynamic/feedback api), to explicitly play and/or skip songs in the playlist in order to advance the playlist when 'results' is set to zero.
       # @option options [Integer] :lookahead Number of lookahead songs to return. Lookahead songs are the next songs that will be returned to be played if no user feedback or steering occurs before the next dynamic/next method call. Not required, may be 0 to 5.
       #
       # @option
-      # @return [Echonest::Playlist]
+      # @return [Echowrap::Playlist]
       # @example Return a playlist with songs and lookaheads
-      #   Echonest.playlist_dynamic_next(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d')
+      #   Echowrap.playlist_dynamic_next(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d')
       def playlist_dynamic_next(options={})
-        object_from_response(Echonest::Playlist, :get, '/api/v4/playlist/dynamic/next', nil, options)
+        object_from_response(Echowrap::Playlist, :get, '/api/v4/playlist/dynamic/next', nil, options)
       end
 
       # Give feedback on the given items (artists or songs) or the last played song. This method allows you to give user feedback such as rating, favoriting, banning of a song or artist. Feedback is applied to the item specified by the given song_id or track_id. If no song_id or track_id is specified, then the feedback is applied to the most recent song returned by dynamic/next. Multiple feedbacks can be given at any time. Specified songs need not be in the session history. This allows the pre-seeding of a session with played tracks, skipped tracks, favorites, ratings and bans.
       # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-feedback
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @return [Boolean]
       # @param options [Hash] A customizable set of options.
       # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
@@ -178,7 +178,7 @@ module Echonest
       # @option
       # @return [Boolean]
       # @example Return boolean with status of response
-      #   Echonest.playlist_dynamic_feedback(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d', :favorite_song => 'SOCZMFK12AC468668F')
+      #   Echowrap.playlist_dynamic_feedback(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d', :favorite_song => 'SOCZMFK12AC468668F')
       def playlist_dynamic_feedback(options={})
         boolean_from_response(:get, '/api/v4/playlist/dynamic/feedback', options)
       end
@@ -187,7 +187,7 @@ module Echonest
       # Steers the playlist based upon the given constraints. Steerings are additive and can be reset with the reset parameter.
       # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-steer
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @return [Boolean]
       # @param options [Hash] A customizable set of options.
       # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
@@ -207,7 +207,7 @@ module Echonest
       # @option
       # @return [Boolean]
       # @example Return boolean with status of response
-      #   Echonest.playlist_dynamic_steer(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d', :min_danceability => 0.4)
+      #   Echowrap.playlist_dynamic_steer(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d', :min_danceability => 0.4)
       def playlist_dynamic_steer(options={})
         boolean_from_response(:get, '/api/v4/playlist/dynamic/steer', options)
       end
@@ -215,23 +215,23 @@ module Echonest
       # Returns information about a dynamic playlist session
       # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-info
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
-      # @return [Echonest::Playlist]
+      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @return [Echowrap::Playlist]
       # @param options [Hash] A customizable set of options.
       # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
       #
       # @option
-      # @return [Echonest::Playlist]
+      # @return [Echowrap::Playlist]
       # @example Return boolean with status of response
-      #   Echonest.playlist_dynamic_info(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d')
+      #   Echowrap.playlist_dynamic_info(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d')
       def playlist_dynamic_info(options={})
-        object_from_response(Echonest::Playlist, :get, '/api/v4/playlist/dynamic/info', nil, options)
+        object_from_response(Echowrap::Playlist, :get, '/api/v4/playlist/dynamic/info', nil, options)
       end
 
       # Deletes a previously created session. A non-commercial API can have, at most 1,000 active playlist sessions.
       # @see http://developer.echonest.com/docs/v4/playlist.html#dynamic-delete
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @return [Boolean]
       # @param options [Hash] A customizable set of options.
       # @option options [String] :session_id ID of session. Required.  Example: '7bf982d80ed8421c8c94dbd6de565e9d'
@@ -239,7 +239,7 @@ module Echonest
       # @option
       # @return [Boolean]
       # @example Return boolean with status of response
-      #   Echonest.playlist_dynamic_delete(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d')
+      #   Echowrap.playlist_dynamic_delete(:session_id => 7bf982d80ed8421c8c94dbd6de565e9d')
       def playlist_dynamic_delete(options={})
         boolean_from_response(:get, '/api/v4/playlist/dynamic/delete', options)
       end

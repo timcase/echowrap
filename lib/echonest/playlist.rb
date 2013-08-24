@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-  class Playlist < Echonest::Base
+module Echowrap
+  class Playlist < Echowrap::Base
     attr_reader :actual_history_length, :api_key, :banned_artist_ids, :banned_song_ids, 
                 :contraints, :favorited_artist_ids, :favorited_song_ids, :favorites_map, 
                 :history, :invalid_artist_ids, :invalid_songs, :playlist_score, :ratings_map, 
@@ -11,37 +11,37 @@ module Echonest
 
     # @return [Array]
     def call_list
-      @call_list ||= map_collection(Echonest::CallList, :call_list)
+      @call_list ||= map_collection(Echowrap::CallList, :call_list)
     end
 
-    # @return [Echonest::CategoryMap]
+    # @return [Echowrap::CategoryMap]
     def category_map
-      @category_map ||= Echonest::CategoryMap.new(@attrs[:category_map])
+      @category_map ||= Echowrap::CategoryMap.new(@attrs[:category_map])
     end
 
     # @return [Array]
     def lookahead
-      @lookahead ||= map_collection(Echonest::Song, :lookahead)
+      @lookahead ||= map_collection(Echowrap::Song, :lookahead)
     end
 
-    # @return [Echonest::Options]
+    # @return [Echowrap::Options]
     def options
-      @options ||= Echonest::Options.new(@attrs[:options])
+      @options ||= Echowrap::Options.new(@attrs[:options])
     end
     
     # @return [Array]
     def rules
-      @rules ||= map_collection(Echonest::Rule, :rules)
+      @rules ||= map_collection(Echowrap::Rule, :rules)
     end
 
-    # @return [Echonest::Seeds]
+    # @return [Echowrap::Seeds]
     def seeds
-      @seeds ||= Echonest::Seeds.new(@attrs[:seeds])
+      @seeds ||= Echowrap::Seeds.new(@attrs[:seeds])
     end
     
     # @return [Array]
     def songs
-      @songs ||= map_collection(Echonest::Song, :songs)
+      @songs ||= map_collection(Echowrap::Song, :songs)
     end     
   end
 end

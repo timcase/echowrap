@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-  class UpdateInfo < Echonest::Base
+module Echowrap
+  class UpdateInfo < Echowrap::Base
     attr_reader :info, :item_id
 
   end

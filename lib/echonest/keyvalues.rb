@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-  class Keyvalues < Echonest::Base
+module Echowrap
+  class Keyvalues < Echowrap::Base
     attr_reader :cat_type, :is_active, :timestamp, :version
     
   end

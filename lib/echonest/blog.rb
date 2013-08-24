@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-  class Blog < Echonest::Base
+module Echowrap
+  class Blog < Echowrap::Base
     attr_reader :date_found, :date_posted, :id, :name, :summary, :url
   end
 end

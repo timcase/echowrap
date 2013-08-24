@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Echonest::API::Oauth do
+describe Echowrap::API::Oauth do
   before do
     @client = new_test_client
   end

@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Echonest::API::Sandbox do
+describe Echowrap::API::Sandbox do
   before do
     @client = new_test_client
   end
@@ -23,7 +23,7 @@ describe Echonest::API::Sandbox do
 
    it "returns a sandbox" do
      sandbox = @client.sandbox_list(:sandbox => "emi_evanescence")
-     expect(sandbox).to be_a Echonest::Sandbox
+     expect(sandbox).to be_a Echowrap::Sandbox
      expect(sandbox.total).to eq 455
    end
 
@@ -43,7 +43,7 @@ describe Echonest::API::Sandbox do
   describe "#sandbox_access" do
 
    before do
-     @client = Echonest::Client.new(:api_key => "AK", :consumer_key => "CK", :shared_secret => "SS")
+     @client = Echowrap::Client.new(:api_key => "AK", :consumer_key => "CK", :shared_secret => "SS")
      stub_get("/api/v4/sandbox/access", false).
      with(:query => hash_including({:sandbox => 'emi_evanescence', :id => '2d2b8d352d6f2bc8297266117116421d'})).
      to_return(:body => fixture("sandbox/access.json"),

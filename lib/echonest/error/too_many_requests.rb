@@ -1,9 +1,9 @@
 require 'echonest/error/client_error'
 
-module Echonest
+module Echowrap
   class Error
-    # Raised when Echonest returns the HTTP status code 429
-    class TooManyRequests < Echonest::Error::ClientError
+    # Raised when Echowrap returns the HTTP status code 429
+    class TooManyRequests < Echowrap::Error::ClientError
       HTTP_STATUS_CODE = 429
     end
     EnhanceYourCalm = TooManyRequests

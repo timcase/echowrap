@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-  class EchonestId < Echonest::Base
+module Echowrap
+  class EchowrapId < Echowrap::Base
     attr_reader :foreign_id, :id
     
   end

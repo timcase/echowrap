@@ -1,11 +1,11 @@
 require 'echonest/error/server_error'
 
-module Echonest
+module Echowrap
   class Error
-    # Raised when Echonest returns the HTTP status code 502
-    class BadGateway < Echonest::Error::ServerError
+    # Raised when Echowrap returns the HTTP status code 502
+    class BadGateway < Echowrap::Error::ServerError
       HTTP_STATUS_CODE = 502
-      MESSAGE = "Echonest is down or being upgraded."
+      MESSAGE = "Echowrap is down or being upgraded."
     end
   end
 end

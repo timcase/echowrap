@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Echonest::API::Song do
+describe Echowrap::API::Song do
 
   before do
     @client = new_test_client
@@ -43,7 +43,7 @@ describe Echonest::API::Song do
       songs = @client.song_search(:results => 1,
                           :artist => 'radiohead',
                           :title => 'karma police')
-      expect(songs.first.audio_summary).to be_an Echonest::AudioSummary
+      expect(songs.first.audio_summary).to be_an Echowrap::AudioSummary
     end
 
     it 'returns nil for any field of audio summary' do
@@ -117,7 +117,7 @@ describe Echonest::API::Song do
                                               'song_type',
                                               'tracks',
                                               'id:7digital-US'])
-      expect(song).to be_a Echonest::Song
+      expect(song).to be_a Echowrap::Song
       expect(song.id).to eq 'SODJXOA1313438FB61'
     end
 
@@ -168,7 +168,7 @@ describe Echonest::API::Song do
                                           'song_type',
                                           'tracks',
                                           'id:7digital-US'])
-      expect(song.artist_location).to be_an Echonest::Location
+      expect(song.artist_location).to be_an Echowrap::Location
       expect(song.artist_location.location).to eq "Gary, IN, US"
     end
 
@@ -185,7 +185,7 @@ describe Echonest::API::Song do
                                           'song_type',
                                           'tracks',
                                           'id:7digital-US'])
-      expect(song.audio_summary).to be_an Echonest::AudioSummary
+      expect(song.audio_summary).to be_an Echowrap::AudioSummary
       expect(song.audio_summary.audio_md5).to eq "77688ec91b91e8cf5e105049a4227be9"
     end
 
@@ -291,7 +291,7 @@ describe Echonest::API::Song do
 
       it "returns a song" do
         song = @client.song_identify(:query => fixture('billie_jean_query.json'))
-        expect(song).to be_a Echonest::Song
+        expect(song).to be_a Echowrap::Song
         expect(song.id).to eq 'SOKHYNL12A8C142FC7'
       end
 
@@ -314,7 +314,7 @@ describe Echonest::API::Song do
 
       it "returns a song" do
         song = @client.song_identify(:code => fixture('billie_jean_fingerprint.txt').read)
-        expect(song).to be_a Echonest::Song
+        expect(song).to be_a Echowrap::Song
         expect(song.id).to eq 'SOKHYNL12A8C142FC7'
       end
 

@@ -1,11 +1,11 @@
 require 'echonest/base'
 
-module Echonest
+module Echowrap
   class RateLimit
     attr_reader :attrs
     alias to_hash attrs
 
-    # @return [Echonest::RateLimit]
+    # @return [Echowrap::RateLimit]
     def initialize(attrs={})
       @attrs = attrs
     end
@@ -37,7 +37,7 @@ module Echonest
     # Update the attributes of a RateLimit
     #
     # @param attrs [Hash]
-    # @return [Echonest::RateLimit]
+    # @return [Echowrap::RateLimit]
     def update(attrs)
       @attrs.update(attrs)
       self

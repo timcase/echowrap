@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Echonest::API::Playlist do
+describe Echowrap::API::Playlist do
   before do
     @client = new_test_client
   end
@@ -89,7 +89,7 @@ describe Echonest::API::Playlist do
 
     it "returns session id" do
       playlist = @client.playlist_dynamic_create(:artist => 'radiohead')
-      expect(playlist).to be_an Echonest::Playlist
+      expect(playlist).to be_an Echowrap::Playlist
       expect(playlist.session_id).to eq "7c88f9c365294bab8534943d735f587c"
     end
 
@@ -115,7 +115,7 @@ describe Echonest::API::Playlist do
 
     it "returns session id" do
       playlist = @client.playlist_dynamic_restart(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :artist => 'radiohead')
-      expect(playlist).to be_an Echonest::Playlist
+      expect(playlist).to be_an Echowrap::Playlist
       expect(playlist.session_id).to eq "a8cddde7afdf4ac09b510aa1c1c50bf9"
     end
 
@@ -141,13 +141,13 @@ describe Echonest::API::Playlist do
 
     it "returns songs" do
       playlist = @client.playlist_dynamic_next(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
-      expect(playlist).to be_an Echonest::Playlist
+      expect(playlist).to be_an Echowrap::Playlist
       expect(playlist.songs.first.id).to eq "SOXIAKX12AF72AC774"
     end
 
     it "returns lookahead" do
       playlist = @client.playlist_dynamic_next(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
-      expect(playlist).to be_an Echonest::Playlist
+      expect(playlist).to be_an Echowrap::Playlist
       expect(playlist.lookahead.first.id).to eq "SOOVSGI12AB017E8ED"
     end
   end
@@ -220,13 +220,13 @@ describe Echonest::API::Playlist do
 
     it "returns category map" do
       playlist = @client.playlist_dynamic_info(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
-      expect(playlist.category_map).to be_an Echonest::CategoryMap
+      expect(playlist.category_map).to be_an Echowrap::CategoryMap
       expect(playlist.category_map.childrens).to eq "any"
     end
 
     it "returns category seeds" do
       playlist = @client.playlist_dynamic_info(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
-      expect(playlist.seeds).to be_an Echonest::Seeds
+      expect(playlist.seeds).to be_an Echowrap::Seeds
       expect(playlist.seeds.artist_ids).to eq ['ARF8HTQ1187B9AE693']
     end
 
@@ -244,7 +244,7 @@ describe Echonest::API::Playlist do
 
     it "returns call list"  do
       playlist = @client.playlist_dynamic_info(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
-      expect(playlist.options).to be_an Echonest::Options
+      expect(playlist.options).to be_an Echowrap::Options
       expect(playlist.options.rank_type).to eq 'relevance'
     end
   end

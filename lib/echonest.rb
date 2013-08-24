@@ -51,15 +51,15 @@ require 'echonest/video'
 require 'echonest/years_active'
 
 
-module Echonest
+module Echowrap
   class << self
-    include Echonest::Configurable
+    include Echowrap::Configurable
 
-    # Delegate to a Echonest::Client
+    # Delegate to a Echowrap::Client
     #
-    # @return [Echonest::Client]
+    # @return [Echowrap::Client]
     def client
-      @client = Echonest::Client.new(options) unless defined?(@client) && @client.hash == options.hash
+      @client = Echowrap::Client.new(options) unless defined?(@client) && @client.hash == options.hash
       @client
     end
 
@@ -75,4 +75,4 @@ module Echonest
   end
 end
 
-Echonest.setup
+Echowrap.setup

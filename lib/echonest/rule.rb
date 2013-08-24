@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-    class Rule < Echonest::Base
+module Echowrap
+    class Rule < Echowrap::Base
       attr_reader :rule
 
     end

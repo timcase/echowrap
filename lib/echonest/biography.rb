@@ -1,12 +1,12 @@
 require 'echonest/base'
 
-module Echonest
-  class Biography < Echonest::Base
+module Echowrap
+  class Biography < Echowrap::Base
     attr_reader :site, :text, :url
 
-    # @return [Echonest::License]
+    # @return [Echowrap::License]
     def license
-      @license ||= Echonest::License.new(@attrs[:license])
+      @license ||= Echowrap::License.new(@attrs[:license])
     end
   end
 end

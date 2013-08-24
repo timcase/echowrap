@@ -1,4 +1,4 @@
-module Echonest
-    class Segment < Echonest::SequencedData
+module Echowrap
+    class Segment < Echowrap::SequencedData
     end
 end

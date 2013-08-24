@@ -1,16 +1,16 @@
 require 'echonest/api/utils'
 
-module Echonest
+module Echowrap
   module API
     module Song
-      include Echonest::API::Utils
+      include Echowrap::API::Utils
 
       # Identifies a song given an Echoprint or Echo Nest Musical Fingerprint hash codes.
       #
       # @see http://developer.echonest.com/docs/v4/song.html
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
-      # @return [Echonest::Track] The identified song.
+      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied api key is not valid.      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Echowrap::Track] The identified song.
       # @param options [Hash] A customizable set of options.
       # @option options [String] :query The JSON query.  Use only with POST.  Example: See "Here is a sample query:" at http://developer.echonest.com/docs/v4/song.html#identify.
       # @option options [String] :code The FP hashcodes for the track.  Use only with GET. Example: See "Identifying Songs with GET at http://developer.echonest.com/docs/v4/song.html#identify."
@@ -22,12 +22,12 @@ module Echonest
       # @option options [String] :version Version of codegen used to generate the code.  Not required.  Example: For ENMFP use 3.15, for Echoprint use 4.12, defaults to 3.15
       # @option options [String] :bucket The type of track data that should be returned. Must be one of ['audio_summary', 'artist_familiarity', 'artist_hotttnesss', 'artist_location', 'song_hotttnesss', 'song_type', 'tracks', 'id:Rosetta-space']. Example: audio_summary.
       # @example Identify via json query file
-      #   Echonest.song_identify(:query => File.new('query.json'))
+      #   Echowrap.song_identify(:query => File.new('query.json'))
       def song_identify(options={})
         if options.key?(:query)
-          objects_from_response(Echonest::Song, :post, '/api/v4/song/identify', :songs, options).first
+          objects_from_response(Echowrap::Song, :post, '/api/v4/song/identify', :songs, options).first
         else
-          objects_from_response(Echonest::Song, :get, '/api/v4/song/identify', :songs, options).first
+          objects_from_response(Echowrap::Song, :get, '/api/v4/song/identify', :songs, options).first
         end
       end
 
@@ -36,23 +36,23 @@ module Echonest
       #
       # @see http://developer.echonest.com/docs/v4/song.html
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.      # @raise [Echonest::Error::Unauthorized] Error raised when supplied user credentials are not valid.
-      # @return [Echonest::Song] The song.
+      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied api key is not valid.      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied user credentials are not valid.
+      # @return [Echowrap::Song] The song.
       # @param options [Hash] A customizable set of options.
       # @option options [String] :id The ID of the song.  Required if track_id is not provided.  Example: 'SOCZMFK12AC468668F'.
       # @option options [String] :track_id The ID of the track. Required if id is not provided.  Example: 'TRTLKZV12E5AC92E11'.
       # @option options [String] :bucket The type of track data that should be returned. Must be one of ['audio_summary', 'artist_familiarity', 'artist_hotttnesss', 'artist_location', 'song_hotttnesss', 'song_type', 'tracks', 'id:Rosetta-space']. Example: audio_summary.
       # @example Profile via id
-      #   Echonest.song_profile(:id => 'SOCZMFK12AC468668F')
+      #   Echowrap.song_profile(:id => 'SOCZMFK12AC468668F')
       def song_profile(options={})
-        objects_from_response(Echonest::Song, :get, '/api/v4/song/profile', :songs, options).first
+        objects_from_response(Echowrap::Song, :get, '/api/v4/song/profile', :songs, options).first
       end
 
       # Search for songs given different query types
       #
       # @see http://developer.echonest.com/docs/v4/song.html
       # @authentication Requires api key
-      # @raise [Echonest::Error::Unauthorized] Error raised when supplied api key is not valid.
+      # @raise [Echowrap::Error::Unauthorized] Error raised when supplied api key is not valid.
       # @return [Array] Array of songs.
       # @param options [Hash] A customizable set of options.
       # @option options [String] :title The title of the song.
@@ -99,11 +99,11 @@ module Echonest
       # @option options [String] :bucket Indicates what data should be returned for each song. If specifying the "tracks" bucket, a bucket with an id space must also be specified. Must be one of ['audio_summary', 'artist_familiarity', 'artist_hotttnesss', 'artist_location', 'song_hotttnesss', 'song_type', 'tracks', 'id:Rosetta-space'].
       # @option options [String] :sort Indicates how the songs results should be ordered. Must be one of ['tempo-asc', 'duration-asc', 'loudness-asc', 'speechiness-asc', 'liveness-asc', 'artist_familiarity-asc', 'artist_hotttnesss-asc', 'artist_start_year-asc', 'artist_start_year-desc', 'artist_end_year-asc', 'artist_end_year-desc', 'song_hotttness-asc', 'latitude-asc', 'longitude-asc', 'mode-asc', 'key-asc', 'tempo-desc', 'duration-desc', 'loudness-desc', 'liveness-desc', 'speechiness-desc', 'artist_familiarity-desc', 'artist_hotttnesss-desc', 'song_hotttnesss-desc', 'latitude-desc', 'longitude-desc', 'mode-desc', 'key-desc', 'energy-asc', 'energy-desc', 'danceability-asc', 'danceability-desc'].
       # @option options [String] :limit If 'true', limit the results to any of the given idspaces or catalogs. Must be on of ['true', 'false'] with 'false' as the default.
-      # @return [Array<Echonest::Song>]
+      # @return [Array<Echowrap::Song>]
       # @example Return an array of songs with artist 'Daft Punk'
-      #   Echonest.song_search(:artist => "Daft Punk")
+      #   Echowrap.song_search(:artist => "Daft Punk")
       def song_search(options={})
-        objects_from_response(Echonest::Song, :get, '/api/v4/song/search', :songs, options)
+        objects_from_response(Echowrap::Song, :get, '/api/v4/song/search', :songs, options)
       end
 
     end

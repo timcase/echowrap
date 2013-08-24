@@ -1,9 +1,9 @@
 require 'echonest/error/server_error'
 
-module Echonest
+module Echowrap
   class Error
-    # Raised when Echonest returns the HTTP status code 500
-    class InternalServerError < Echonest::Error::ServerError
+    # Raised when Echowrap returns the HTTP status code 500
+    class InternalServerError < Echowrap::Error::ServerError
       HTTP_STATUS_CODE = 500
       MESSAGE = "Something is technically wrong."
     end

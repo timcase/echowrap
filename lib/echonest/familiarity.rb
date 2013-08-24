@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-  class Familiarity < Echonest::Base
+module Echowrap
+  class Familiarity < Echowrap::Base
     attr_reader :familiarity, :id, :name
   end
 end

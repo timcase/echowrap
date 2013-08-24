@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-    class Reference < Echonest::Base
+module Echowrap
+    class Reference < Echowrap::Base
       attr_reader :artist_id, :artist_name
     end
 end

@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-  class DocCounts < Echonest::Base
+module Echowrap
+  class DocCounts < Echowrap::Base
     attr_reader :audio, :biographies, :blogs, :images, :news, :reviews, :songs, :video
 
   end

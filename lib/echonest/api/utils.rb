@@ -1,5 +1,5 @@
 
-module Echonest
+module Echowrap
   module API
     module Utils
 

@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-  class ForeignId < Echonest::Base
+module Echowrap
+  class ForeignId < Echowrap::Base
     attr_reader :catalog, :foreign_id
 
   end

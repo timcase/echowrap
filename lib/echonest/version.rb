@@ -1,9 +1,9 @@
-module Echonest
+module Echowrap
   class Version
-    MAJOR = 0 unless defined? Echonest::Version::MAJOR
-    MINOR = 0 unless defined? Echonest::Version::MINOR
-    PATCH = 1 unless defined? Echonest::Version::PATCH
-    PRE = nil unless defined? Echonest::Version::PRE
+    MAJOR = 0 unless defined? Echowrap::Version::MAJOR
+    MINOR = 0 unless defined? Echowrap::Version::MINOR
+    PATCH = 1 unless defined? Echowrap::Version::PATCH
+    PRE = nil unless defined? Echowrap::Version::PRE
 
     class << self
 

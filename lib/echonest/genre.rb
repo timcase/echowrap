@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-  class Genre < Echonest::Base
+module Echowrap
+  class Genre < Echowrap::Base
     attr_reader :name
     
   end

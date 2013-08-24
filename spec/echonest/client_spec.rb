@@ -1,29 +1,29 @@
 
 require 'helper'
 
-describe Echonest::Client do
+describe Echowrap::Client do
 
   subject do
-    Echonest::Client.new(:api_key => "AK", :consumer_key => "CK", :shared_secret => "SS")
+    Echowrap::Client.new(:api_key => "AK", :consumer_key => "CK", :shared_secret => "SS")
   end
 
   context "with module configuration" do
 
     before do
-      Echonest.configure do |config|
-        Echonest::Configurable.keys.each do |key|
+      Echowrap.configure do |config|
+        Echowrap::Configurable.keys.each do |key|
           config.send("#{key}=", key)
         end
       end
     end
 
     after do
-      Echonest.reset!
+      Echowrap.reset!
     end
 
     it "inherits the module configuration" do
-      client = Echonest::Client.new
-      Echonest::Configurable.keys.each do |key|
+      client = Echowrap::Client.new
+      Echowrap::Configurable.keys.each do |key|
         expect(client.instance_variable_get(:"@#{key}")).to eq key
       end
     end
@@ -43,8 +43,8 @@ describe Echonest::Client do
 
       context "during initialization" do
         it "overrides the module configuration" do
-          client = Echonest::Client.new(@configuration)
-          Echonest::Configurable.keys.each do |key|
+          client = Echowrap::Client.new(@configuration)
+          Echowrap::Configurable.keys.each do |key|
             expect(client.instance_variable_get(:"@#{key}")).to eq @configuration[key]
           end
         end
@@ -52,13 +52,13 @@ describe Echonest::Client do
 
       context "after initialization" do
         it "overrides the module configuration after initialization" do
-          client = Echonest::Client.new
+          client = Echowrap::Client.new
           client.configure do |config|
             @configuration.each do |key, value|
               config.send("#{key}=", value)
             end
           end
-          Echonest::Configurable.keys.each do |key|
+          Echowrap::Configurable.keys.each do |key|
             expect(client.instance_variable_get(:"@#{key}")).to eq @configuration[key]
           end
         end
@@ -69,10 +69,10 @@ describe Echonest::Client do
 
   # it "does not cache the screen name across clients" do
   #   stub_get("/1.1/account/verify_credentials.json").to_return(:body => fixture("sferik.json"), :headers => {:content_type => "application/json; charset=utf-8"})
-  #   client1 = Echonest::Client.new
+  #   client1 = Echowrap::Client.new
   #   expect(client1.verify_credentials.id).to eq 7505382
   #   stub_get("/1.1/account/verify_credentials.json").to_return(:body => fixture("pengwynn.json"), :headers => {:content_type => "application/json; charset=utf-8"})
-  #   client2 = Echonest::Client.new
+  #   client2 = Echowrap::Client.new
   #   expect(client2.verify_credentials.id).to eq 14100886
   # end
   #
@@ -98,11 +98,11 @@ describe Echonest::Client do
   #
   # describe "#credentials?" do
   #   it "returns true if all credentials are present" do
-  #     client = Echonest::Client.new(:consumer_key => 'CK', :consumer_secret => 'CS', :oauth_token => 'OT', :oauth_token_secret => 'OS')
+  #     client = Echowrap::Client.new(:consumer_key => 'CK', :consumer_secret => 'CS', :oauth_token => 'OT', :oauth_token_secret => 'OS')
   #     expect(client.credentials?).to be_true
   #   end
   #   it "returns false if any credentials are missing" do
-  #     client = Echonest::Client.new(:consumer_key => 'CK', :consumer_secret => 'CS', :oauth_token => 'OT')
+  #     client = Echowrap::Client.new(:consumer_key => 'CK', :consumer_secret => 'CS', :oauth_token => 'OT')
   #     expect(client.credentials?).to be_false
   #   end
   # end
@@ -130,11 +130,11 @@ describe Echonest::Client do
   #   end
   #   it "catches Faraday errors" do
   #     subject.stub!(:connection).and_raise(Faraday::Error::ClientError.new("Oops"))
-  #     expect{subject.send(:request, :get, "/path")}.to raise_error Echonest::Error::ClientError
+  #     expect{subject.send(:request, :get, "/path")}.to raise_error Echowrap::Error::ClientError
   #   end
   #   it "catches MultiJson::DecodeError errors" do
   #     subject.stub!(:connection).and_raise(MultiJson::DecodeError.new("unexpected token", [], "<!DOCTYPE html>"))
-  #     expect{subject.send(:request, :get, "/path")}.to raise_error Echonest::Error::DecodeError
+  #     expect{subject.send(:request, :get, "/path")}.to raise_error Echowrap::Error::DecodeError
   #   end
   # end
 
@@ -153,7 +153,7 @@ describe Echonest::Client do
   #
   # describe "#bearer_auth_header" do
   #   subject do
-  #     Echonest::Client.new(:bearer_token => "BT")
+  #     Echowrap::Client.new(:bearer_token => "BT")
   #   end
   #
   #   it "creates the correct auth headers with supplied bearer_token" do

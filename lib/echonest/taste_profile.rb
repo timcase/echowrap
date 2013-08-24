@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-    class TasteProfile < Echonest::Base
+module Echowrap
+    class TasteProfile < Echowrap::Base
       attr_reader :name, :pending_tickets, :resolved, :score, :ticket, :total, :type 
 
       # @return [String]
@@ -11,17 +11,17 @@ module Echonest
       
       # @return [Array]
       def items
-        @items ||= map_collection(Echonest::Item, :items)
+        @items ||= map_collection(Echowrap::Item, :items)
       end
 
-      # @return [Echonest::Keyvalues]
+      # @return [Echowrap::Keyvalues]
       def keyvalues
-        @keyvalues ||= Echonest::Keyvalues.new(@attrs[:keyvalues])
+        @keyvalues ||= Echowrap::Keyvalues.new(@attrs[:keyvalues])
       end
       
       # @return [Array]
       def predictions
-        @predictions ||= map_collection(Echonest::Prediction, :predictions)
+        @predictions ||= map_collection(Echowrap::Prediction, :predictions)
       end
       
     end

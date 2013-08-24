@@ -11,24 +11,24 @@ require 'echonest/api/track'
 require 'simple_oauth'
 
 
-module Echonest
+module Echowrap
   class Client
-    include Echonest::API::Artist
-    include Echonest::API::Playlist
-    include Echonest::API::Sandbox
-    include Echonest::API::Song
-    include Echonest::API::Oauth
-    include Echonest::API::TasteProfile
-    include Echonest::API::Track
-    include Echonest::Configurable
+    include Echowrap::API::Artist
+    include Echowrap::API::Playlist
+    include Echowrap::API::Sandbox
+    include Echowrap::API::Song
+    include Echowrap::API::Oauth
+    include Echowrap::API::TasteProfile
+    include Echowrap::API::Track
+    include Echowrap::Configurable
 
     # Initializes a new Client object
     #
     # @param options [Hash]
-    # @return [Echonest::Client]
+    # @return [Echowrap::Client]
     def initialize(options={})
-      Echonest::Configurable.keys.each do |key|
-        instance_variable_set(:"@#{key}", options[key] || Echonest.instance_variable_get(:"@#{key}"))
+      Echowrap::Configurable.keys.each do |key|
+        instance_variable_set(:"@#{key}", options[key] || Echowrap.instance_variable_get(:"@#{key}"))
       end
     end
 
@@ -55,9 +55,9 @@ module Echonest
         params = setup_authentication_parameters(method, path, params)
         connection.send(method.to_sym, path, params).env
       rescue Faraday::Error::ClientError
-        raise Echonest::Error::ClientError
+        raise Echowrap::Error::ClientError
       rescue MultiJson::DecodeError
-        raise Echonest::Error::DecodeError
+        raise Echowrap::Error::DecodeError
       end
 
       # Returns a Faraday::Connection object

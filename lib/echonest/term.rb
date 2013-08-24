@@ -1,7 +1,7 @@
 require 'echonest/base'
 
-module Echonest
-    class Term < Echonest::Base
+module Echowrap
+    class Term < Echowrap::Base
       attr_reader :name, :frequency, :weight
 
     end

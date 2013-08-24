@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Echonest::API::TasteProfile do
+describe Echowrap::API::TasteProfile do
 
   before do
     @client = new_test_client
@@ -24,7 +24,7 @@ describe Echonest::API::TasteProfile do
 
     it "returns a taste profile" do
       taste_profile = @client.taste_profile_create(:api_key => 'AK', :name => "Favorite Artists of Paul", :type => 'artist')
-      expect(taste_profile).to be_a Echonest::TasteProfile
+      expect(taste_profile).to be_a Echowrap::TasteProfile
       expect(taste_profile.id).to eq 'CAUWCTB13EBA18ADAE'
     end
   end
@@ -47,7 +47,7 @@ describe Echonest::API::TasteProfile do
 
     it "returns a taste profile" do
       taste_profile = @client.taste_profile_update(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE', :data => fixture('taste_profile/update_request_data.json').read)
-      expect(taste_profile).to be_a Echonest::TasteProfile
+      expect(taste_profile).to be_a Echowrap::TasteProfile
       expect(taste_profile.id).to eq 'd298131d5f189c73bd9a8ff706621443'
     end
   end
@@ -70,7 +70,7 @@ describe Echonest::API::TasteProfile do
 
     it "returns a taste profile" do
       taste_profile = @client.taste_profile_keyvalues(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE')
-      expect(taste_profile).to be_a Echonest::TasteProfile
+      expect(taste_profile).to be_a Echowrap::TasteProfile
       expect(taste_profile.keyvalues.cat_type).to eq 'persona'
     end
   end
@@ -114,7 +114,7 @@ describe Echonest::API::TasteProfile do
 
     it "returns a taste profile" do
       taste_profile = @client.taste_profile_delete(:api_key => 'AK', :id => 'CAZOFXZ13EB0258BD4')
-      expect(taste_profile).to be_a Echonest::TasteProfile
+      expect(taste_profile).to be_a Echowrap::TasteProfile
       expect(taste_profile.id).to eq 'CAOFUDS12BB066268E'
     end
   end
@@ -138,7 +138,7 @@ describe Echonest::API::TasteProfile do
 
     it "returns a taste profile" do
       taste_profile = @client.taste_profile_profile(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE')
-      expect(taste_profile).to be_a Echonest::TasteProfile
+      expect(taste_profile).to be_a Echowrap::TasteProfile
       expect(taste_profile.name).to eq 'top hot song catalog by ID'
     end
   end
@@ -161,7 +161,7 @@ describe Echonest::API::TasteProfile do
 
     it "returns a taste status" do
       taste_profile_status = @client.taste_profile_status(:api_key => 'AK', :ticket => 'e0ba094bbf98cd006283aa7de6780a83')
-      expect(taste_profile_status).to be_a Echonest::Status
+      expect(taste_profile_status).to be_a Echowrap::Status
       expect(taste_profile_status.ticket_status).to eq 'complete'
     end
 
@@ -190,7 +190,7 @@ describe Echonest::API::TasteProfile do
 
     it "returns a taste profile" do
       taste_profile = @client.taste_profile_read(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE')
-      expect(taste_profile).to be_a Echonest::TasteProfile
+      expect(taste_profile).to be_a Echowrap::TasteProfile
       expect(taste_profile.name).to eq 'top hot song catalog by ID'
     end
 
@@ -390,7 +390,7 @@ describe Echonest::API::TasteProfile do
 
     it "returns a taste profile" do
       taste_profile = @client.taste_profile_predict(:api_key => 'AK', :id => 'CAUWCTB13EBA18ADAE', :category => 'adventurousness')
-      expect(taste_profile).to be_a Echonest::TasteProfile
+      expect(taste_profile).to be_a Echowrap::TasteProfile
       expect(taste_profile.name).to eq "Tim's Test Profile"
     end
 

@@ -1,7 +1,7 @@
 require 'faraday'
 require 'multi_json'
 
-module Echonest
+module Echowrap
   module Response
     class ParseJson < Faraday::Response::Middleware
 

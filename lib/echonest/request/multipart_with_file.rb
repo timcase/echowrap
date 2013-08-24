@@ -1,6 +1,6 @@
 require 'faraday'
 
-module Echonest
+module Echowrap
   module Request
     class MultipartWithFile < Faraday::Middleware
       CONTENT_TYPE = 'Content-Type'

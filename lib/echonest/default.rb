@@ -8,13 +8,13 @@ require 'echonest/response/parse_json'
 require 'echonest/response/raise_error'
  require 'echonest/version'
 
-module Echonest
+module Echowrap
   module Default
-    ENDPOINT = 'http://developer.echonest.com' unless defined? Echonest::Default::ENDPOINT
+    ENDPOINT = 'http://developer.echonest.com' unless defined? Echowrap::Default::ENDPOINT
     CONNECTION_OPTIONS = {
       :headers => {
         :accept => 'application/json',
-        :user_agent => "Echonest Ruby Gem #{Echonest::Version}",
+        :user_agent => "Echowrap Ruby Gem #{Echowrap::Version}",
       },
       :request => {
         :open_timeout => 5,
@@ -25,29 +25,29 @@ module Echonest
         :verify => false
       },
     } unless defined? Echnoest::Default::CONNECTION_OPTIONS
-    IDENTITY_MAP = false unless defined? Echonest::Default::IDENTITY_MAP
+    IDENTITY_MAP = false unless defined? Echowrap::Default::IDENTITY_MAP
     MIDDLEWARE = Faraday::RackBuilder.new do |builder|
       # Convert file uploads to Faraday::UploadIO objects
-      builder.use Echonest::Request::MultipartWithFile
+      builder.use Echowrap::Request::MultipartWithFile
       # Checks for files in the payload
       builder.use Faraday::Request::Multipart
       # Convert request params to "www-form-urlencoded"
       builder.use Faraday::Request::UrlEncoded
       # Handle 4xx server responses
-      builder.use Echonest::Response::RaiseError, Echonest::Error::ClientError
+      builder.use Echowrap::Response::RaiseError, Echowrap::Error::ClientError
       # Parse JSON response bodies using MultiJson
-      builder.use Echonest::Response::ParseJson
+      builder.use Echowrap::Response::ParseJson
       # Handle 5xx server responses
-      builder.use Echonest::Response::RaiseError, Echonest::Error::ServerError
+      builder.use Echowrap::Response::RaiseError, Echowrap::Error::ServerError
       # Set Faraday's HTTP adapter
       builder.adapter Faraday.default_adapter
-    end unless defined? Echonest::Default::MIDDLEWARE
+    end unless defined? Echowrap::Default::MIDDLEWARE
 
     class << self
 
       # @return [Hash]
       def options
-        Hash[Echonest::Configurable.keys.map{|key| [key, send(key)]}]
+        Hash[Echowrap::Configurable.keys.map{|key| [key, send(key)]}]
       end
 
       # @return [String]
@@ -65,7 +65,7 @@ module Echonest
         ENV['ECHONEST_SHARED_SECRET']
       end
 
-      # @note This is configurable in case you want to use a Echonest-compatible endpoint.
+      # @note This is configurable in case you want to use a Echowrap-compatible endpoint.
       # @return [String]
       def endpoint
         ENDPOINT

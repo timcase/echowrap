@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Echonest::API::Track do
+describe Echowrap::API::Track do
   before do
     @client = new_test_client
   end
@@ -24,7 +24,7 @@ describe Echonest::API::Track do
 
       it "returns a track" do
         track = @client.track_upload(:url => "http://freedownloads.last.fm/download/494669779/Calgary.mp3")
-        expect(track).to be_a Echonest::Track
+        expect(track).to be_a Echowrap::Track
         expect(track.id).to eq 'TRGOVKX128F7FA5920'
       end
     end
@@ -44,7 +44,7 @@ describe Echonest::API::Track do
 
        it "returns a track" do
          track = @client.track_upload(:track => fixture('technolol-music.mp3'))
-         expect(track).to be_a Echonest::Track
+         expect(track).to be_a Echowrap::Track
          expect(track.id).to eq 'TRGOVKX128F7FA5920'
        end
 
@@ -68,13 +68,13 @@ describe Echonest::API::Track do
 
     it "returns a track" do
       track = @client.track_profile(:id => 'TRTLKZV12E5AC92E11')
-      expect(track).to be_a Echonest::Track
+      expect(track).to be_a Echowrap::Track
       expect(track.id).to eq 'TRTLKZV12E5AC92E11'
     end
 
     it 'returns an audio summary with track' do
       track = @client.track_profile(:id => 'TRTLKZV12E5AC92E11')
-      expect(track.audio_summary).to be_a Echonest::AudioSummary
+      expect(track.audio_summary).to be_a Echowrap::AudioSummary
       expect(track.audio_summary.key).to eq 1
 
     end
@@ -96,14 +96,14 @@ describe Echonest::API::Track do
 
     it "returns an analysis" do
       analysis = @client.track_analysis(:url => 'http://echonest-analysis.s3.amazonaws.com/TR/TREYOVK13C9786E66B/3/full.json?AWSAccessKeyId=AKIAJRDFEY23UEVW42BQ&Expires=1367716357&Signature=dkZ4zsyf2%2BOuICu/veozEN5wWMs')
-      expect(analysis).to be_a Echonest::Analysis
+      expect(analysis).to be_a Echowrap::Analysis
       expect(analysis.id).to eq 1299731141
     end
 
     it 'returns a track as part of the analysis' do
       analysis = @client.track_analysis(:url => 'http://echonest-analysis.s3.amazonaws.com/TR/TREYOVK13C9786E66B/3/full.json?AWSAccessKeyId=AKIAJRDFEY23UEVW42BQ&Expires=1367716357&Signature=dkZ4zsyf2%2BOuICu/veozEN5wWMs')
       track = analysis.track
-      expect(track).to be_a Echonest::Track
+      expect(track).to be_a Echowrap::Track
       expect(track.num_samples).to eq 5372342
     end
 
