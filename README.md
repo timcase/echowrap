@@ -1,4 +1,4 @@
-# The Echonest Ruby Gem
+# The Echowrap Ruby Gem
 [![Echonest](http://echonest.com/static/img/logos/250x200_dk.gif)](http://developer.echonest.com/index.html)
 
 A Ruby interface to the Echonest API. The Echonest API is based on their
@@ -12,6 +12,7 @@ can be found at http://developer.echonest.com/
 * This wrapper supports 100% of the [Echonest API Version 4](http://developer.echonest.com/docs/v4)
 * Data returned from API calls are mapped into Ruby objects
 * Various http clients are supported via [Faraday](https://github.com/lostisland/faraday)
+* Uses Unix philosophy of "do one thing and do it well"
 
 [![Dependency Status](https://gemnasium.com/timcase/echonest.png)](https://gemnasium.com/timcase/echonest)
 [![Build Status](https://travis-ci.org/timcase/echonest.png)](https://travis-ci.org/timcase/echonest)
@@ -24,7 +25,6 @@ This library is [tested against](https://travis-ci.org/timcase/echonest) the fol
 * Ruby 1.9.3 
 * Ruby 2.0
 * JRuby 1.9 mode
-* Rubinius 1.9 mode
 
 ## Gem Dependencies
 Installing this gem also installs the following gems:
@@ -37,7 +37,7 @@ Installing this gem also installs the following gems:
 
 Add this line to your application's Gemfile:
 ```ruby
-    gem 'echonest'
+    gem 'echowrap'
 ```
 And then execute:
 ```shell
@@ -45,7 +45,7 @@ And then execute:
 ```
 Or install it yourself as:
 ```shell
-    $ gem install echonest
+    $ gem install echowrap
 ```
 ## Quick Start Guide
 
@@ -54,7 +54,7 @@ First, [get an api key from Echonest][register].
 Then copy and paste in your API keys:
 
 ```ruby
-Echonest.configure do |config|
+Echowrap.configure do |config|
   config.api_key =       'YOUR_API_KEY'
   config.consumer_key =  'YOUR_CONSUMER_KEY'
   config.shared_secret = 'YOUR_SHARED_SECRET'
@@ -63,7 +63,7 @@ end
 You are ready to use Echonest:
 
 ```ruby
-Echonest.song_search(artist: 'Daft Punk')
+Echowrap.song_search(artist: 'Daft Punk')
 ```
 
 [register]: http://developer.echonest.com/account/register
@@ -74,7 +74,7 @@ See [Usage page](https://github.com/timcase/echonest/wiki) for a complete listin
 ## Tests
 An Rspec test suite is available to ensure API functionality:
 
-1. $ git clone git://github.com/timcase/echonest.git
+1. $ git clone git://github.com/timcase/echowrap.git
 2. $ bundle install (installs rspec and other supporting gems, see
    [GEMFILE](https://github.com/timcase/echonest/blob/master/Gemfile)
    for complete listing)
@@ -82,17 +82,19 @@ An Rspec test suite is available to ensure API functionality:
 
 ## More Information
 More information can be found on the [project website on
-GitHub](https://github.com/timcase/echonest). There is extensive usage
-documentation available [on the wiki](https://github.com/timcase/echonest/wiki).
+GitHub](https://github.com/timcase/echowrap). There is extensive usage
+documentation available [on the
+wiki](https://github.com/timcase/echowrap/wiki).
 
 ## API Documentation
 
 ## License
-Echonest is released under the [MIT License](https://github.com/timcase/echonest/blob/master/LICENSE.txt).
+Echowrap is released under the [MIT
+License](https://github.com/timcase/echowrap/blob/master/LICENSE.txt).
 
 ## Support
 Bug reports and feature requests should be filed on the [github issue
-tracking page](https://github.com/timcase/echonest/issues). 
+tracking page](https://github.com/timcase/echowrap/issues). 
 
 ## Contributing
 
