@@ -113,7 +113,7 @@ describe Echowrap::API::Track do
       expect(bars).to be_a Array
       expect(bars.count).to eq 74
       bar = bars.first
-      expect(bar.id).to eq 'echonest::bar_0.38205'
+      expect(bar.id).to eq 'echowrap::bar_0.38205'
     end
 
     it 'returns beats as part of the analysis' do
@@ -122,7 +122,7 @@ describe Echowrap::API::Track do
       expect(beats).to be_a Array
       expect(beats.count).to eq 300
       beat = beats.first
-      expect(beat.id).to eq 'echonest::beat_0.38205'
+      expect(beat.id).to eq 'echowrap::beat_0.38205'
     end
 
     it 'returns beats as part of the analysis' do
@@ -131,7 +131,7 @@ describe Echowrap::API::Track do
       expect(beats).to be_a Array
       expect(beats.count).to eq 300
       beat = beats.first
-      expect(beat.id).to eq 'echonest::beat_0.38205'
+      expect(beat.id).to eq 'echowrap::beat_0.38205'
     end
 
     it 'returns sections as part of the analysis' do
@@ -140,7 +140,7 @@ describe Echowrap::API::Track do
       expect(sections).to be_a Array
       expect(sections.count).to eq 9
       section = sections.first
-      expect(section.id).to eq 'echonest::section_0.0'
+      expect(section.id).to eq 'echowrap::section_0.0'
     end
 
     it 'returns segments as part of the analysis' do
@@ -149,7 +149,7 @@ describe Echowrap::API::Track do
       expect(segments).to be_a Array
       expect(segments.count).to eq 683
       segment = segments.first
-      expect(segment.id).to eq 'echonest::segment_0.0'
+      expect(segment.id).to eq 'echowrap::segment_0.0'
     end
 
     it 'returns tatums as part of the analysis' do
@@ -158,7 +158,7 @@ describe Echowrap::API::Track do
       expect(tatums).to be_a Array
       expect(tatums.count).to eq 599
       tatum = tatums.first
-      expect(tatum.id).to eq 'echonest::tatum_0.38205'
+      expect(tatum.id).to eq 'echowrap::tatum_0.38205'
     end
 
 

@@ -5,7 +5,7 @@ module Echowrap
     attr_reader :explicit, :filename, :id, :release, :title, :type, :year
 
     def echonest_ids
-      @echonest_ids ||= map_collection(Echowrap::EchowrapId, :echonest_ids)
+      @echonest_ids ||= map_collection(Echowrap::EchonestId, :echonest_ids)
     end
 
   end
