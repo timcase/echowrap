@@ -4,6 +4,9 @@ module Echonest
     #
     # @param attrs [Array, Set, Symbol]
     def self.attr_reader(*attrs)
+      @attr_readers ||= []
+      @attr_readers.concat attrs
+
       mod = Module.new do
         attrs.each do |attribute|
           define_method attribute do
@@ -49,6 +52,14 @@ module Echonest
       self
     end
 
+    def self.attr_readers
+      @attr_readers
+    end
+
+    def attr_readers
+      self.class.attr_readers
+    end
+
   protected
 
     # @param attr [Symbol]
@@ -72,7 +83,6 @@ module Echonest
         klass.new(entity)
       end
     end
-
 
   end
 end
