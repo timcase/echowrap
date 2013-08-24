@@ -15,7 +15,8 @@ can be found at http://developer.echonest.com/
 * Uses Unix philosophy of "do one thing and do it well"
 
 [![Dependency Status](https://gemnasium.com/timcase/echonest.png)](https://gemnasium.com/timcase/echonest)
-[![Build Status](https://travis-ci.org/timcase/echonest.png)](https://travis-ci.org/timcase/echonest)
+[![Build
+Status](https://travis-ci.org/timcase/echowrap.png)](https://travis-ci.org/timcase/echowrap)
 [![Code Climate](https://codeclimate.com/github/timcase/echonest.png)](https://codeclimate.com/github/timcase/echonest)
 [![Coverage Status](https://coveralls.io/repos/timcase/echonest/badge.png?branch=master)](https://coveralls.io/r/timcase/echonest?branch=master)
 
@@ -60,7 +61,7 @@ Echowrap.configure do |config|
   config.shared_secret = 'YOUR_SHARED_SECRET'
 end
 ```
-You are ready to use Echonest:
+You are ready to use Echowrap:
 
 ```ruby
 Echowrap.song_search(artist: 'Daft Punk')
