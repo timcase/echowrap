@@ -1,16 +1,16 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'echonest/version'
+require 'echowrap/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "echonest"
-  gem.version       = Echonest::Version
+  gem.name          = "echowrap"
+  gem.version       = Echowrap::Version
   gem.authors       = ["Tim Case"]
   gem.email         = ["tim@2drops.net"]
   gem.description   = %q{A Ruby interface to the Echonest API.}
   gem.summary       = gem.description
-  gem.homepage      = "https://github.com/timcase/echonest"
+  gem.homepage      = "https://github.com/timcase/echowrap"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
