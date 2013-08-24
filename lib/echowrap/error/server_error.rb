@@ -1,4 +1,4 @@
-require 'echonest/error'
+require 'echowrap/error'
 
 module Echowrap
   class Error

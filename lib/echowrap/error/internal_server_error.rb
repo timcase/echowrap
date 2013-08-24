@@ -1,4 +1,4 @@
-require 'echonest/error/server_error'
+require 'echowrap/error/server_error'
 
 module Echowrap
   class Error

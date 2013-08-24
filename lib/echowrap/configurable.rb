@@ -1,5 +1,5 @@
-require 'echonest/default'
-require 'echonest/error/configuration_error'
+require 'echowrap/default'
+require 'echowrap/error/configuration_error'
 require 'forwardable'
 
 module Echowrap

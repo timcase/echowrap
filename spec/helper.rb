@@ -1,5 +1,5 @@
 require 'coveralls'
-require 'echonest'
+require 'echowrap'
 require 'rspec'
 require 'timecop'
 require 'webmock/rspec'
@@ -15,7 +15,7 @@ end
 def new_test_client
   client = Echowrap::Client.new(:api_key => "AK")
   #Param encoder is being set here because webmock expects params encodeded a certain way
-  #Normally, you won't set this option, it's already configured for Echowrap in lib/echonest/default.rb
+  #Normally, you won't set this option, it's already configured for Echowrap in lib/echowrap/default.rb
   client.connection_options[:request][:params_encoder] = Faraday::NestedParamsEncoder
   client
 end

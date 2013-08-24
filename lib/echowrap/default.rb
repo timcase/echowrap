@@ -1,12 +1,12 @@
 require 'faraday'
 require 'faraday/request/multipart'
-require 'echonest/configurable'
-require 'echonest/error/client_error'
-require 'echonest/error/server_error'
-require 'echonest/request/multipart_with_file'
-require 'echonest/response/parse_json'
-require 'echonest/response/raise_error'
- require 'echonest/version'
+require 'echowrap/configurable'
+require 'echowrap/error/client_error'
+require 'echowrap/error/server_error'
+require 'echowrap/request/multipart_with_file'
+require 'echowrap/response/parse_json'
+require 'echowrap/response/raise_error'
+ require 'echowrap/version'
 
 module Echowrap
   module Default

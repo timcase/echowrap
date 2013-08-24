@@ -1,4 +1,4 @@
-require 'echonest/base'
+require 'echowrap/base'
 
 module Echowrap
     class Video < Echowrap::Base

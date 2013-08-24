@@ -1,4 +1,4 @@
-require 'echonest/api/utils'
+require 'echowrap/api/utils'
 
 module Echowrap
   module API
