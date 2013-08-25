@@ -8,9 +8,10 @@ Gem::Specification.new do |gem|
   gem.version       = Echowrap::Version
   gem.authors       = ["Tim Case"]
   gem.email         = ["tim@2drops.net"]
-  gem.description   = %q{A Ruby interface to the Echonest API.}
-  gem.summary       = gem.description
+  gem.description   = %q{A Ruby interface to the Echonest API, details can be found at http://echowrap.com.}
+  gem.summary       = %q{A Ruby interface to the Echonest API.}
   gem.homepage      = "https://github.com/timcase/echowrap"
+  gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
