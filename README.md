@@ -14,7 +14,7 @@ can be found at http://developer.echonest.com/
 * Various http clients are supported via [Faraday](https://github.com/lostisland/faraday)
 * Uses Unix philosophy of "do one thing and do it well"
 
-[![Dependency Status](https://gemnasium.com/timcase/echonest.png)](https://gemnasium.com/timcase/echonest)
+[![Dependency Status](https://gemnasium.com/timcase/echowrap.png)](https://gemnasium.com/timcase/echowrap)
 [![Build
 Status](https://travis-ci.org/timcase/echowrap.png)](https://travis-ci.org/timcase/echowrap)
 [![Code Climate](https://codeclimate.com/github/timcase/echonest.png)](https://codeclimate.com/github/timcase/echonest)
