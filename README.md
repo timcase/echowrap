@@ -88,6 +88,8 @@ documentation available [on the
 wiki](https://github.com/timcase/echowrap/wiki).
 
 ## API Documentation
+Full API Documentation can be found in the
+[wiki](https://github.com/timcase/echowrap/wiki)
 
 ## License
 Echowrap is released under the [MIT
@@ -107,5 +109,6 @@ tracking page](https://github.com/timcase/echowrap/issues).
 
 ##Acknowledgement
 Much of the heavy lifting was done by studying the [Twitter gem](https://github.com/sferik/twitter).
+
 ##Contributors
 [Tim Case](timcase.me)
