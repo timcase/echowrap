@@ -18,7 +18,7 @@ module Echowrap
       # @param options [Hash]
       # @return [Array]
       def objects_from_response(klass, request_method, path, object_key, options={})
-        response = send(request_method.to_sym, path, options)[:body][:response][object_key]
+        response = send(request_method.to_sym, path, options)[:body][:response][object_key] || []
         objects_from_array(klass, response)
       end
 

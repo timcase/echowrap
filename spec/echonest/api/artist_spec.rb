@@ -706,6 +706,17 @@ describe Echowrap::API::Artist do
       expect(artists.first.name).to eq "Thom Yorke"
     end
 
+    it 'does not throw an error when no artists are returned by Echonest' do
+
+      stub_get("/api/v4/artist/similar").
+      with(:query => {
+            :results => 1,
+            :name => 'herpderp'}).
+        to_return(:body => fixture("artist/similar_with_no_results.json"),
+                  :headers => {:content_type => "application/json; charset=utf-8"})
+      expect{ @client.artist_similar(:results => 1,
+                          :name => 'herpderp')}.to_not raise_error
+    end
   end
 
   describe "#artist_suggest" do
