@@ -67,7 +67,7 @@ place the above code in /config/initializers/echowrap.rb.
 
 You can also use Echowrap in any plain old ruby file and I've included
 an example of this
-[here](https://github.com/timcase/echowrap/examples/echowrap.examples.rb)
+[here](https://github.com/timcase/echowrap/blob/master/examples/echowrap_examples.rb)
 
 You are ready to use Echowrap:
 
