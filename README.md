@@ -61,6 +61,14 @@ Echowrap.configure do |config|
   config.shared_secret = 'YOUR_SHARED_SECRET'
 end
 ```
+If you are using Echowrap with a Rails application then a good location
+for the key would be to create an initializer, for example you could
+place the above code in /config/initializers/echowrap.rb.
+
+You can also use Echowrap in any plain old ruby file and I've included
+an example of this
+[here](https://github.com/timcase/echowrap/examples/echowrap.examples.rb)
+
 You are ready to use Echowrap:
 
 ```ruby
