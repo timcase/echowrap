@@ -67,46 +67,6 @@ describe Echowrap::Client do
     end
   end
 
-  # it "does not cache the screen name across clients" do
-  #   stub_get("/1.1/account/verify_credentials.json").to_return(:body => fixture("sferik.json"), :headers => {:content_type => "application/json; charset=utf-8"})
-  #   client1 = Echowrap::Client.new
-  #   expect(client1.verify_credentials.id).to eq 7505382
-  #   stub_get("/1.1/account/verify_credentials.json").to_return(:body => fixture("pengwynn.json"), :headers => {:content_type => "application/json; charset=utf-8"})
-  #   client2 = Echowrap::Client.new
-  #   expect(client2.verify_credentials.id).to eq 14100886
-  # end
-  #
-  # describe "#delete" do
-  #   before do
-  #     stub_delete("/custom/delete").with(:query => {:deleted => "object"})
-  #   end
-  #   it "allows custom delete requests" do
-  #     subject.delete("/custom/delete", {:deleted => "object"})
-  #     expect(a_delete("/custom/delete").with(:query => {:deleted => "object"})).to have_been_made
-  #   end
-  # end
-  #
-  # describe "#put" do
-  #   before do
-  #     stub_put("/custom/put").with(:body => {:updated => "object"})
-  #   end
-  #   it "allows custom put requests" do
-  #     subject.put("/custom/put", {:updated => "object"})
-  #     expect(a_put("/custom/put").with(:body => {:updated => "object"})).to have_been_made
-  #   end
-  # end
-  #
-  # describe "#credentials?" do
-  #   it "returns true if all credentials are present" do
-  #     client = Echowrap::Client.new(:consumer_key => 'CK', :consumer_secret => 'CS', :oauth_token => 'OT', :oauth_token_secret => 'OS')
-  #     expect(client.credentials?).to be_true
-  #   end
-  #   it "returns false if any credentials are missing" do
-  #     client = Echowrap::Client.new(:consumer_key => 'CK', :consumer_secret => 'CS', :oauth_token => 'OT')
-  #     expect(client.credentials?).to be_false
-  #   end
-  # end
-  #
   describe "#connection" do
     it "looks like Faraday connection" do
       expect(subject.send(:connection)).to respond_to(:run_request)
@@ -117,58 +77,5 @@ describe Echowrap::Client do
     end
   end
 
-  # describe "#request" do
-  #   it "encodes the entire body when no uploaded media is present" do
-  #     stub_post("/1.1/statuses/update.json").with(:body => {:status => "Update"}).to_return(:body => fixture("status.json"), :headers => {:content_type => "application/json; charset=utf-8"})
-  #     subject.update("Update")
-  #     expect(a_post("/1.1/statuses/update.json").with(:body => {:status => "Update"})).to have_been_made
-  #   end
-  #   it "encodes none of the body when uploaded media is present" do
-  #     stub_post("/1.1/statuses/update_with_media.json")
-  #     subject.update_with_media("Update", fixture("pbjt.gif"))
-  #     expect(a_post("/1.1/statuses/update_with_media.json")).to have_been_made
-  #   end
-  #   it "catches Faraday errors" do
-  #     subject.stub!(:connection).and_raise(Faraday::Error::ClientError.new("Oops"))
-  #     expect{subject.send(:request, :get, "/path")}.to raise_error Echowrap::Error::ClientError
-  #   end
-  #   it "catches MultiJson::DecodeError errors" do
-  #     subject.stub!(:connection).and_raise(MultiJson::DecodeError.new("unexpected token", [], "<!DOCTYPE html>"))
-  #     expect{subject.send(:request, :get, "/path")}.to raise_error Echowrap::Error::DecodeError
-  #   end
-  # end
-
-  # describe "#oauth_auth_header" do
-  #   it "creates the correct auth headers" do
-  #     uri = "/1.1/direct_messages.json"
-  #     authorization = subject.send(:oauth_auth_header, :get, uri)
-  #     expect(authorization.options[:signature_method]).to eq "HMAC-SHA1"
-  #     expect(authorization.options[:version]).to eq "1.0"
-  #     expect(authorization.options[:consumer_key]).to eq "CK"
-  #     expect(authorization.options[:consumer_secret]).to eq "CS"
-  #     expect(authorization.options[:token]).to eq "OT"
-  #     expect(authorization.options[:token_secret]).to eq "OS"
-  #   end
-  # end
-  #
-  # describe "#bearer_auth_header" do
-  #   subject do
-  #     Echowrap::Client.new(:bearer_token => "BT")
-  #   end
-  #
-  #   it "creates the correct auth headers with supplied bearer_token" do
-  #     uri = "/1.1/direct_messages.json"
-  #     authorization = subject.send(:bearer_auth_header)
-  #     expect(authorization).to eq "Bearer BT"
-  #   end
-  # end
-  #
-  # describe "#bearer_token_credentials_auth_header" do
-  #   it "creates the correct auth header with supplied consumer_key and consumer_secret" do
-  #     uri = "/1.1/direct_messages.json"
-  #     authorization = subject.send(:bearer_token_credentials_auth_header)
-  #     expect(authorization).to eq "Basic #{Base64.strict_encode64("CK:CS")}"
-  #   end
-  # end
 end
 
