@@ -16,18 +16,7 @@ module Echowrap
     private
 
       def self.parse_error(body)
-        if body.nil?
-          ''
-        elsif body[:error]
-          body[:error]
-        elsif body[:errors]
-          first = Array(body[:errors]).first
-          if first.is_a?(Hash)
-            first[:message].chomp
-          else
-            first.chomp
-          end
-        end
+        body[:response][:status][:message]
       end
 
     end
