@@ -32,10 +32,10 @@ describe Echowrap do
 
       describe ".respond_to?" do
         it "delegates to Echowrap::Client" do
-          expect(Echowrap.respond_to?(:song_search)).to be_true
+          expect(Echowrap.respond_to?(:song_search)).to be_truthy
         end
         it "takes an optional argument" do
-          expect(Echowrap.respond_to?(:client, true)).to be_true
+          expect(Echowrap.respond_to?(:client, true)).to be_truthy
         end
       end
 

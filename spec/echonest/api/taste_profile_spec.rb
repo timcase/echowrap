@@ -221,7 +221,7 @@ describe Echowrap::API::TasteProfile do
 
     it "returns boolean with response result" do
       result = @client.taste_profile_play(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid')
-      expect(result).to be_true
+      expect(result).to be_truthy
     end
   end
 
@@ -244,7 +244,7 @@ describe Echowrap::API::TasteProfile do
 
     it "returns boolean with response result" do
       result = @client.taste_profile_skip(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid')
-      expect(result).to be_true
+      expect(result).to be_truthy
     end
   end
 
@@ -267,7 +267,7 @@ describe Echowrap::API::TasteProfile do
 
     it "returns boolean with response result" do
       result = @client.taste_profile_ban(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid')
-      expect(result).to be_true
+      expect(result).to be_truthy
     end
   end
 
@@ -290,7 +290,7 @@ describe Echowrap::API::TasteProfile do
 
     it "returns boolean with response result" do
       result = @client.taste_profile_favorite(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid')
-      expect(result).to be_true
+      expect(result).to be_truthy
     end
   end
 
@@ -313,7 +313,7 @@ describe Echowrap::API::TasteProfile do
 
     it "returns boolean with response result" do
       result = @client.taste_profile_rate(:id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :item => 'myitemid', :rating => 5)
-      expect(result).to be_true
+      expect(result).to be_truthy
     end
   end
 

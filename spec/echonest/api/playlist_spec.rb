@@ -172,7 +172,7 @@ describe Echowrap::API::Playlist do
 
     it "returns boolean with response result" do
       result = @client.playlist_dynamic_feedback(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :favorite_song => 'SOCZMFK12AC468668F')
-      expect(result).to be_true
+      expect(result).to be_truthy
     end
   end
 
@@ -196,7 +196,7 @@ describe Echowrap::API::Playlist do
 
     it "returns boolean with response result" do
       result = @client.playlist_dynamic_steer(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9', :min_danceability => 0.5)
-      expect(result).to be_true
+      expect(result).to be_truthy
     end
   end
 
@@ -268,7 +268,7 @@ describe Echowrap::API::Playlist do
 
     it "returns boolean with response result" do
       result = @client.playlist_dynamic_delete(:session_id => 'a8cddde7afdf4ac09b510aa1c1c50bf9')
-      expect(result).to be_true
+      expect(result).to be_truthy
     end
   end
 end
