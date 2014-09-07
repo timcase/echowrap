@@ -2,7 +2,7 @@ require 'echowrap/base'
 
 module Echowrap
   class Artist < Echowrap::Base
-    attr_reader :name, :twitter, :id, :familiarity, :hotttnesss
+    attr_reader :name, :twitter, :id, :familiarity, :hotttnesss, :discovery
 
     # @return [Array]
     def biographies
