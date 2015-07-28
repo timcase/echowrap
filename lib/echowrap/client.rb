@@ -73,7 +73,8 @@ module Echowrap
 
       def oauth_parameters(method, path, params={})
         uri = URI(@endpoint + path)
-        SimpleOAuth::Header.new(method, uri, params, credentials).signed_attributes
+        SimpleOAuth::Header.new(method, uri, params,
+                                credentials.merge(ignore_extra_keys: true)).signed_attributes
       end
 
   end
