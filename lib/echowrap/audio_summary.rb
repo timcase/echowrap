@@ -2,7 +2,7 @@ require 'echowrap/base'
 
 module Echowrap
   class AudioSummary < Echowrap::Base
-    attr_reader :acousticness, :analysis_url, :audio_md5, :danceability, :duration, :energy,
+    attr_reader :acousticness, :analysis_url, :audio_md5, :danceability, :duration, :energy, :instrumentalness,
                 :key, :liveness, :loudness, :mode, :speechiness, :liveness, :tempo, :time_signature,
                 :valence
 
