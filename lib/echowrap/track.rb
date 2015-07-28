@@ -10,7 +10,7 @@ module Echowrap
                   :offset_seconds, :preview_url, :release, :release_image, :sample_md5, :samplerate,
                   :song_id, :start_of_fade_out, :status, :synch_version, :synchstring, :tempo,
                   :tempo_confidence, :time_signature, :time_signature_confidence, :title,
-                  :window_seconds
+                  :window_seconds, :album_type, :album_date, :album_name,
 
       # @return [Echowrap::AudioSummary]
       def audio_summary
