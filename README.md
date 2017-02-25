@@ -120,3 +120,7 @@ Much of the heavy lifting was done by studying the [Twitter gem](https://github.
 
 ##Contributors
 [Tim Case](timcase.me)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/timcase/echowrap/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
